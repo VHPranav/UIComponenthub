@@ -1,26 +1,32 @@
 import Link from "next/link"
 import { AnimatedThemeToggler } from "@/components/animated-theme-toggler"
+import { CommandMenu } from "@/components/command-menu"
+import { ComponentMetadata } from "@/lib/types"
 
-export function Navbar() {
+interface NavbarProps {
+  components: ComponentMetadata[]
+}
+
+export function Navbar({ components }: NavbarProps) {
   return (
-    <header className="sticky top-0 z-50 w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header className="sticky top-0 z-50 w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b">
       <div className="container flex h-14 max-w-screen-2xl items-center px-4 md:px-8 mx-auto">
         <div className="mr-4 flex">
           <Link href="/" className="mr-6 flex items-center space-x-2">
-            <span className="hidden font-bold sm:inline-block">
+            <span className="hidden font-bold sm:inline-block font-display tracking-tight">
               UIComponentHub
             </span>
           </Link>
           <nav className="flex items-center space-x-6 text-sm font-medium">
             <Link
               href="/docs"
-              className="transition-colors hover:text-foreground/80 text-foreground/60"
+              className="transition-colors hover:text-foreground/80 text-foreground/60 font-display"
             >
               Docs
             </Link>
             <Link
               href="/components"
-              className="transition-colors hover:text-foreground/80 text-foreground/60"
+              className="transition-colors hover:text-foreground/80 text-foreground/60 font-display"
             >
               Components
             </Link>
@@ -28,7 +34,7 @@ export function Navbar() {
         </div>
         <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
           <div className="w-full flex-1 md:w-auto md:flex-none">
-            {/* Can add search here later */}
+            <CommandMenu components={components} />
           </div>
           <nav className="flex items-center space-x-2">
             <Link

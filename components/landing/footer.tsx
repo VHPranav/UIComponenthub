@@ -55,10 +55,6 @@ export function Footer() {
           </div>
         </div>
       </div>
-      
-      <div className="container mx-auto mt-12 pt-8 border-t border-border/10 text-center text-xs text-muted-foreground">
-        © {new Date().getFullYear()} UIComponentHub. All rights reserved.
-      </div>
     </footer>
   )
 }

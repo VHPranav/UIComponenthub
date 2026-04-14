@@ -15,7 +15,7 @@ export function ComponentsSidebar({ items }: SidebarNavProps) {
   return (
     <div className="w-full flex flex-col gap-6">
       <div className="flex flex-col gap-2">
-        <h4 className="px-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground/60 mb-1">
+        <h4 className="px-2 text-[10px] font-bold uppercase tracking-[0.1em] text-muted-foreground/50 mb-1 font-display">
           Getting Started
         </h4>
         <Link
@@ -33,7 +33,7 @@ export function ComponentsSidebar({ items }: SidebarNavProps) {
 
       {Object.entries(items).map(([category, components]) => (
         <div key={category} className="flex flex-col gap-2">
-          <h4 className="px-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground/60 mb-1">
+          <h4 className="px-2 text-[10px] font-bold uppercase tracking-[0.1em] text-muted-foreground/50 mb-1 font-display">
             {category}
           </h4>
           <div className="flex flex-col gap-1">

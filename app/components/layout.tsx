@@ -26,7 +26,10 @@ export default function ComponentsLayout({
         <ComponentsSidebar items={groupedComponents} />
       </aside>
       <main className="relative py-6 lg:gap-10 lg:py-8">
-        <MobileNav items={groupedComponents} />
+        <MobileNav 
+          items={groupedComponents} 
+          allComponents={components} 
+        />
         {children}
       </main>
     </div>

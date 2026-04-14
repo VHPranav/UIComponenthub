@@ -1,15 +1,12 @@
 import type { Metadata, Viewport } from "next"
-import { Inter, DM_Sans } from "next/font/google"
+import { DM_Sans } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { Navbar } from "@/components/navbar"
+import { SiteFooter } from "@/components/site-footer"
+import { getAllComponentsMetadata } from "@/lib/mdx"
 import { ToastProvider } from "@/components/ui/toast"
 import { cn } from "@/lib/utils"
-
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-})
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
@@ -76,13 +73,14 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const components = getAllComponentsMetadata()
+
   return (
     <html lang="en" suppressHydrationWarning>
       <body
         className={cn(
-          "min-h-screen bg-background font-sans antialiased",
-          inter.variable,
-          dmSans.variable
+          "min-h-screen bg-background antialiased",
+          dmSans.className
         )}
       >
         <ThemeProvider
@@ -93,8 +91,9 @@ export default function RootLayout({
         >
           <ToastProvider>
             <div className="relative flex min-h-screen flex-col">
-              <Navbar />
+              <Navbar components={components} />
               <main className="flex-1">{children}</main>
+              <SiteFooter />
             </div>
           </ToastProvider>
         </ThemeProvider>

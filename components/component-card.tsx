@@ -78,7 +78,7 @@ export function ComponentCard({ component, index = 0 }: ComponentCardProps) {
 
           {/* Content */}
           <CardHeader className="px-5 pt-4 pb-1">
-            <CardTitle className="text-base font-semibold leading-tight tracking-tight group-hover:text-primary transition-colors duration-200">
+            <CardTitle className="text-base font-semibold leading-tight tracking-tight group-hover:text-primary transition-colors duration-200 font-display">
               {component.title}
             </CardTitle>
           </CardHeader>

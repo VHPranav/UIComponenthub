@@ -9,6 +9,7 @@ import { Separator } from "@/components/ui/separator"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { CodeBlock } from "@/components/code-block"
 import { TableOfContents } from "@/components/toc"
+import { Breadcrumbs } from "@/components/breadcrumbs"
 
 interface ComponentPageProps {
   params: { id: string }
@@ -61,6 +62,7 @@ const mdxComponents = {
 
 export default async function ComponentPage({ params }: ComponentPageProps) {
   const componentData = await getComponentData(params.id)
+  const allComponents = getAllComponentsMetadata()
   if (!componentData) notFound()
 
   const { metadata, content } = componentData
@@ -69,13 +71,10 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
   return (
     <div className="xl:grid xl:grid-cols-[1fr_250px] xl:gap-10">
       <div className="mx-auto w-full min-w-0">
-        <div className="mb-4 flex items-center space-x-1 text-sm text-muted-foreground">
-          <Link href="/components" className="hover:text-foreground">Docs</Link>
-          <ChevronRight className="h-4 w-4" />
-          <Link href="/components" className="hover:text-foreground">Components</Link>
-          <ChevronRight className="h-4 w-4" />
-          <span className="text-foreground">{metadata.title}</span>
-        </div>
+        <Breadcrumbs 
+          components={allComponents} 
+          currentTitle={metadata.title} 
+        />
 
         <div className="space-y-4 mb-10">
           <h1 className="text-4xl font-bold tracking-tight font-display">{metadata.title}</h1>
