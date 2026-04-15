@@ -1,0 +1,57 @@
+---
+title: Interactive Pixel Grid
+description: A premium, interactive square grid background that responds to mouse movement and features an automated idle ripple animation.
+category: Backgrounds
+tags: ["Interactive", "Animated", "Minimalist", "Grid"]
+date: 2026-04-15
+---
+
+## Overview
+
+The Interactive Pixel Grid is a minimalist yet high-impact background component. It consists of a dense grid of responsive squares that react to cursor proximity with vibrant highlights and scale transformations. When the user is idle, it triggers a subtle wave-like ripple effect from the center.
+
+## Features
+
+- **Dynamic Hover**: Squares scale and light up as the cursor passes over them.
+- **Idle Ripple**: Automatic ripple animation triggers after a period of inactivity to keep the interface feeling alive.
+- **Responsive Calculation**: Automatically calculates the necessary grid dimensions based on its container size.
+- **Customizable**: Control square size, margins, colors, and timing via simple props.
+
+## Installation
+
+```bash
+npm install framer-motion clsx tailwind-merge
+```
+
+## Usage
+
+```tsx
+import { InteractivePixelGrid } from "@/registry/backgrounds/interactive-pixel-grid"
+
+export default function BackgroundDemo() {
+  return (
+    <div className="relative w-full h-[500px]">
+      <InteractivePixelGrid 
+        squareSize={40}
+        squareMargin={4}
+        activeColor="#bef264"
+        squareColor="rgba(0, 0, 0, 0.05)"
+      />
+      <div className="relative z-10 flex items-center justify-center h-full">
+        <h1 className="text-4xl font-bold">Content Over Grid</h1>
+      </div>
+    </div>
+  )
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `squareSize` | `number` | `40` | The width and height of each square in pixels. |
+| `squareMargin` | `number` | `4` | The gap between squares. |
+| `squareColor` | `string` | `"rgba(0,0,0,0.05)"` | The default border color of the squares. |
+| `activeColor` | `string` | `"#bef264"` | The highlight color on hover and ripple. |
+| `idleDelay` | `number` | `4000` | Delay in ms before the idle ripple starts. |
+| `className` | `string` | - | Additional Tailwind classes for the container. |

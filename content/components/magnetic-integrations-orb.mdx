@@ -1,0 +1,51 @@
+---
+title: Magnetic Integrations Orb
+description: A stunning floating integration icons display with magnetic hover effect and smooth float animations. Perfect for hero sections and feature highlights.
+category: Backgrounds
+tags: ["Magnetic", "Animated", "Interactive", "Integrations"]
+date: 2026-04-15
+---
+
+## Overview
+
+The **Magnetic Integrations Orb** creates a floating cloud of integration brand icons scattered across the viewport. Each icon responds to mouse proximity with a satisfying magnetic pull effect, making it ideal for sections that showcase platform integrations or tool ecosystems.
+
+## Features
+
+- **Magnetic Hover**: Icons are attracted to the mouse cursor using spring-based physics.
+- **Floating Animations**: Each icon floats independently with unique duration, delay, and path for an organic, alive feel.
+- **Blur Depth**: Icons have varying blur and opacity levels to create a natural sense of depth.
+- **Brand Logos**: Uses the Simple Icons CDN for crisp, recognizable brand marks.
+- **Customizable**: Pass your own `heading` and `subheading` props.
+
+## Installation
+
+```bash
+npm install framer-motion lucide-react
+```
+
+## Usage
+
+```tsx
+import { MagneticIntegrationsOrb } from "@/registry/backgrounds/magnetic-integrations-orb"
+
+export default function HeroSection() {
+  return (
+    <MagneticIntegrationsOrb
+      heading="Connect with your favourite tools"
+      subheading="Supports 100+ integrations and counting."
+    />
+  )
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `heading` | `string` | `"Hover over the icons"` | Main heading text |
+| `subheading` | `string` | `"Connect with 100+ tools..."` | Subtitle below the heading |
+
+## How it works
+
+The magnetic effect is driven by a custom `Magnet` wrapper component built with Framer Motion's `useMotionValue` and `useSpring`. It tracks mouse position relative to each icon's bounding box and applies a proportional offset, then snaps back smoothly when the mouse leaves.

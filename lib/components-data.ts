@@ -16,6 +16,7 @@ export const CATEGORIES = [
   "Inputs",
   "Animations",
   "Special Effects",
+  "Backgrounds",
 ] as const
 
 export const ALL_TAGS = [
@@ -119,6 +120,41 @@ export const ShimmerButton = () => {
     installation: "npm install framer-motion",
     code: `export const PerspectiveCard = () => {
   return <div className="w-40 h-40 bg-muted rounded-xl" />
+}`,
+  },
+  {
+    id: "bg-1",
+    name: "Interactive Pixel Grid",
+    description: "A premium, interactive square grid background that responds to mouse movement and features an automated idle ripple animation.",
+    category: "Backgrounds",
+    tags: ["Interactive", "Animated", "Minimalist"],
+    installation: "npm install framer-motion clsx tailwind-merge",
+    code: `export const InteractivePixelGrid = () => {
+  return <div className="w-full h-full bg-grid-zinc-200" />
+}`,
+  },
+  /*
+  {
+    id: "bt-1",
+    name: "Colourful Bento Grid",
+    description: "A high-impact, responsive Bento-style grid with industry-specific cards and smooth animations.",
+    category: "Cards",
+    tags: ["Bento Grid", "Animated", "Premium"],
+    installation: "npm install framer-motion clsx tailwind-merge",
+    code: `export const ColourfulBentoGrid = () => {
+  return <div className="grid grid-cols-3 gap-4">Bento Grid</div>
+}`,
+  },
+  */
+  {
+    id: "bg-2",
+    name: "Magnetic Integrations Orb",
+    description: "A stunning floating integration icons display with a magnetic hover effect and smooth float animations. Perfect as a section background.",
+    category: "Backgrounds",
+    tags: ["Magnetic", "Animated", "Interactive", "Integrations"],
+    installation: "npm install framer-motion lucide-react",
+    code: `export const MagneticIntegrationsOrb = () => {
+  return <MagneticIntegrationsOrb />
 }`,
   },
 ]

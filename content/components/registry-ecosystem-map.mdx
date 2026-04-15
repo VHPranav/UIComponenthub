@@ -1,0 +1,52 @@
+---
+title: Registry Ecosystem Map
+description: An interactive architecture diagram showing how the UIComponentHub registry connects component categories to framework outputs, with animated SVG connection lines and coloured spark particles.
+category: Special Effects
+tags: ["Architecture", "Animated", "SVG", "Interactive", "Premium"]
+date: 2026-04-15
+---
+
+## Overview
+
+The **Registry Ecosystem Map** is an architectural diagram component that visualises a hub-and-spoke relationship between input nodes and output nodes. The central hub represents the UIComponentHub registry, with component categories connecting on the left and framework outputs on the right.
+
+Animated SVG paths with coloured spark particles flow along each connection in real time, making the diagram feel alive.
+
+## Features
+
+- **Animated Connection Lines**: Bezier curves with travelling coloured sparks powered by native SVG `animateMotion`.
+- **Glassmorphism Cards**: Info cards with `backdrop-blur`, subtle borders, and accent pills.
+- **Framer Motion Entrance**: Each card and the central hub animate in with spring physics.
+- **Pulsing Rings**: Concentric rings around the central hub breathe in and out subtly.
+- **Fully Responsive**: Stacks into a clean vertical layout on mobile.
+
+## Installation
+
+```bash
+npm install framer-motion lucide-react
+```
+
+## Usage
+
+```tsx
+import { RegistryEcosystemMap } from "@/registry/special-effects/registry-ecosystem-map"
+
+export default function Page() {
+  return <RegistryEcosystemMap />
+}
+```
+
+## Customisation
+
+To change the content, edit the `sources` and `outputs` arrays in the component file. Each item accepts:
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `title` | `string` | Card title |
+| `desc` | `string` | Short description |
+| `top` | `number` | Vertical position (percentage) |
+| `left` | `number` | Horizontal position (percentage) |
+| `color` | `string` | Accent color (hex) |
+| `icon` | `LucideIcon` | Icon component |
+
+The `connections` array contains pairs of percentage-based `[x, y]` coordinates mapping source nodes to the center hub.

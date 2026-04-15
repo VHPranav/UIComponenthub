@@ -9,6 +9,10 @@ import { SpringModal } from "./modals/spring-modal"
 import { BeamInput } from "./inputs/beam-input"
 import { OrbitLoader } from "./loaders/orbit-loader"
 import { LiquidLoader } from "./loaders/liquid-loader"
+import { InteractivePixelGrid } from "./backgrounds/interactive-pixel-grid"
+import { MagneticIntegrationsOrb } from "./backgrounds/magnetic-integrations-orb"
+import { RegistryEcosystemMap } from "./special-effects/registry-ecosystem-map"
+// import { ColourfulBentoGrid } from "./cards/colourful-bento-grid"
 
 export const registry: Record<string, React.ComponentType<any>> = {
   "glass-button": GlassButton,
@@ -21,4 +25,8 @@ export const registry: Record<string, React.ComponentType<any>> = {
   "beam-input": BeamInput,
   "orbit-loader": OrbitLoader,
   "liquid-loader": LiquidLoader,
+  "interactive-pixel-grid": InteractivePixelGrid,
+  "magnetic-integrations-orb": MagneticIntegrationsOrb,
+  "registry-ecosystem-map": RegistryEcosystemMap,
+  // "colourful-bento-grid": ColourfulBentoGrid,
 }

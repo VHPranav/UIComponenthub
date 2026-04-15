@@ -1,0 +1,49 @@
+---
+title: Colourful Bento Grid
+description: A high-impact, responsive Bento-style grid with industry-specific cards, smooth entry animations, and subtle hover effects.
+category: Cards
+tags: ["Bento Grid", "Animated", "Interactive", "Premium"]
+date: 2026-04-15
+---
+
+## Overview
+
+The Colourful Bento Grid is a modern way to showcase various services, industries, or features. It use a deliberate asymmetrical grid layout (Bento) combined with a soft, harmonious color palette and smooth entrance animations using Framer Motion.
+
+## Features
+
+- **Asymmetrical Layout**: Uses `col-span` and `row-span` to create a visually interesting 3x3 grid (desktop).
+- **Enticing Animations**: Cards slide up and fade in with a staggered delay for a professional entry.
+- **Micro-interactions**: Subtle image scaling and card lift on hover.
+- **Fully Responsive**: Automatically stacks into a single column on mobile devices.
+- **Customizable**: The component is built to be easily themed by changing background colors and content.
+
+## Installation
+
+```bash
+npm install framer-motion clsx tailwind-merge
+```
+
+## Usage
+
+```tsx
+import { ColourfulBentoGrid } from "@/registry/cards/colourful-bento-grid"
+
+export default function BentoDemo() {
+  return (
+    <div className="w-full">
+      <ColourfulBentoGrid />
+    </div>
+  )
+}
+```
+
+## Structure
+
+The grid is designed with specific `grid-area` logic converted to Tailwind classes:
+
+- **Row 1**: 1/3 split between Healthcare and Travel.
+- **Row 2**: Three balanced columns with Retail spanning two rows.
+- **Row 3**: Enterprise and the remainder of the Retail card.
+
+Each card features a unique background color and a high-quality image that transitions on hover.
