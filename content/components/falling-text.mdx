@@ -1,0 +1,61 @@
+---
+title: Falling Letters
+description: A high-impact physics animation where text breaks into individual characters that fall.
+category: Animations
+tags: ["Physics", "Interactive", "Animated", "Typography"]
+date: 2026-04-15
+---
+
+## Overview
+
+**Falling Letters** uses the `matter-js` physics engine to turn any string of text into a collection of physical bodies with mass, gravity, and collision logic. It provides a tactile, playful interaction where letters can be dragged, tossed, or triggered to collapse on scroll.
+
+## Features
+
+- **Real Physics**: Each character is an independent body with restitution (bounciness) and friction.
+- **Mouse Interaction**: Grab and throw letters around the container using a virtual mouse constraint.
+- **Scroll/Click Triggers**: Trigger the "gravity collapse" through scroll intersection, click, or hover.
+- **Responsive Canvas**: Automatically handles canvas resizing and boundary maintenance.
+- **Customizable Gravity**: Adjust the strength of gravity to change how fast the letters fall.
+
+## Installation
+
+```bash
+npm install matter-js
+```
+
+## Usage
+
+```tsx
+import { FallingText } from "@/registry/animations/falling-text"
+
+export default function PhysicsHero() {
+  return (
+    <div className="h-[500px] w-full">
+      <FallingText
+        text="Everything eventually falls"
+        highlightWords={["falls"]}
+        trigger="scroll"
+        fontSize="3rem"
+        gravity={1.2}
+      />
+    </div>
+  )
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `text` | `string` | `"Falling Letters"` | The text to be converted into physical bodies. |
+| `highlightWords` | `string[]` | `[]` | Words within the text to style differently (e.g. bold blue). |
+| `trigger` | `"auto" \| "scroll" \| "click" \| "hover"` | `"auto"` | What event causes the text to fall. |
+| `gravity` | `number` | `1` | Strength of gravity pulling characters down. |
+| `fontSize` | `string` | `"2rem"` | CSS font-size for the characters. |
+| `mouseConstraintStiffness` | `number` | `0.2` | How "stiff" the mouse interaction is when dragging. |
+| `wireframes` | `boolean` | `false` | Enable Matter.js wireframe mode (for debugging physics). |
+
+## How it works
+
+The component splits the input text into characters and measures their initial positions using `getBoundingClientRect()`. It then spawns a hidden `matter-js` engine and creates rectangle bodies matching the dimensions of each letter. The original DOM elements are then "tethered" to the physics bodies using `requestAnimationFrame`, updating their `transform` and `position` properties in sync with the physics simulation.

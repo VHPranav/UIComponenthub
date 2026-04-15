@@ -168,4 +168,26 @@ export const ShimmerButton = () => {
   return <BlurText text="Animated Text" />
 }`,
   },
+  {
+    id: "typing-animation",
+    name: "Typing Animation",
+    description: "A dynamic text component that simulates a typing effect character-by-character. Perfect for hero headlines and intro sections.",
+    category: "Animations",
+    tags: ["Animated", "Typography", "Interactive"],
+    installation: "npm install framer-motion",
+    code: `export const TypingAnimation = () => {
+  return <TypingAnimation text="Hello World" />
+}`,
+  },
+  {
+    id: "falling-text",
+    name: "Falling Letters",
+    description: "A high-impact physics animation where text breaks into individual characters that fall and react to gravity and mouse interaction. Powered by Matter.js.",
+    category: "Animations",
+    tags: ["Physics", "Interactive", "Animated", "Typography"],
+    installation: "npm install matter-js",
+    code: `export const FallingTextEffect = () => {
+  return <FallingText text="Gravity is real" fontSize="2rem" />
+}`,
+  },
 ]

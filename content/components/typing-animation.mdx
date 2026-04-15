@@ -1,0 +1,55 @@
+---
+title: Typing Animation
+description: A dynamic text component that simulates a typing effect character-by-character.
+category: Animations
+tags: ["Animated", "Typography", "Interactive"]
+date: 2026-04-15
+---
+
+## Overview
+
+**Typing Animation** is a lightweight, high-impact typography component that reveals text string-by-string, mimicking a terminal or typewriter effect. It includes a customizable blinking cursor and supports triggering on scroll via the Intersection Observer API.
+
+## Features
+
+- **Sequential Reveal**: Types text character-by-character with adjustable speed.
+- **Blinking Cursor**: Animated cursor at the end of the text for a realistic feel.
+- **Auto-Trigger**: Optional `startOnView` prop to trigger the animation only when the user scrolls to the section.
+- **Framer Motion Powered**: Smooth cursor transitions and predictable state management.
+- **Customizable**: Control `duration`, `delay`, and typography via standard props.
+
+## Installation
+
+```bash
+npm install framer-motion
+```
+
+## Usage
+
+```tsx
+import { TypingAnimation } from "@/registry/animations/typing-animation"
+
+export default function IntroSection() {
+  return (
+    <TypingAnimation
+      text="Welcome to the next generation of UI."
+      duration={100}
+      className="text-white text-5xl font-bold"
+    />
+  )
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `text` | `string` | `"Typing effect..."` | The text to animate. |
+| `duration` | `number` | `100` | Speed of typing in ms per character. |
+| `delay` | `number` | `0` | Delay before the animation starts (in ms). |
+| `startOnView` | `boolean` | `true` | Whether to wait until the text is in the viewport to start typing. |
+| `className` | `string` | `undefined` | Custom CSS classes for styling. |
+
+## How it works
+
+The component uses an internal `setInterval` to iterate through the characters of the input string. It maintains a `displayedText` state that updates incrementally. The blinking cursor is a separate `motion.span` that uses a simple opacity keyframe animation.

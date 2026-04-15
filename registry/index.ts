@@ -1,4 +1,6 @@
 import React from "react"
+import { FallingText } from "./animations/falling-text"
+import { TypingAnimation } from "./animations/typing-animation"
 import { BlurText } from "./animations/blur-text"
 import { GlassButton } from "./buttons/glass-button"
 import { ShimmerButton } from "./buttons/shimmer-button"
@@ -30,5 +32,7 @@ export const registry: Record<string, React.ComponentType<any>> = {
   "magnetic-integrations-orb": MagneticIntegrationsOrb,
   "registry-ecosystem-map": RegistryEcosystemMap,
   "blur-text": BlurText as any,
+  "typing-animation": TypingAnimation,
+  "falling-text": FallingText,
   // "colourful-bento-grid": ColourfulBentoGrid,
 }
