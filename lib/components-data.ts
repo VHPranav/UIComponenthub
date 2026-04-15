@@ -157,4 +157,15 @@ export const ShimmerButton = () => {
   return <MagneticIntegrationsOrb />
 }`,
   },
+  {
+    id: "blur-text",
+    name: "Blur Text",
+    description: "An elegant text animation component that reveals text with a smooth blur and motion effect. Supports words and letters animation.",
+    category: "Animations",
+    tags: ["Animated", "Typography", "Motion"],
+    installation: "npm install framer-motion",
+    code: `export const BlurText = () => {
+  return <BlurText text="Animated Text" />
+}`,
+  },
 ]

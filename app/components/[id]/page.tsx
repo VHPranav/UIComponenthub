@@ -118,7 +118,7 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
 
           <TabsContent value="code" className="mt-8">
             <div className="prose prose-zinc dark:prose-invert max-w-none">
-              <MDXRemote source={content} components={mdxComponents} />
+              <MDXRemote source={componentData.content} components={mdxComponents} />
             </div>
           </TabsContent>
         </Tabs>

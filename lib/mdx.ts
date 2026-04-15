@@ -31,6 +31,22 @@ export function getAllComponentsMetadata(): ComponentMetadata[] {
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
 }
 
+function findComponentFile(dir: string, filename: string): string | null {
+  const entries = fs.readdirSync(dir, { withFileTypes: true })
+
+  for (const entry of entries) {
+    const res = path.join(dir, entry.name)
+    if (entry.isDirectory()) {
+      const found = findComponentFile(res, filename)
+      if (found) return found
+    } else if (entry.name === filename) {
+      return res
+    }
+  }
+
+  return null
+}
+
 export async function getComponentData(id: string) {
   const filePath = path.join(CONTENT_PATH, `${id}.mdx`)
   
@@ -38,12 +54,33 @@ export async function getComponentData(id: string) {
     return null
   }
 
-  const source = fs.readFileSync(filePath, "utf-8")
-  const { content, data } = matter(source)
+  const sourceFile = fs.readFileSync(filePath, "utf-8")
+  const { content, data } = matter(sourceFile)
+
+  // Find corresponding source code in registry
+  let sourceCode = ""
+  const registryPath = path.join(process.cwd(), "registry")
+  const sourceFilePath = findComponentFile(registryPath, `${id}.tsx`)
+  
+  if (sourceFilePath) {
+    sourceCode = fs.readFileSync(sourceFilePath, "utf-8")
+  }
+
+  // Inject source code into content before ## Props
+  let finalContent = content
+  if (sourceCode) {
+    const sourceSection = `\n\n## Source Code\n\n\`\`\`tsx\n${sourceCode}\n\`\`\`\n\n`
+    if (finalContent.includes("## Props")) {
+      finalContent = finalContent.replace("## Props", `${sourceSection}## Props`)
+    } else {
+      finalContent += sourceSection
+    }
+  }
 
   return {
     id,
     metadata: data as ComponentMetadata,
-    content,
+    content: finalContent,
+    sourceCode,
   }
 }

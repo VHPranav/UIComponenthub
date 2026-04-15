@@ -1,110 +1,126 @@
 "use client"
 
-import React, { useRef, ReactNode } from "react"
-import { motion, useMotionValue, useSpring } from "framer-motion"
-import { ShieldCheck, Mail, Bot } from "lucide-react"
+import React, { useState, useEffect, useRef, ReactNode, HTMLAttributes } from "react"
+import { motion } from "framer-motion"
+import {
+  Database,
+  Mail,
+  Globe,
+  MessageSquare,
+  Zap,
+  Shield,
+  Activity,
+  Cpu,
+  Layers,
+  Lock,
+} from "lucide-react"
 
-// --- Magnet Component ---
-interface MagnetProps {
+// --- User-provided Smooth Magnet Component ---
+interface MagnetProps extends HTMLAttributes<HTMLDivElement> {
   children: ReactNode
+  padding?: number
+  disabled?: boolean
   magnetStrength?: number
+  activeTransition?: string
+  inactiveTransition?: string
+  wrapperClassName?: string
+  innerClassName?: string
 }
 
-function Magnet({ children, magnetStrength = 4 }: MagnetProps) {
-  const ref = useRef<HTMLDivElement>(null)
-  // Capture the original center ONCE on mouseenter (before the element starts moving)
-  // so the moving transform doesn't pollute the reference point and cause jitter
-  const origin = useRef<{ cx: number; cy: number } | null>(null)
+const Magnet: React.FC<MagnetProps> = ({
+  children,
+  padding = 100,
+  disabled = false,
+  magnetStrength = 2,
+  activeTransition = "transform 0.3s ease-out",
+  inactiveTransition = "transform 0.5s ease-in-out",
+  wrapperClassName = "",
+  innerClassName = "",
+  ...props
+}) => {
+  const [isActive, setIsActive] = useState<boolean>(false)
+  const [position, setPosition] = useState<{ x: number; y: number }>({ x: 0, y: 0 })
+  const magnetRef = useRef<HTMLDivElement>(null)
 
-  const x = useMotionValue(0)
-  const y = useMotionValue(0)
-  // Lower stiffness + damping = smooth, buttery pull with a tiny natural overshoot
-  const springX = useSpring(x, { stiffness: 120, damping: 14, mass: 0.08 })
-  const springY = useSpring(y, { stiffness: 120, damping: 14, mass: 0.08 })
-
-  const handleMouseEnter = () => {
-    const el = ref.current
-    if (!el) return
-    const rect = el.getBoundingClientRect()
-    origin.current = {
-      cx: rect.left + rect.width / 2,
-      cy: rect.top + rect.height / 2,
+  useEffect(() => {
+    if (disabled) {
+      setPosition({ x: 0, y: 0 })
+      return
     }
-  }
 
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!origin.current) return
-    x.set((e.clientX - origin.current.cx) / magnetStrength)
-    y.set((e.clientY - origin.current.cy) / magnetStrength)
-  }
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!magnetRef.current) return
 
-  const handleMouseLeave = () => {
-    origin.current = null
-    x.set(0)
-    y.set(0)
-  }
+      const { left, top, width, height } = magnetRef.current.getBoundingClientRect()
+      const centerX = left + width / 2
+      const centerY = top + height / 2
+
+      const distX = Math.abs(centerX - e.clientX)
+      const distY = Math.abs(centerY - e.clientY)
+
+      if (distX < width / 2 + padding && distY < height / 2 + padding) {
+        setIsActive(true)
+        const offsetX = (e.clientX - centerX) / magnetStrength
+        const offsetY = (e.clientY - centerY) / magnetStrength
+        setPosition({ x: offsetX, y: offsetY })
+      } else {
+        setIsActive(false)
+        setPosition({ x: 0, y: 0 })
+      }
+    }
+
+    window.addEventListener("mousemove", handleMouseMove)
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove)
+    }
+  }, [padding, disabled, magnetStrength])
+
+  const transitionStyle = isActive ? activeTransition : inactiveTransition
 
   return (
-    <motion.div
-      ref={ref}
-      style={{ x: springX, y: springY }}
-      onMouseEnter={handleMouseEnter}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
+    <div
+      ref={magnetRef}
+      className={wrapperClassName}
+      style={{ position: "relative", display: "inline-block" }}
+      {...props}
     >
-      {children}
-    </motion.div>
+      <div
+        className={innerClassName}
+        style={{
+          transform: `translate3d(${position.x}px, ${position.y}px, 0)`,
+          transition: transitionStyle,
+          willChange: "transform",
+        }}
+      >
+        {children}
+      </div>
+    </div>
   )
 }
 
-// --- Tool data — all positions kept within 8%–88% (h) and 6%–88% (v) ---
-interface ToolItem {
-  type: "img" | "lucide"
-  src?: string
-  Icon?: React.ElementType
-  iconColor?: string
+// --- Scattered Category Icons Data ---
+interface IconItem {
+  Icon: React.ElementType
+  color: string
   top: string
   left: string
-  blur: string
   opacity: number
   scale: number
   delay: number
   floatDuration: number
 }
 
-const TOOLS: ToolItem[] = [
-  // Top-left cluster
-  { type: "img", src: "https://cdn.simpleicons.org/slack",             top: "12%", left: "10%", blur: "0px", opacity: 1,   scale: 1,    delay: 0,   floatDuration: 7   },
-  { type: "img", src: "https://cdn.simpleicons.org/shopify/96bf48",   top: "28%", left: "18%", blur: "1px", opacity: 0.6, scale: 0.85, delay: 1.5, floatDuration: 9   },
-  { type: "img", src: "https://cdn.simpleicons.org/hubspot/ff7a59",   top: "10%", left: "28%", blur: "0px", opacity: 0.8, scale: 0.9,  delay: 2.5, floatDuration: 8   },
-  { type: "lucide", Icon: ShieldCheck, iconColor: "#4285F4",          top: "20%", left: "36%", blur: "0px", opacity: 0.85,scale: 0.85, delay: 1.2, floatDuration: 6.5 },
-  { type: "lucide", Icon: Mail,        iconColor: "#EA4335",          top: "7%",  left: "16%", blur: "1px", opacity: 0.5, scale: 0.8,  delay: 3.2, floatDuration: 10  },
-  { type: "lucide", Icon: Bot,         iconColor: "#33A852",          top: "38%", left: "8%",  blur: "0px", opacity: 0.9, scale: 1,    delay: 0.8, floatDuration: 7.5 },
-
-  // Top-right cluster
-  { type: "img", src: "https://cdn.simpleicons.org/salesforce/00a1e0",top: "10%", left: "72%", blur: "0px", opacity: 0.9, scale: 1,    delay: 3,   floatDuration: 8   },
-  { type: "img", src: "https://cdn.simpleicons.org/whatsapp/25d366",  top: "28%", left: "82%", blur: "1px", opacity: 0.6, scale: 0.85, delay: 1,   floatDuration: 9   },
-  { type: "img", src: "https://cdn.simpleicons.org/shopify/96bf48",   top: "12%", left: "64%", blur: "0px", opacity: 1,   scale: 1.05, delay: 4,   floatDuration: 6.5 },
-  { type: "lucide", Icon: ShieldCheck, iconColor: "#4285F4",          top: "20%", left: "58%", blur: "0px", opacity: 0.8, scale: 0.85, delay: 1.7, floatDuration: 8   },
-  { type: "lucide", Icon: Mail,        iconColor: "#EA4335",          top: "7%",  left: "84%", blur: "1px", opacity: 0.5, scale: 0.8,  delay: 2.8, floatDuration: 7   },
-  { type: "lucide", Icon: Bot,         iconColor: "#33A852",          top: "38%", left: "88%", blur: "0px", opacity: 0.9, scale: 1,    delay: 1.4, floatDuration: 9.5 },
-
-  // Bottom-left cluster
-  { type: "img", src: "https://cdn.simpleicons.org/square",           top: "60%", left: "12%", blur: "0px", opacity: 0.8, scale: 0.95, delay: 2,   floatDuration: 7.5 },
-  { type: "img", src: "https://cdn.simpleicons.org/slack",            top: "78%", left: "22%", blur: "2px", opacity: 0.4, scale: 0.8,  delay: 3.5, floatDuration: 8.5 },
-  { type: "img", src: "https://cdn.simpleicons.org/whatsapp/25d366",  top: "55%", left: "8%",  blur: "0px", opacity: 0.9, scale: 1,    delay: 1.8, floatDuration: 6   },
-  { type: "img", src: "https://cdn.simpleicons.org/hubspot/ff7a59",   top: "72%", left: "36%", blur: "1px", opacity: 0.5, scale: 0.85, delay: 5,   floatDuration: 9   },
-  { type: "lucide", Icon: ShieldCheck, iconColor: "#4285F4",          top: "85%", left: "14%", blur: "0px", opacity: 0.6, scale: 0.8,  delay: 0.5, floatDuration: 7   },
-  { type: "lucide", Icon: Mail,        iconColor: "#EA4335",          top: "58%", left: "38%", blur: "0px", opacity: 0.9, scale: 1,    delay: 2.2, floatDuration: 8   },
-  { type: "lucide", Icon: Bot,         iconColor: "#33A852",          top: "88%", left: "28%", blur: "1px", opacity: 0.5, scale: 0.8,  delay: 4.1, floatDuration: 10  },
-
-  // Bottom-right cluster
-  { type: "img", src: "https://cdn.simpleicons.org/shopify/96bf48",   top: "60%", left: "82%", blur: "0px", opacity: 1,   scale: 1,    delay: 4.5, floatDuration: 7   },
-  { type: "img", src: "https://cdn.simpleicons.org/square",           top: "78%", left: "72%", blur: "2px", opacity: 0.4, scale: 0.8,  delay: 0.8, floatDuration: 6.5 },
-  { type: "img", src: "https://cdn.simpleicons.org/salesforce/00a1e0",top: "55%", left: "88%", blur: "0px", opacity: 0.8, scale: 1,    delay: 2.2, floatDuration: 8.5 },
-  { type: "lucide", Icon: ShieldCheck, iconColor: "#4285F4",          top: "85%", left: "84%", blur: "0px", opacity: 0.6, scale: 0.8,  delay: 1.2, floatDuration: 9   },
-  { type: "lucide", Icon: Mail,        iconColor: "#EA4335",          top: "58%", left: "60%", blur: "0px", opacity: 0.9, scale: 1,    delay: 3.5, floatDuration: 7.5 },
-  { type: "lucide", Icon: Bot,         iconColor: "#33A852",          top: "88%", left: "68%", blur: "1px", opacity: 0.5, scale: 0.8,  delay: 2.8, floatDuration: 8   },
+const TOOLS: IconItem[] = [
+  { Icon: Database,      color: "#3b82f6", top: "15%", left: "12%", opacity: 0.8, scale: 1,    delay: 0,   floatDuration: 8   },
+  { Icon: Mail,          color: "#ec4899", top: "12%", left: "85%", opacity: 0.7, scale: 1,    delay: 1.5, floatDuration: 7   },
+  { Icon: Globe,         color: "#10b981", top: "75%", left: "15%", opacity: 0.7, scale: 0.9,  delay: 2.5, floatDuration: 9   },
+  { Icon: MessageSquare, color: "#8b5cf6", top: "85%", left: "82%", opacity: 0.8, scale: 1.05, delay: 3,   floatDuration: 6.5 },
+  { Icon: Zap,           color: "#f59e0b", top: "45%", left: "8%",  opacity: 0.8, scale: 0.95, delay: 0.8, floatDuration: 7.5 },
+  { Icon: Shield,        color: "#6366f1", top: "45%", left: "92%", opacity: 0.9, scale: 1,    delay: 1.8, floatDuration: 8.5 },
+  { Icon: Activity,      color: "#ef4444", top: "10%", left: "50%", opacity: 0.6, scale: 1,    delay: 4,   floatDuration: 10  },
+  { Icon: Cpu,           color: "#14b8a6", top: "88%", left: "50%", opacity: 0.5, scale: 0.85, delay: 2.2, floatDuration: 7   },
+  { Icon: Layers,        color: "#f97316", top: "30%", left: "28%", opacity: 0.7, scale: 0.8,  delay: 3.2, floatDuration: 9   },
+  { Icon: Lock,          color: "#06b6d4", top: "70%", left: "70%", opacity: 0.7, scale: 0.95, delay: 1.2, floatDuration: 8   },
 ]
 
 interface MagneticIntegrationsOrbProps {
@@ -113,12 +129,12 @@ interface MagneticIntegrationsOrbProps {
 }
 
 export function MagneticIntegrationsOrb({
-  heading = "Hover over the icons",
-  subheading = "Connect with 100+ tools your team already loves.",
+  heading = "Integrated Tools",
+  subheading = "Minimal icons with a smooth magnetic response.",
 }: MagneticIntegrationsOrbProps) {
   return (
-    <section className="relative w-full min-h-[400px] flex items-center justify-center overflow-hidden">
-      {/* Floating Icons Layer */}
+    <section className="relative w-full min-h-[400px] flex items-center justify-center overflow-hidden bg-transparent">
+      {/* Background Floating Layer */}
       <div className="absolute inset-0 pointer-events-none z-[1]">
         {TOOLS.map((tool, i) => (
           <motion.div
@@ -128,14 +144,12 @@ export function MagneticIntegrationsOrb({
               top: tool.top,
               left: tool.left,
               opacity: tool.opacity,
-              filter: `blur(${tool.blur})`,
               scale: tool.scale,
               x: "-50%",
               y: "-50%",
             }}
             animate={{
-              y: ["-50%", "calc(-50% - 8px)", "calc(-50% + 6px)", "-50%"],
-              rotate: [0, 2, -2, 0],
+              y: ["-50%", "calc(-50% - 12px)", "calc(-50% + 8px)", "-50%"],
             }}
             transition={{
               duration: tool.floatDuration,
@@ -144,34 +158,28 @@ export function MagneticIntegrationsOrb({
               ease: "easeInOut",
             }}
           >
-            <Magnet magnetStrength={4}>
-              <div className="w-8 h-8 p-[7px] bg-white rounded-xl border border-black/5 shadow-[0_4px_16px_rgba(0,0,0,0.07)] flex items-center justify-center hover:shadow-[0_8px_28px_rgba(0,0,0,0.12)] hover:scale-110 transition-shadow duration-300 cursor-pointer">
-                {tool.type === "lucide" && tool.Icon ? (
-                  <tool.Icon size="100%" color={tool.iconColor} strokeWidth={1.5} />
-                ) : (
-                  <img
-                    src={tool.src}
-                    alt="Integration"
-                    className="w-full h-full object-contain"
-                  />
-                )}
+            <Magnet magnetStrength={1.5} padding={120}>
+              <div className="group cursor-pointer p-3">
+                <tool.Icon 
+                  size={32} 
+                  color={tool.color} 
+                  strokeWidth={1.5}
+                  className="drop-shadow-sm transition-transform duration-300 group-hover:scale-110" 
+                />
               </div>
             </Magnet>
           </motion.div>
         ))}
       </div>
 
-      {/* Central Content */}
+      {/* Hero Content */}
       <motion.div
-        className="relative z-[2] flex flex-col items-center justify-center text-center max-w-xs px-6"
-        initial={{ opacity: 0, y: 20 }}
+        className="relative z-[2] flex flex-col items-center justify-center text-center max-w-sm px-6"
+        initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.9, ease: [0.2, 0.8, 0.2, 1] }}
+        transition={{ duration: 0.8, ease: [0.2, 0.8, 0.2, 1] }}
       >
-        <h2
-          className="text-3xl sm:text-4xl font-medium tracking-tight text-zinc-900 dark:text-zinc-100 leading-[1.1]"
-          style={{ textShadow: "0 0 40px rgba(255,255,255,1)" }}
-        >
+        <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-100 leading-tight">
           {heading}
         </h2>
         {subheading && (

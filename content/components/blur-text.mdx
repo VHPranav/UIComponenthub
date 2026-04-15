@@ -1,0 +1,59 @@
+---
+title: Blur Text
+description: An elegant text animation component that reveals text with a smooth blur and motion effect.
+category: Animations
+tags: ["Animated", "Typography", "Motion"]
+date: 2026-04-15
+---
+
+## Overview
+
+**Blur Text** is a high-performance typography animation component built with Framer Motion. It animates text (either by words or individual letters) using a multi-step keyframe approach that transitions from a blurred, offset state to a crisp, centered final state.
+
+## Features
+
+- **Granular Control**: Animate by `words` or `letters`.
+- **Directional Entrance**: Support entrance from `top` or `bottom`.
+- **Keyframe Pipeline**: Uses unique multi-step keyframes for complex, smooth transitions.
+- **Intersection Observer**: Animations trigger only when the component enters the viewport.
+- **Customizable**: Full control over easing, delay, and step duration.
+
+## Installation
+
+```bash
+npm install framer-motion
+```
+
+## Usage
+
+```tsx
+import { BlurText } from "@/registry/animations/blur-text"
+
+export default function TextSection() {
+  return (
+    <BlurText
+      text="Experience the transition"
+      delay={150}
+      animateBy="words"
+      direction="top"
+      className="text-4xl font-bold"
+    />
+  )
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `text` | `string` | `""` | The text to be animated. |
+| `delay` | `number` | `200` | Delay between consecutive segments in ms. |
+| `animateBy` | `"words" \| "letters"` | `"words"` | Animation granularity (split by word or letter). |
+| `direction` | `"top" \| "bottom"` | `"top"` | The direction from which the text enters. |
+| `stepDuration` | `number` | `0.35` | Duration of each animation step in seconds. |
+| `easing` | `Easing` | `"easeOut"` | Framer Motion easing function or string. |
+| `onAnimationComplete` | `() => void` | `undefined` | Callback fired when the last segment finishes animating. |
+
+## How it works
+
+The component splits the input text and wraps each segment in a `motion.span`. It builds a set of keyframes dynamically from the `animationFrom` and `animationTo` configurations. Using `framer-motion`'s `times` property, it coordinates a smooth multi-stage transition that includes blur, opacity, and translation.

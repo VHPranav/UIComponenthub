@@ -1,4 +1,5 @@
 import React from "react"
+import { BlurText } from "./animations/blur-text"
 import { GlassButton } from "./buttons/glass-button"
 import { ShimmerButton } from "./buttons/shimmer-button"
 import { RetroButton } from "./buttons/retro-button"
@@ -28,5 +29,6 @@ export const registry: Record<string, React.ComponentType<any>> = {
   "interactive-pixel-grid": InteractivePixelGrid,
   "magnetic-integrations-orb": MagneticIntegrationsOrb,
   "registry-ecosystem-map": RegistryEcosystemMap,
+  "blur-text": BlurText as any,
   // "colourful-bento-grid": ColourfulBentoGrid,
 }
