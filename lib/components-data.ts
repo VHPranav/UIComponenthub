@@ -201,4 +201,26 @@ export const ShimmerButton = () => {
   return <DecryptedText text="Cyberpunk Reveal" />
 }`,
   },
+  {
+    id: "rotating-text",
+    name: "Rotating Text",
+    description: "A versatile text rotation component that transitions through an array of strings with highly customizable character, word, or line-level animations.",
+    category: "Animations",
+    tags: ["Animated", "Typography", "Motion", "Rotating"],
+    installation: "npm install framer-motion",
+    code: `export const RotatingTextEffect = () => {
+  return <RotatingText texts={["React", "Motion", "Tailwind", "Next.js"]} />
+}`,
+  },
+  {
+    id: "count-up",
+    name: "Number Count Up",
+    description: "A high-performance number animation component that uses spring physics for smooth, natural numerical transitions. Supports decimals and custom separators.",
+    category: "Animations",
+    tags: ["Animated", "Numbers", "Spring", "Motion"],
+    installation: "npm install framer-motion",
+    code: `export const CountUpEffect = () => {
+  return <CountUp to={100} duration={2} />
+}`,
+  },
 ]

@@ -1,0 +1,65 @@
+---
+title: Rotating Text
+description: A versatile text rotation component that transitions through an array of strings with character, word, or line-level animations.
+category: Animations
+tags: ["Animated", "Typography", "Motion", "Rotating"]
+date: 2026-04-16
+---
+
+## Overview
+
+**Rotating Text** is a high-performance typography component that cycles through different phrases with elegant motion. It supports deep splitting (by character, word, or line) and sophisticated stagger logic, allowing you to create complex entrance and exit sequences that feel organic and professional.
+
+## Features
+
+- **Granular Splitting**: Animate by `characters`, `words`, or `lines`.
+- **Intelligent Character Handling**: Uses `Intl.Segmenter` for accurate character splitting (graphemes) across any font or language.
+- **Sophisticated Stagger**: Control the flow of animation with `staggerFrom` options like `first`, `last`, `center`, or `random`.
+- **Full Motion Control**: Pass your own Framer Motion `transition`, `initial`, `animate`, and `exit` props for infinite creative possibilities.
+- **Referenceable API**: Use a `ref` to manually control the sequence (`next`, `previous`, `jumpTo`, `reset`).
+
+## Installation
+
+```bash
+npm install framer-motion
+```
+
+## Usage
+
+### Simple Character Rotation
+
+```tsx
+import { RotatingText } from "@/registry/animations/rotating-text"
+
+export default function Intro() {
+  return (
+    <h2 className="text-4xl flex gap-2">
+      Built with
+      <RotatingText
+        texts={["React", "Motion", "Tailwind", "Next.js"]}
+        mainClassName="px-2 bg-blue-500 text-white overflow-hidden py-0.5 sm:py-1 md:py-2 justify-center rounded-lg"
+        staggerDuration={0.025}
+        splitLevelClassName="overflow-hidden"
+        transition={{ type: "spring", damping: 30, stiffness: 400 }}
+        rotationInterval={2000}
+      />
+    </h2>
+  )
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `texts` | `string[]` | `[]` | Array of strings to cycle through. |
+| `splitBy` | `"characters" \| "words" \| "lines"` | `"characters"` | The granularity of the splitting and animation. |
+| `rotationInterval` | `number` | `2000` | Auto-rotation interval in milliseconds. |
+| `auto` | `boolean` | `true` | Whether to automatically cycle through texts. |
+| `staggerDuration` | `number` | `0.025` | Delay between consecutive segments. |
+| `staggerFrom` | `string \| number` | `"first"` | Direction of stagger: `first`, `last`, `center`, `random`. |
+| `animatePresenceMode` | `"sync" \| "wait"` | `"wait"` | Mode for Framer Motion's AnimatePresence. |
+
+## How it works
+
+The component calculates the current set of elements (characters/words) based on the `splitBy` prop. It then uses an `AnimatePresence` wrapper to handle the entrance and exit of each text variant. Each individual element (like a character) is assigned a `staggerDelay` based on its position and the chosen `staggerFrom` logic, ensuring a perfectly timed sequence.

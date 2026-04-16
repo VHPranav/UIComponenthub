@@ -1,0 +1,110 @@
+---
+title: Number Count Up
+description: A high-performance number animation component that uses spring physics for smooth numerical transitions.
+category: Animations
+tags: ["Animated", "Numbers", "Spring", "Motion"]
+date: 2026-04-16
+---
+
+## Overview
+
+**Number Count Up** is a performant component designed for dashboard metrics and data visualizations. Unlike basic interval-based counters, it uses a **physics-based spring** from Framer Motion. This means the speed of the counting feels natural, accelerating at the start and gracefully slowing down as it reaches the final value.
+
+## Features
+
+- **Spring Physics**: Uses `damping` and `stiffness` to create a more organic numerical transition.
+- **Decimal Precision**: Automatically detects and respects the number of decimal places in your target value.
+- **Trigger on Visibility**: Uses `useInView` to automatically start counting when the user scrolls to the section.
+- **Custom Formatting**: Easily add separators (commas, dots) for professional financial or data displays.
+- **Event Hooks**: `onStart` and `onEnd` callbacks for triggering secondary effects or sequences.
+
+## Installation
+
+```bash
+npm install framer-motion
+```
+
+## Usage
+
+### Whole Numbers
+
+<ComponentPreview 
+  id="count-up" 
+  props={{ 
+    to: 1234, 
+    separator: ",", 
+    duration: 2.5,
+    className: "text-white text-6xl font-black tracking-tighter" 
+  }} 
+/>
+
+```tsx
+<CountUp
+  from={0}
+  to={1234}
+  separator=","
+  duration={2.5}
+  className="text-white text-6xl font-black tracking-tighter"
+/>
+```
+
+### Decimal Precision
+
+The component automatically detects the number of decimal places in your `to` or `from` props.
+
+<ComponentPreview 
+  id="count-up" 
+  props={{ 
+    to: 99.99, 
+    duration: 3,
+    className: "text-blue-500 text-6xl font-black tracking-tighter" 
+  }} 
+/>
+
+```tsx
+<CountUp
+  from={0}
+  to={99.99}
+  duration={3}
+  className="text-blue-500 text-6xl font-black tracking-tighter"
+/>
+```
+
+### Currency Style
+
+<ComponentPreview 
+  id="count-up" 
+  props={{ 
+    to: 5000.75, 
+    separator: ",",
+    duration: 3,
+    className: "text-green-500 text-5xl font-bold" 
+  }} 
+/>
+
+```tsx
+<CountUp
+  from={0}
+  to={5000.75}
+  separator=","
+  duration={3}
+  className="text-green-500 text-5xl font-bold"
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `to` | `number` | `100` | The target value to count up to. |
+| `from` | `number` | `0` | The starting value for the animation. |
+| `duration` | `number` | `2` | Estimated duration in seconds (affects spring stiffness). |
+| `delay` | `number` | `0` | Delay in seconds before starting the count. |
+| `separator` | `string` | `""` | The character used for grouping thousands (e.g. `","`). |
+| `startWhen` | `boolean` | `true` | Condition that must be true for the animation to begin. |
+| `onStart` | `() => void` | `undefined` | Callback fired when counting begins. |
+| `onEnd` | `() => void` | `undefined` | Callback fired when counting is complete. |
+
+## Technical Details
+
+The component updates the `textContent` of a `span` ref directly using Framer Motion's `springValue.on('change')` listener. This bypasses React's state-update overhead for high-frequency numerical shifts, ensuring 60fps performance even with large numbers or multiple counters on a single page.

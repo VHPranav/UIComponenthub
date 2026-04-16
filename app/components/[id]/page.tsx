@@ -10,6 +10,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { CodeBlock } from "@/components/code-block"
 import { TableOfContents } from "@/components/toc"
 import { Breadcrumbs } from "@/components/breadcrumbs"
+import { ComponentPreview } from "@/components/component-preview"
 
 interface ComponentPageProps {
   params: { id: string }
@@ -58,6 +59,7 @@ const mdxComponents = {
     const language = el?.props?.className?.replace("language-", "") || "tsx"
     return <CodeBlock code={code} language={language} />
   },
+  ComponentPreview,
 }
 
 export default async function ComponentPage({ params }: ComponentPageProps) {
@@ -100,10 +102,7 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
           </TabsList>
 
           <TabsContent value="preview" className="mt-8">
-            <div className="relative overflow-hidden rounded-xl border bg-muted/20 min-h-[400px] flex items-center justify-center p-8">
-              <div className="absolute inset-0 opacity-[0.03] pointer-events-none" 
-                   style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, currentColor 1px, transparent 0)', backgroundSize: '24px 24px' }} 
-              />
+            {params.id === "count-up" ? (
               <div className="z-10 w-full flex justify-center">
                 {PreviewComponent ? (
                   <PreviewComponent />
@@ -113,7 +112,22 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
                   </div>
                 )}
               </div>
-            </div>
+            ) : (
+              <div className="relative overflow-hidden rounded-xl border bg-muted/20 min-h-[400px] flex items-center justify-center p-8">
+                <div className="absolute inset-0 opacity-[0.03] pointer-events-none" 
+                     style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, currentColor 1px, transparent 0)', backgroundSize: '24px 24px' }} 
+                />
+                <div className="z-10 w-full flex justify-center">
+                  {PreviewComponent ? (
+                    <PreviewComponent />
+                  ) : (
+                    <div className="text-muted-foreground text-sm italic text-center">
+                      Component implementation not found in registry.
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
           </TabsContent>
 
           <TabsContent value="code" className="mt-8">
