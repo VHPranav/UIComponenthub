@@ -1,5 +1,6 @@
 import React from "react"
 import { FallingText } from "./animations/falling-text"
+import { DecryptedText } from "./animations/decrypted-text"
 import { TypingAnimation } from "./animations/typing-animation"
 import { BlurText } from "./animations/blur-text"
 import { GlassButton } from "./buttons/glass-button"
@@ -34,5 +35,6 @@ export const registry: Record<string, React.ComponentType<any>> = {
   "blur-text": BlurText as any,
   "typing-animation": TypingAnimation,
   "falling-text": FallingText,
+  "decrypted-text": DecryptedText,
   // "colourful-bento-grid": ColourfulBentoGrid,
 }

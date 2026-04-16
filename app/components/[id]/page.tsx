@@ -65,7 +65,7 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
   const allComponents = getAllComponentsMetadata()
   if (!componentData) notFound()
 
-  const { metadata, content } = componentData
+  const { content: _, metadata } = componentData
   const PreviewComponent = registry[params.id]
 
   return (

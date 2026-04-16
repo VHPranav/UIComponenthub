@@ -1,0 +1,60 @@
+---
+title: Decrypted Text
+description: A premium text entrance effect where characters transition from a glitchy scramble to clear text.
+category: Animations
+tags: ["Animated", "Typography", "Glitch", "Motion"]
+date: 2026-04-15
+---
+
+## Overview
+
+**Decrypted Text** is a high-end typography animation that treats every character as an independent physical object. While "encrypted", letters jitter, scale, and switch colors in a digital glitch pattern. They then transition smoothly into their final form using staggered reveal patterns.
+
+## Features
+
+- **Character Jitter**: Encrypted characters have randomized `x`, `y`, and `scale` motion for a "glitchy" feel.
+- **Staggered Reveal**: Supports `start`, `end`, `center`, and `random` reveal directions.
+- **Micro-Interaction**: Trigger decryption on `hover`, `view` (scroll), or `click`.
+- **AnimatePresence**: Uses Framer Motion's `AnimatePresence` to cross-fade between encrypted and decrypted states per letter.
+- **Layout Aware**: Uses Framer Motion's `layout` prop to ensure smooth spacing as letters change width.
+
+## Installation
+
+```bash
+npm install framer-motion
+```
+
+## Usage
+
+```tsx
+import { DecryptedText } from "@/registry/animations/decrypted-text"
+
+export default function SecurityDashboard() {
+  return (
+    <DecryptedText
+      text="ACCESS GRANTED"
+      animateOn="view"
+      revealDirection="center"
+      sequential={true}
+      className="text-green-500 font-bold text-6xl"
+    />
+  )
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `text` | `string` | (Required) | The final text to be revealed. |
+| `speed` | `number` | `50` | Interval between decryption steps in ms. |
+| `sequential` | `boolean` | `false` | Whether to reveal characters one-by-one or all at once. |
+| `revealDirection` | `string` | `"start"` | Direction of reveal: `start`, `end`, `center`, or `random`. |
+| `animateOn` | `string` | `"hover"` | Trigger: `hover`, `view`, `inViewHover`, or `click`. |
+| `characters` | `string` | (A-Z, a-z, symbols) | The pool of characters used for the scrambled state. |
+| `className` | `string` | `""` | Classes applied to the decrypted text. |
+| `encryptedClassName` | `string` | (Blue/Mono/70%) | Classes applied to characters while scrambled. |
+
+## How it works
+
+The component maps each character to a `motion.span`. It maintains internal state for `revealedIndices` and uses a `setInterval` loop to progressively add indices to this set. Each character sub-component listens for its state change and uses `AnimatePresence` to swap the scrambled `motion.span` (active jitter) with the original character (smooth entrance).

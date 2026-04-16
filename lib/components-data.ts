@@ -190,4 +190,15 @@ export const ShimmerButton = () => {
   return <FallingText text="Gravity is real" fontSize="2rem" />
 }`,
   },
+  {
+    id: "decrypted-text",
+    name: "Decrypted Text",
+    description: "A premium text entrance effect where characters transition from a glitchy scramble to clear text. Features per-character motion, scaling, and jitter.",
+    category: "Animations",
+    tags: ["Animated", "Typography", "Glitch", "Motion"],
+    installation: "npm install framer-motion",
+    code: `export const DecryptedTextEffect = () => {
+  return <DecryptedText text="Cyberpunk Reveal" />
+}`,
+  },
 ]
