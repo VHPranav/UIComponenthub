@@ -1,0 +1,84 @@
+---
+title: Shiny Text
+description: A premium typography effect that animates a radiant shine across the text with customizable speed and colors.
+category: Animations
+tags: ["Animated", "Typography", "Shine", "Motion"]
+date: 2026-04-16
+---
+
+## Overview
+
+**Shiny Text** is a high-end typography component that adds a moving "radiance" or "gleam" effect to your text. It uses an animated CSS gradient that tracks along the text path, giving it a polished, premium aesthetic similar to those found in modern Apple or Stripe-style landing pages.
+
+## Features
+
+- **Liquid Motion**: The shine flows smoothly thanks to a `background-position` transition controlled by Framer Motion's `useAnimationFrame`.
+- **Yoyo Mode**: Toggle back-and-forth shine animations for a continuous shimmering effect.
+- **Interactive Control**: Optionally pause the animation when the user hovers over the text.
+- **Highly Customizable**: Control `speed`, `color`, `shineColor`, `spread`, and `direction` with simple props.
+- **Auto-Formatting**: Built with performance in mind using `Shared Motion Values` for 60fps animations.
+
+## Installation
+
+```bash
+npm install framer-motion
+```
+
+## Usage
+
+### Basic Shine
+
+<ComponentPreview 
+  id="shiny-text" 
+  props={{ 
+    text: "Shimmering Text", 
+    disabled: false, 
+    speed: 3, 
+    className: "text-4xl font-bold" 
+  }} 
+/>
+
+```tsx
+import { ShinyText } from "@/registry/animations/shiny-text"
+
+export default function Hero() {
+  return (
+    <ShinyText 
+      text="Shimmering Text" 
+      disabled={false} 
+      speed={3} 
+      className="text-4xl font-bold" 
+    />
+  )
+}
+```
+
+### Gold Shine (Yoyo Mode)
+
+```tsx
+<ShinyText 
+  text="Golden Glow" 
+  color="#8a6d3b" 
+  shineColor="#ffd700" 
+  yoyo={true} 
+  speed={2} 
+  className="text-5xl font-black" 
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `text` | `string` | `""` | The text to be shined. |
+| `speed` | `number` | `2` | Duration in seconds for one full shine cycle. |
+| `color` | `string` | `"#b5b5b5"` | The base color of the text. |
+| `shineColor` | `string` | `"#ffffff"` | The color of the radiant shine effect. |
+| `spread` | `number` | `120` | The angle/width of the shine gradient. |
+| `yoyo` | `boolean` | `false` | Whether the shine should reverse direction at the end of each cycle. |
+| `pauseOnHover` | `boolean` | `false` | Pause the animation when the user hovers. |
+| `direction` | `"left" \| "right"` | `"left"` | Initial direction of the shine movement. |
+
+## Technical Details
+
+The component works by applying a `linear-gradient` as a `backgroundImage` with `background-clip: text`. It then uses a `SharedMotionValue` to animate the `background-position` via `useTransform`, ensuring the animation is strictly tied to the high-performance browser rendering loop through `useAnimationFrame`.

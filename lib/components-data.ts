@@ -223,4 +223,15 @@ export const ShimmerButton = () => {
   return <CountUp to={100} duration={2} />
 }`,
   },
+  {
+    id: "shiny-text",
+    name: "Shiny Text",
+    description: "A premium typography effect that animates a radiant shine across the text. Supports customizable speed, colors, and interactive hover states.",
+    category: "Animations",
+    tags: ["Animated", "Typography", "Shine", "Motion"],
+    installation: "npm install framer-motion",
+    code: `export const ShinyTextExample = () => {
+  return <ShinyText text="Shimmering Content" speed={2} />
+}`,
+  },
 ]
