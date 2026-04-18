@@ -1,0 +1,70 @@
+---
+title: Scroll Reveal
+description: A cinematic text animation component that reveals content as you scroll, using GSAP scrub effects.
+category: Animations
+tags: ["Animated", "Typography", "Scroll", "GSAP"]
+date: 2026-04-18
+---
+
+## Overview
+
+**Scroll Reveal** is a high-performance scroll-driven animation component powered by **GSAP** and **ScrollTrigger**. It transforms static text into a cinematic experience by synchronizing opacity, rotation, and blur effects with the user's scroll position.
+
+## Features
+
+- **GSAP Scrubbing**: Animations are perfectly synced to the scrollbar for a tactile, responsive feel.
+- **Dynamic Split-Text**: Automatically handles text splitting for granular word-by-word animation.
+- **Organic Motion**: Features subtle rotation and blur transitions that create a sense of depth.
+- **Highly Customizable**: Control everything from blur strength to the exact scroll start/end points.
+- **Performance Optimized**: Uses GSAP's `will-change` optimizations and efficient cleanup logic.
+
+## Installation
+
+This component requires **GSAP**.
+
+```bash
+npm install gsap
+```
+
+## Usage
+
+```tsx
+import { ScrollReveal } from "@/registry/animations/scroll-reveal"
+
+export default function Section() {
+  return (
+    <div className="py-[50vh]">
+      <ScrollReveal
+        baseOpacity={0}
+        baseRotation={5}
+        blurStrength={10}
+      >
+        Your story, revealed one word at a time.
+      </ScrollReveal>
+    </div>
+  )
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | - | The text content to be animated. |
+| `scrollContainerRef` | `RefObject<HTMLElement>` | `window` | Optional custom scroll container. |
+| `enableBlur` | `boolean` | `true` | Whether to include the blur entrance effect. |
+| `baseOpacity` | `number` | `0.1` | Starting opacity of the words. |
+| `baseRotation` | `number` | `3` | Initial rotation of the entire text block. |
+| `blurStrength` | `number` | `4` | Maximum blur amount in pixels. |
+| `rotationEnd` | `string` | `"bottom bottom"` | GSAP ScrollTrigger end point for rotation. |
+| `wordAnimationEnd` | `string` | `"bottom bottom"` | GSAP ScrollTrigger end point for word reveal. |
+| `containerClassName` | `string` | `""` | Tailwind classes for the main container. |
+| `textClassName` | `string` | `""` | Tailwind classes for the text element. |
+
+## How it works
+
+The component uses `gsap.fromTo` to create two primary animations:
+1. **Container Rotation**: Harmonizes the entire text block's angle as it enters the view.
+2. **Word Reveal**: Staggers the opacity and blur of individual words based on the scroll progress (`scrub: true`).
+
+By using `useMemo` for text splitting and `useEffect` for GSAP lifecycle management, the component ensures minimal re-renders and clean memory management.

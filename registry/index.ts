@@ -6,6 +6,7 @@ import { RotatingText } from "./animations/rotating-text"
 import { DecryptedText } from "./animations/decrypted-text"
 import { TypingAnimation } from "./animations/typing-animation"
 import { BlurText } from "./animations/blur-text"
+import { ScrollRevealDemo } from "./animations/scroll-reveal-demo"
 import { GlassButton } from "./buttons/glass-button"
 import { ShimmerButton } from "./buttons/shimmer-button"
 import { RetroButton } from "./buttons/retro-button"
@@ -42,5 +43,6 @@ export const registry: Record<string, React.ComponentType<any>> = {
   "rotating-text": RotatingText,
   "count-up": CountUpDemo,
   "shiny-text": ShinyText,
+  "scroll-reveal": ScrollRevealDemo,
   // "colourful-bento-grid": ColourfulBentoGrid,
 }
