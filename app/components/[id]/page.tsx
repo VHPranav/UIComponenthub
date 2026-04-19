@@ -1,7 +1,6 @@
 import type { Metadata } from "next"
-import Link from "next/link"
 import { notFound } from "next/navigation"
-import { ChevronRight, Terminal } from "lucide-react"
+import { Terminal } from "lucide-react"
 import { getComponentData, getAllComponentsMetadata } from "@/lib/mdx"
 import { MDXRemote } from "next-mdx-remote/rsc"
 import { registry } from "@/registry"
@@ -68,7 +67,7 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
   const allComponents = getAllComponentsMetadata()
   if (!componentData) notFound()
 
-  const { content: _, metadata } = componentData
+  const { metadata } = componentData
   const PreviewComponent = registry[params.id]
 
   return (

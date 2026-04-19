@@ -1,0 +1,66 @@
+---
+title: Animated Content
+description: A versatile entrance animation wrapper that brings any component to life with scroll-triggered motion.
+category: Animations
+tags: ["Animated", "GSAP", "Entrance", "Scroll"]
+date: 2026-04-19
+---
+
+## Overview
+
+**Animated Content** is a utility component that provides a standardized way to add entrance animations to any UI element. Powered by **GSAP** and **ScrollTrigger**, it supports multiple directions, staggering, scaling, and even temporary "disappearing" states.
+
+## Features
+
+- **Multi-Directional**: Animate in from `vertical`, `horizontal`, or `diagonal` paths.
+- **Scroll-Triggered**: Animations only fire when the element enters the viewport (customizable threshold).
+- **Stagger Support**: Easily create sequential entrance effects by using the `delay` prop.
+- **GSAP Easing**: Built-in support for all GSAP easing functions like `power3.out`, `back.out`, etc.
+- **Disappearance Logic**: Optional support for elements that animate out after a specific duration.
+- **SSR Safe**: Uses `useIsomorphicLayoutEffect` for flicker-free rendering in Next.js.
+
+## Installation
+
+This component requires **GSAP**.
+
+```bash
+npm install gsap
+```
+
+## Usage
+
+```tsx
+import { AnimatedContent } from "@/registry/animations/animated-content"
+
+export default function Section() {
+  return (
+    <AnimatedContent 
+      direction="vertical" 
+      distance={100} 
+      delay={0.2}
+    >
+      <div className="p-8 bg-zinc-900 rounded-xl">
+        I animate in as you scroll!
+      </div>
+    </AnimatedContent>
+  )
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `distance` | `number` | `100` | The distance (in px) the element travels during entrance. |
+| `direction` | `"vertical" \| "horizontal" \| "diagonal" \| "none"` | `"vertical"` | The entrance path direction. |
+| `reverse` | `boolean` | `false` | Reverses the direction (e.g., top-to-bottom instead of bottom-to-top). |
+| `duration` | `number` | `0.8` | Animation duration in seconds. |
+| `ease` | `string` | `"power3.out"` | GSAP easing function. |
+| `scale` | `number` | `1` | Starting scale of the element. |
+| `threshold` | `number` | `0.1` | How much of the element should be visible before triggering (0-1). |
+| `delay` | `number` | `0` | Delay before the animation starts. |
+| `disappearAfter` | `number` | `0` | If > 0, the element will animate out after this many seconds. |
+
+## How it works
+
+The component uses `gsap.set` to establish an invisible, offset initial state. When the element enters the viewport (monitored by `ScrollTrigger`), it triggers a `gsap.to` timeline that restores the element to its natural position and opacity. Using `useRef` and `useIsomorphicLayoutEffect` ensures that the animation logic is correctly synced with the React lifecycle.

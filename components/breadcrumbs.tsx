@@ -3,9 +3,8 @@
 import * as React from "react"
 import Link from "next/link"
 import { useParams } from "next/navigation"
-import { ChevronRight, Home, MoreHorizontal } from "lucide-react"
+import { ChevronRight, Home } from "lucide-react"
 import { ComponentMetadata } from "@/lib/types"
-import { cn } from "@/lib/utils"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -54,8 +53,8 @@ export function Breadcrumbs({ components, currentTitle }: BreadcrumbsProps) {
           <ChevronRight className="h-4 w-4 ml-1 shrink-0" />
         </DropdownMenuTrigger>
         <DropdownMenuContent align="start" className="w-48">
-          <DropdownMenuItem asChild>
-            <Link href="/components">All Categories</Link>
+          <DropdownMenuItem>
+            <Link href="/components" className="w-full">All Categories</Link>
           </DropdownMenuItem>
           {/* We could list all categories here if we wanted */}
         </DropdownMenuContent>
@@ -71,8 +70,8 @@ export function Breadcrumbs({ components, currentTitle }: BreadcrumbsProps) {
         {categoryComponents.length > 0 && (
           <DropdownMenuContent align="start" className="w-56 max-h-[300px] overflow-y-auto">
             {categoryComponents.map((comp) => (
-              <DropdownMenuItem key={comp.id} asChild>
-                <Link href={`/components/${comp.id}`}>
+              <DropdownMenuItem key={comp.id}>
+                <Link href={`/components/${comp.id}`} className="w-full">
                   {comp.title}
                 </Link>
               </DropdownMenuItem>

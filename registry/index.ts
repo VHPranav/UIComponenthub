@@ -8,6 +8,8 @@ import { TypingAnimation } from "./animations/typing-animation"
 import { BlurText } from "./animations/blur-text"
 import { ScrollRevealDemo } from "./animations/scroll-reveal-demo"
 import { ScrollVelocityDemo } from "./animations/scroll-velocity-demo"
+import { AnimatedContentDemo } from "./animations/animated-content-demo"
+import { GlareCardDemo } from "./animations/glare-card-demo"
 import { GlassButton } from "./buttons/glass-button"
 import { ShimmerButton } from "./buttons/shimmer-button"
 import { RetroButton } from "./buttons/retro-button"
@@ -46,5 +48,7 @@ export const registry: Record<string, React.ComponentType<any>> = {
   "shiny-text": ShinyText,
   "scroll-reveal": ScrollRevealDemo,
   "scroll-velocity": ScrollVelocityDemo,
+  "animated-content": AnimatedContentDemo,
+  "glare-card": GlareCardDemo,
   // "colourful-bento-grid": ColourfulBentoGrid,
 }

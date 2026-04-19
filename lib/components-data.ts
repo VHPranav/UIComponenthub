@@ -1,8 +1,10 @@
+import { Category } from "./types"
+
 export interface ComponentItem {
   id: string
   name: string
   description: string
-  category: "Buttons" | "Cards" | "Inputs" | "Animations" | "Special Effects"
+  category: Category
   tags: string[]
   preview?: string
   code: string
@@ -232,6 +234,72 @@ export const ShimmerButton = () => {
     installation: "npm install framer-motion",
     code: `export const ShinyTextExample = () => {
   return <ShinyText text="Shimmering Content" speed={2} />
+}`,
+  },
+  {
+    id: "animated-content",
+    name: "Animated Content",
+    description: "A high-performance entrance animation component powered by GSAP. Supports configurable directions, staggering, and scroll-triggered activation.",
+    category: "Animations",
+    tags: ["Animated", "GSAP", "ScrollTrigger", "Entrance"],
+    installation: "npm install gsap",
+    code: `import { AnimatedContent } from "@/registry/animations/animated-content"
+
+export const AnimatedContentDemo = () => {
+  return (
+    <AnimatedContent direction="vertical" distance={50}>
+      <div>Animated Content</div>
+    </AnimatedContent>
+  )
+}`,
+  },
+  {
+    id: "scroll-reveal",
+    name: "Scroll Reveal",
+    description: "A premium scroll-driven text reveal effect that brings words to life with organic motion and cinematic depth.",
+    category: "Animations",
+    tags: ["Animated", "GSAP", "ScrollTrigger", "Typography"],
+    installation: "npm install gsap",
+    code: `import { ScrollReveal } from "@/registry/animations/scroll-reveal"
+
+export const ScrollRevealDemo = () => {
+  return (
+    <ScrollReveal>
+      Experience a new dimension of typography.
+    </ScrollReveal>
+  )
+}`,
+  },
+  {
+    id: "scroll-velocity",
+    name: "Scroll Velocity",
+    description: "A high-performance parallax text component that moves at a velocity proportional to the scroll speed. Perfect for dynamic horizontal headlines.",
+    category: "Animations",
+    tags: ["Animated", "Framer Motion", "Parallax", "Velocity"],
+    installation: "npm install framer-motion",
+    code: `import { ScrollVelocity } from "@/registry/animations/scroll-velocity"
+
+export const ScrollVelocityDemo = () => {
+  return (
+    <ScrollVelocity texts={["Dynamic", "Interactive", "High Performance"]} />
+  )
+}`,
+  },
+  {
+    id: "glare-card",
+    name: "Glare Card",
+    description: "A premium interactive card component that combines 3D spring physics with dynamic light reflection and glassmorphism. Perfect for showcasing products or features with a high-end feel.",
+    category: "Animations",
+    tags: ["Animated", "Interactive", "3D", "Tilt", "Glare"],
+    installation: "npm install framer-motion",
+    code: `import { GlareCard } from "@/registry/animations/glare-card"
+
+export const GlareCardDemo = () => {
+  return (
+    <GlareCard spotlight className="h-96 w-72 bg-zinc-950 p-8">
+      <h3 className="text-xl font-bold">Interactive Surface</h3>
+    </GlareCard>
+  )
 }`,
   },
 ]

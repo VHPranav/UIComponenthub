@@ -33,8 +33,10 @@ export default function ComponentsIndexPage() {
 
       <div className="prose prose-zinc dark:prose-invert max-w-none mb-10">
         <p>
-          UIComponentHub is a collection of re-usable components that you can copy and paste into your apps. 
-          It's not a component library. It's a collection of re-usable components that you can copy and paste into your apps.
+          Discover our collection of premium UI components. It&apos;s all you need to build stunning interfaces.
+        </p>
+        <p>
+          It&apos;s not a component library. It&apos;s a collection of re-usable components that you can copy and paste into your apps.
         </p>
         <p>
           <strong>What do you mean by not a component library?</strong> I mean you do not install it as a dependency. It is not available or distributed via npm.
