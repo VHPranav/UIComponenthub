@@ -2,63 +2,61 @@
 
 import React from "react"
 import { GlareCard } from "./glare-card"
-import { Sparkles, Zap, Shield, Rocket } from "lucide-react"
 
 export const GlareCardDemo = () => {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 p-4">
-      {/* Example 1: Standard Beam Glare */}
-      <GlareCard className="flex flex-col items-center justify-center h-[350px] p-8 text-center bg-zinc-950">
-        <Sparkles className="h-12 w-12 text-zinc-400 mb-4" />
-        <h3 className="text-2xl font-bold text-white mb-2">Standard Beam</h3>
-        <p className="text-zinc-500 max-w-[200px]">
-          Smooth linear light beam that reacts to your movement.
-        </p>
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 p-4">
+      {/* 1. Static Sweep (Doesn't follow cursor) */}
+      <GlareCard 
+        interactive={false} 
+        animateOnHover={true}
+        className="flex flex-col items-center justify-center h-[350px] p-8 text-center bg-gradient-to-br from-indigo-900 via-zinc-900 to-indigo-900 border-indigo-500/20"
+      >
+        <div className="space-y-4">
+            <h3 className="text-2xl font-bold text-white uppercase tracking-wider">Static Sweep</h3>
+            <p className="text-zinc-400 text-sm max-w-[200px]">
+                A predictable light beam that sweeps across on hover, ignoring cursor position.
+            </p>
+        </div>
       </GlareCard>
 
-      {/* Example 2: Spotlight Mode */}
+      {/* 2. Standard Interactive Beam */}
+      <GlareCard 
+        className="flex flex-col items-center justify-center h-[350px] p-8 text-center bg-gradient-to-br from-emerald-900 via-zinc-900 to-emerald-900 border-emerald-500/20"
+      >
+        <div className="space-y-4">
+            <h3 className="text-2xl font-bold text-white uppercase tracking-wider">Interactive</h3>
+            <p className="text-zinc-400 text-sm max-w-[200px]">
+                The classic experience. Light follows your movement with precision.
+            </p>
+        </div>
+      </GlareCard>
+
+      {/* 3. Holographic Rainbow */}
+      <GlareCard 
+        rainbow
+        glareOpacity={0.8}
+        className="flex flex-col items-center justify-center h-[350px] p-8 text-center bg-gradient-to-br from-slate-900 via-zinc-900 to-slate-900 border-zinc-700/30"
+      >
+        <div className="space-y-4">
+            <h3 className="text-2xl font-bold text-white uppercase tracking-wider">Holographic</h3>
+            <p className="text-zinc-400 text-sm max-w-[200px]">
+                A prismatic, multi-color glare that shifts and shimmers based on movement.
+            </p>
+        </div>
+      </GlareCard>
+
+      {/* 4. Interactive Spotlight */}
       <GlareCard 
         spotlight 
-        glareColor="rgba(56, 189, 248, 0.2)"
-        glareSize={200}
-        className="flex flex-col items-center justify-center h-[350px] p-8 text-center bg-zinc-950"
+        glareColor="rgba(244, 63, 94, 0.2)"
+        glareSize={250}
+        className="flex flex-col items-center justify-center h-[350px] p-8 text-center bg-gradient-to-br from-rose-900 via-zinc-900 to-rose-900 border-rose-500/20"
       >
-        <Zap className="h-12 w-12 text-sky-400 mb-4" />
-        <h3 className="text-2xl font-bold text-white mb-2">Spotlight Mode</h3>
-        <p className="text-zinc-500 max-w-[200px]">
-          Dynamic radial light that follows the cursor precisely.
-        </p>
-      </GlareCard>
-
-      {/* Example 3: High Intensity Colored Glare */}
-      <GlareCard 
-        glareColor="rgba(192, 38, 211, 0.4)" 
-        glareAngle={135}
-        tiltMax={25}
-        className="flex flex-col items-center justify-center h-[350px] p-8 text-center bg-zinc-950"
-      >
-        <Shield className="h-12 w-12 text-fuchsia-500 mb-4" />
-        <h3 className="text-2xl font-bold text-white mb-2">Reactive Surface</h3>
-        <p className="text-zinc-500 max-w-[200px]">
-          Increased tilt and custom angle for high interaction.
-        </p>
-      </GlareCard>
-
-      {/* Example 4: Dark Premium Glare */}
-      <GlareCard 
-        glareOpacity={0.3}
-        className="relative flex flex-col items-start justify-end h-[350px] p-8 bg-zinc-950 group"
-      >
-        <div className="absolute top-8 right-8">
-            <Rocket className="h-8 w-8 text-zinc-700 group-hover:text-white transition-colors duration-500" />
-        </div>
-        <div className="space-y-2">
-            <div className="px-3 py-1 text-xs font-medium border border-zinc-700 rounded-full w-fit text-zinc-400">
-                Premium Feature
-            </div>
-            <h3 className="text-2xl font-bold text-white">Dynamic Content</h3>
-            <p className="text-zinc-500">
-                Wraps any content with a premium holographic feel.
+        <div className="space-y-4">
+            <h3 className="text-2xl font-bold text-white uppercase tracking-wider">Spotlight</h3>
+            <p className="text-zinc-400 text-sm max-w-[200px]">
+                A soft radial light that brings a focused glow to the surface beneath the cursor.
             </p>
         </div>
       </GlareCard>

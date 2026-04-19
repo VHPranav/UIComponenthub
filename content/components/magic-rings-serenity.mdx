@@ -1,0 +1,36 @@
+---
+title: Magic Rings Serenity
+description: A softly blurred, slow-moving pastel WebGL background perfect for subtle, non-distracting visual experiences.
+date: 2024-04-19
+category: Backgrounds
+tags: ["Background", "WebGL", "Three.js", "Serene", "3D"]
+---
+
+# Magic Rings Serenity
+
+<ComponentPreview name="magic-rings-serenity" />
+
+The `MagicRingsSerenity` component is built strictly with raw Three.js shaders. It creates a gentle, 60fps dynamic background consisting of softly blurred, slow-rotating pastel rings providing ambient movement without distracting from the main content.
+
+## Installation
+
+This component depends on `three.js`. You will also need the core `MagicRings` component installed in your registry.
+
+```bash
+npm install three
+npm install -D @types/three
+```
+
+## Usage
+
+```tsx
+import { MagicRingsSerenity } from "@/registry/backgrounds/magic-rings-serenity"
+
+export default function Example() {
+  return (
+    <div className="relative w-full h-[500px]">
+        <MagicRingsSerenity />
+    </div>
+  )
+}
+```

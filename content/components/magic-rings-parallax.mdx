@@ -1,0 +1,36 @@
+---
+title: Magic Rings Parallax
+description: A deep space WebGL background featuring high noise levels and intense 3D mouse parallax.
+date: 2024-04-19
+category: Backgrounds
+tags: ["Background", "WebGL", "Three.js", "Parallax", "3D"]
+---
+
+# Magic Rings Parallax
+
+<ComponentPreview name="magic-rings-parallax" />
+
+The `MagicRingsParallax` component is built strictly with raw Three.js shaders. It creates an immersive, 60fps dynamic background consisting of geometric rings distorted by intense depth parallax to create a deep space illusion.
+
+## Installation
+
+This component depends on `three.js`. You will also need the core `MagicRings` component installed in your registry.
+
+```bash
+npm install three
+npm install -D @types/three
+```
+
+## Usage
+
+```tsx
+import { MagicRingsParallax } from "@/registry/backgrounds/magic-rings-parallax"
+
+export default function Example() {
+  return (
+    <div className="relative w-full h-[500px]">
+        <MagicRingsParallax />
+    </div>
+  )
+}
+```

@@ -1,0 +1,38 @@
+---
+title: Magic Rings Cyberpunk
+description: A high-performance interactive WebGL background featuring multiple 3D rings in a cyberpunk aesthetic that react to mouse movements and click bursts.
+date: 2024-04-19
+category: Backgrounds
+tags: ["Background", "WebGL", "Three.js", "Interactive", "3D", "Cyberpunk"]
+---
+
+# Magic Rings Cyberpunk
+
+<ComponentPreview name="magic-rings-cyberpunk" />
+
+The `MagicRingsCyberpunk` component is built strictly with raw Three.js shaders. It creates a deeply interactive, 60fps dynamic background consisting of segmented geometric rings that react to cursor movement and click events.
+
+This variant features bold magenta and cyan neon colors with an explosive burst effect on click.
+
+## Installation
+
+This component depends on `three.js`. You will also need the core `MagicRings` component installed in your registry.
+
+```bash
+npm install three
+npm install -D @types/three
+```
+
+## Usage
+
+```tsx
+import { MagicRingsCyberpunk } from "@/registry/backgrounds/magic-rings-cyberpunk"
+
+export default function Example() {
+  return (
+    <div className="relative w-full h-[500px]">
+        <MagicRingsCyberpunk />
+    </div>
+  )
+}
+```

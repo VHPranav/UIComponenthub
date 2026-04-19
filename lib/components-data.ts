@@ -302,4 +302,55 @@ export const GlareCardDemo = () => {
   )
 }`,
   },
+  {
+    id: "magic-rings-cyberpunk",
+    name: "Magic Rings Cyberpunk",
+    description: "A high-performance interactive WebGL background featuring multiple 3D rings in a bright cyberpunk aesthetic that react to mouse movements, complete with click bursts.",
+    category: "Backgrounds",
+    tags: ["Background", "WebGL", "Three.js", "Interactive", "3D", "Cyberpunk"],
+    installation: "npm install three && npm install -D @types/three",
+    code: `import { MagicRingsCyberpunk } from "@/registry/backgrounds/magic-rings-cyberpunk"
+
+export const Demo = () => {
+  return (
+    <div className="relative w-full h-[400px]">
+        <MagicRingsCyberpunk />
+    </div>
+  )
+}`,
+  },
+  {
+    id: "magic-rings-serenity",
+    name: "Magic Rings Serenity",
+    description: "A softly blurred, slow-moving pastel WebGL background perfect for subtle, non-distracting visual experiences.",
+    category: "Backgrounds",
+    tags: ["Background", "WebGL", "Three.js", "Serene", "3D"],
+    installation: "npm install three && npm install -D @types/three",
+    code: `import { MagicRingsSerenity } from "@/registry/backgrounds/magic-rings-serenity"
+
+export const Demo = () => {
+  return (
+    <div className="relative w-full h-[400px]">
+        <MagicRingsSerenity />
+    </div>
+  )
+}`,
+  },
+  {
+    id: "magic-rings-parallax",
+    name: "Magic Rings Parallax",
+    description: "A deep space WebGL background featuring high noise levels and intense 3D mouse parallax.",
+    category: "Backgrounds",
+    tags: ["Background", "WebGL", "Three.js", "Parallax", "3D"],
+    installation: "npm install three && npm install -D @types/three",
+    code: `import { MagicRingsParallax } from "@/registry/backgrounds/magic-rings-parallax"
+
+export const Demo = () => {
+  return (
+    <div className="relative w-full h-[400px]">
+        <MagicRingsParallax />
+    </div>
+  )
+}`,
+  },
 ]

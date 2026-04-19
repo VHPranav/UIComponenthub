@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useRef, useState } from "react"
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion"
+import { motion, useMotionValue, useSpring, useTransform, animate } from "framer-motion"
 import { cn } from "@/lib/utils"
 
 interface GlareCardProps {
@@ -42,6 +42,21 @@ interface GlareCardProps {
    * @default false
    */
   spotlight?: boolean
+  /**
+   * Whether the glare should follow the mouse position
+   * @default true
+   */
+  interactive?: boolean
+  /**
+   * Whether to run an automated animation loop when hovered (used when interactive is false)
+   * @default false
+   */
+  animateOnHover?: boolean
+  /**
+   * Enable holographic multi-color glare gradient
+   * @default false
+   */
+  rainbow?: boolean
 }
 
 export const GlareCard: React.FC<GlareCardProps> = ({
@@ -54,8 +69,12 @@ export const GlareCard: React.FC<GlareCardProps> = ({
   tiltMax = 20,
   perspective = 1000,
   spotlight = false,
+  interactive = true,
+  animateOnHover = false,
+  rainbow = false,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null)
+  const [isHovered, setIsHovered] = useState(false)
   
   // Motion values for normalized mouse position (-0.5 to 0.5)
   const x = useMotionValue(0)
@@ -66,16 +85,24 @@ export const GlareCard: React.FC<GlareCardProps> = ({
   const mouseXSpring = useSpring(x, springConfig)
   const mouseYSpring = useSpring(y, springConfig)
 
+  // Automated animation value
+  const autoX = useMotionValue(0)
+  const smoothAutoX = useSpring(autoX, { damping: 100, stiffness: 100 })
+
+  // Select source of motion
+  const activeX = interactive ? mouseXSpring : smoothAutoX
+  const activeY = interactive ? mouseYSpring : useMotionValue(0)
+
   // Transform motion values to rotation and glare position
-  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], [tiltMax, -tiltMax])
-  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], [-tiltMax, tiltMax])
+  const rotateX = useTransform(activeY, [-0.5, 0.5], [tiltMax, -tiltMax])
+  const rotateY = useTransform(activeX, [-0.5, 0.5], [-tiltMax, tiltMax])
 
   // Glare position (0% to 100%)
-  const glareX = useTransform(mouseXSpring, [-0.5, 0.5], [0, 100])
-  const glareY = useTransform(mouseYSpring, [-0.5, 0.5], [0, 100])
+  const glareX = useTransform(activeX, [-0.5, 0.5], [0, 100])
+  const glareY = useTransform(activeY, [-0.5, 0.5], [0, 100])
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!containerRef.current) return
+    if (!containerRef.current || !interactive) return
 
     const rect = containerRef.current.getBoundingClientRect()
     const width = rect.width
@@ -89,10 +116,24 @@ export const GlareCard: React.FC<GlareCardProps> = ({
     y.set(mouseY)
   }
 
+  const handleMouseEnter = () => {
+    setIsHovered(true)
+    if (!interactive && animateOnHover) {
+      animate(autoX, 0.5, { duration: 1 })
+    }
+  }
+
   const handleMouseLeave = () => {
+    setIsHovered(false)
     x.set(0)
     y.set(0)
+    if (!interactive) {
+      animate(autoX, 0, { duration: 1 })
+    }
   }
+
+  // Rainbow gradient constant
+  const RAINBOW_GRADIENT = "linear-gradient(90deg, #ff0000 0%, #ff7f00 12.5%, #ffff00 25%, #00ff00 37.5%, #0000ff 50%, #4b0082 62.5%, #8b00ff 75%, #ff0000 100%)"
 
   return (
     <div
@@ -102,10 +143,11 @@ export const GlareCard: React.FC<GlareCardProps> = ({
       <motion.div
         ref={containerRef}
         onMouseMove={handleMouseMove}
+        onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         style={{
-          rotateX,
-          rotateY,
+          rotateX: interactive ? rotateX : 0, // Disable tilt if not interactive for Card 1 effect
+          rotateY: interactive ? rotateY : 0,
           transformStyle: "preserve-3d",
         }}
         className={cn(
@@ -117,26 +159,50 @@ export const GlareCard: React.FC<GlareCardProps> = ({
         <motion.div
           style={{
             opacity: useTransform(
-              [mouseXSpring, mouseYSpring],
+              [activeX, activeY],
               ([mx, my]) => {
                 const distance = Math.sqrt(Math.pow(mx as number, 2) + Math.pow(my as number, 2))
-                return Math.min(distance * 2, glareOpacity)
+                return interactive ? Math.min(distance * 2, glareOpacity) : (isHovered ? glareOpacity : 0)
               }
             ),
             background: spotlight
               ? useTransform(
                   [glareX, glareY],
                   ([gx, gy]) =>
-                    `radial-gradient(${glareSize}% circle at ${gx}% ${gy}%, ${glareColor}, transparent 80%)`
+                    `radial-gradient(${glareSize}% circle at ${gx}% ${gy}%, ${rainbow ? "transparent" : glareColor}, transparent 80%)`
                 )
               : useTransform(
                   glareX,
                   (gx) =>
-                    `linear-gradient(${glareAngle}deg, transparent 0%, ${glareColor} ${gx}%, transparent 100%)`
+                    rainbow 
+                      ? `${RAINBOW_GRADIENT} ${gx}%` // Placeholder for holographic logic
+                      : `linear-gradient(${glareAngle}deg, transparent 0%, ${glareColor} ${gx}%, transparent 100%)`
                 ),
           }}
-          className="pointer-events-none absolute inset-0 z-10 transition-opacity duration-300"
+          className={cn(
+             "pointer-events-none absolute inset-0 z-10 transition-opacity duration-300",
+             rainbow && "mix-blend-color-dodge"
+          )}
         />
+        
+        {/* Simplified Rainbow Overlay for Mode 3 */}
+        {rainbow && (
+          <motion.div
+            style={{
+              opacity: interactive ? 0.3 : 0,
+              background: RAINBOW_GRADIENT,
+              maskImage: useTransform(
+                [glareX, glareY],
+                ([gx, gy]) => `radial-gradient(${glareSize}% circle at ${gx}% ${gy}%, black, transparent 80%)`
+              ),
+              WebkitMaskImage: useTransform(
+                [glareX, glareY],
+                ([gx, gy]) => `radial-gradient(${glareSize}% circle at ${gx}% ${gy}%, black, transparent 80%)`
+              ),
+            }}
+            className="pointer-events-none absolute inset-0 z-10 mix-blend-overlay"
+          />
+        )}
 
         {/* Shine Layer (Subtle border highlight) */}
         <div className="pointer-events-none absolute inset-0 z-20 rounded-xl border border-white/20 transition-opacity duration-500 group-hover:opacity-100 opacity-0" />

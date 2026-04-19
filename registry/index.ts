@@ -10,6 +10,9 @@ import { ScrollRevealDemo } from "./animations/scroll-reveal-demo"
 import { ScrollVelocityDemo } from "./animations/scroll-velocity-demo"
 import { AnimatedContentDemo } from "./animations/animated-content-demo"
 import { GlareCardDemo } from "./animations/glare-card-demo"
+import { MagicRingsCyberpunk } from "./backgrounds/magic-rings-cyberpunk"
+import { MagicRingsSerenity } from "./backgrounds/magic-rings-serenity"
+import { MagicRingsParallax } from "./backgrounds/magic-rings-parallax"
 import { GlassButton } from "./buttons/glass-button"
 import { ShimmerButton } from "./buttons/shimmer-button"
 import { RetroButton } from "./buttons/retro-button"
@@ -50,5 +53,8 @@ export const registry: Record<string, React.ComponentType<any>> = {
   "scroll-velocity": ScrollVelocityDemo,
   "animated-content": AnimatedContentDemo,
   "glare-card": GlareCardDemo,
+  "magic-rings-cyberpunk": MagicRingsCyberpunk,
+  "magic-rings-serenity": MagicRingsSerenity,
+  "magic-rings-parallax": MagicRingsParallax,
   // "colourful-bento-grid": ColourfulBentoGrid,
 }
