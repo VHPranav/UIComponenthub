@@ -1,0 +1,59 @@
+---
+title: Scroll Velocity
+description: An interactive parallax scrolling text effect that responds to the user's scroll speed and direction.
+category: Animations
+tags: ["Animated", "Typography", "Scroll", "Parallax"]
+date: 2026-04-18
+---
+
+## Overview
+
+**Scroll Velocity** is a high-impact typography component that creates a "ticker" or "marquee" effect that reacts dynamically to the user's scroll velocity. As you scroll faster, the text accelerates; when you scroll up, the direction shifts smoothly.
+
+## Features
+
+- **Velocity Tracking**: Uses Framer Motion's `useVelocity` and `useSpring` for buttery-smooth responsiveness.
+- **Infinite Looping**: Seamlessly wraps text for a continuous, uninterrupted visual experience.
+- **Direction Aware**: Automatically detects scroll direction to adjust text movement.
+- **Premium Styling**: Includes built-in horizontal gradient masks to blend perfectly into any background.
+- **SSR Safe**: Carefully implemented to avoid hydration warnings in Next.js.
+
+## Installation
+
+This component requires **Framer Motion**.
+
+```bash
+npm install framer-motion
+```
+
+## Usage
+
+```tsx
+import { ScrollVelocity } from "@/registry/animations/scroll-velocity"
+
+export default function MarqueeSection() {
+  return (
+    <ScrollVelocity
+      texts={["React Components", "Modern UI", "Interactive Design"]}
+      velocity={100}
+      className="text-white dark:text-zinc-50"
+    />
+  )
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `texts` | `string[]` | `[]` | An array of strings to display in separate rows. |
+| `velocity` | `number` | `100` | Base movement speed. |
+| `damping` | `number` | `50` | Damping for the velocity spring. |
+| `stiffness` | `number` | `400` | Stiffness for the velocity spring. |
+| `numCopies` | `number` | `6` | Number of times to duplicate text for the loop. |
+| `className` | `string` | `""` | Tailwind classes for the text spans. |
+| `parallaxClassName` | `string` | `""` | Tailwind classes for the main section. |
+
+## How it works
+
+The component calculates the current scroll velocity and maps it to a "velocity factor" using `useTransform`. This factor is combined with a `baseX` value inside a `useAnimationFrame` loop to offset the text container. By wrapping the horizontal position based on the element's width, it creates a perfect infinite loop.
