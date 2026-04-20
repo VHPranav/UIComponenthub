@@ -29,6 +29,7 @@ import { MagneticIntegrationsOrb } from "./backgrounds/magnetic-integrations-orb
 import { RegistryEcosystemMap } from "./special-effects/registry-ecosystem-map"
 import { GradualBlurDemo } from "./special-effects/gradual-blur-demo"
 import { SplashCursorDemo } from "./special-effects/splash-cursor-demo"
+import { FluidGooeyEffectDemo } from "./special-effects/fluid-gooey-effect-demo"
 // import { ColourfulBentoGrid } from "./cards/colourful-bento-grid"
 
 export const registry: Record<string, React.ComponentType<any>> = {
@@ -62,5 +63,6 @@ export const registry: Record<string, React.ComponentType<any>> = {
   "gradual-blur": GradualBlurDemo,
   "splash-cursor": SplashCursorDemo,
   "three-confetti": ThreeConfettiDemo,
+  "fluid-gooey-effect": FluidGooeyEffectDemo,
   // "colourful-bento-grid": ColourfulBentoGrid,
 }

@@ -397,19 +397,25 @@ export const SplashCursorDemo = () => {
 }
 export default SplashCursorDemo`,
   },
+  },
   {
-    id: "three-confetti",
-    name: "Three.js Confetti",
-    description: "A high-performance 3D confetti system powered by Three.js and React Three Fiber. Features multi-shape particles (noodles, balls, stars) with custom gradient shaders and physics-based motion.",
-    category: "Animations",
-    tags: ["WebGL", "Three.js", "3D", "Animated", "Physics"],
-    installation: "npm install three @react-three/fiber @react-three/drei",
-    code: `import { ThreeConfetti } from "@/registry/animations/three-confetti"
+    id: "fluid-gooey-effect",
+    name: "Fluid Gooey Image Reveal",
+    description: "A premium interactive image reveal component featuring GSAP animations and liquid gooey SVG filters. Droplets merge and travel with organic fluid physics.",
+    category: "Special Effects",
+    tags: ["GSAP", "SVG", "Masking", "Interactive", "Gooey"],
+    installation: "npm install gsap",
+    code: `import FluidGooeyEffect from "@/registry/special-effects/fluid-gooey-effect"
 
-export const Demo = () => {
+export const FluidGooeyDemo = () => {
   return (
-    <div className="relative w-full h-[600px]">
-        <ThreeConfetti />
+    <div className="w-full h-[600px]">
+      <FluidGooeyEffect
+        mainImage="/gooey-bg.png"
+        revealImage="/gooey-reveal.png"
+        trailCount={10}
+        dropletCount={30}
+      />
     </div>
   )
 }`,

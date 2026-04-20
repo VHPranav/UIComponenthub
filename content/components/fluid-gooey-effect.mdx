@@ -1,0 +1,64 @@
+---
+title: Fluid Gooey Effect
+description: A high-performance interactive image reveal component featuring GSAP animations and liquid gooey SVG filters.
+category: Special Effects
+tags: ["GSAP", "SVG", "Masking", "Interactive", "Gooey"]
+date: 2026-04-20
+---
+
+## Overview
+
+**Fluid Gooey Effect** is a premium interactive component that reveals a secondary image through a "liquid" mask that follows the cursor. It uses GSAP's high-speed animation engine for smooth motion and complex SVG filters to create the characteristic "gooey" or "meta-ball" effect where droplets merge and split realistically.
+
+## Features
+
+- **Liquid Trail**: A dynamic trail of particles that follow the cursor with varying speeds.
+- **Droplet System**: Independent, bouncy droplets that orbit the main cursor for a more chaotic, organic feel.
+- **Topographic Background**: Includes an optional animated SVG background with topographic-style lines.
+- **GSAP Optimized**: Uses `quickTo` for ultra-low latency mouse tracking.
+- **Fully Customizable**: Control trail count, droplet density, and colors via props.
+
+## Installation
+
+```bash
+npm install gsap
+```
+
+## Usage
+
+```tsx
+import FluidGooeyEffect from "@/registry/special-effects/fluid-gooey-effect"
+
+export default function RevealSection() {
+  return (
+    <div className="w-full h-[600px]">
+      <FluidGooeyEffect
+        mainImage="/bg.jpg"
+        revealImage="/reveal.jpg"
+        trailCount={10}
+        dropletCount={30}
+      />
+    </div>
+  )
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `mainImage` | `string` | `""` | The base image visible by default. |
+| `revealImage` | `string` | `""` | The image revealed by the mouse. |
+| `showBackgroundLines` | `boolean` | `true` | Show animated topographic lines. |
+| `lineColor` | `string` | `"#C4A484"` | Color of the topographic lines. |
+| `trailCount` | `number` | `10` | Number of segments in the liquid trail. |
+| `dropletCount` | `number` | `32` | Number of loose, bouncy droplets. |
+| `className` | `string` | `""` | Optional CSS class for the container. |
+
+## How it works
+
+The magic comes from a combination of **SVG Masks** and a **Gooey Filter**. 
+1. The `revealImage` is wrapped in an SVG `<image>` tag with a `mask` property.
+2. The mask consists of multiple circles (the trail and droplets).
+3. We apply a `feGaussianBlur` followed by a `feColorMatrix` to the mask. The color matrix "sharpens" the blur by applying a high contrast to the alpha channel, which causes nearby circles to merge together like liquid drops.
+4. GSAP animates the circle positions with different durations to create inertia and elastic effects.
