@@ -79,6 +79,7 @@ export default function SplashCursor({
     if (!canvas) return;
 
     let pointers: Pointer[] = [pointerPrototype()];
+    let rafId: number;
 
     let config = {
       SIM_RESOLUTION: SIM_RESOLUTION!,
@@ -661,7 +662,11 @@ export default function SplashCursor({
           gl.bindFramebuffer(gl.FRAMEBUFFER, target.fbo);
         }
         if (doClear) {
-          gl.clearColor(0, 0, 0, 1);
+          if (config.TRANSPARENT) {
+            gl.clearColor(0, 0, 0, 0);
+          } else {
+            gl.clearColor(config.BACK_COLOR.r, config.BACK_COLOR.g, config.BACK_COLOR.b, 1);
+          }
           gl.clear(gl.COLOR_BUFFER_BIT);
         }
         gl.drawElements(gl.TRIANGLES, 6, gl.UNSIGNED_SHORT, 0);
@@ -871,7 +876,7 @@ export default function SplashCursor({
       applyInputs();
       step(dt);
       render(null);
-      requestAnimationFrame(updateFrame);
+      rafId = requestAnimationFrame(updateFrame);
     }
 
     function calcDeltaTime() {
@@ -1104,8 +1109,8 @@ export default function SplashCursor({
       pointer.id = id;
       pointer.down = true;
       pointer.moved = false;
-      pointer.texcoordX = posX / canvas.width;
-      pointer.texcoordY = 1 - posY / canvas.height;
+      pointer.texcoordX = posX / canvas!.width;
+      pointer.texcoordY = 1 - posY / canvas!.height;
       pointer.prevTexcoordX = pointer.texcoordX;
       pointer.prevTexcoordY = pointer.texcoordY;
       pointer.deltaX = 0;
@@ -1116,8 +1121,8 @@ export default function SplashCursor({
     function updatePointerMoveData(pointer: Pointer, posX: number, posY: number, color: ColorRGB) {
       pointer.prevTexcoordX = pointer.texcoordX;
       pointer.prevTexcoordY = pointer.texcoordY;
-      pointer.texcoordX = posX / canvas.width;
-      pointer.texcoordY = 1 - posY / canvas.height;
+      pointer.texcoordX = posX / canvas!.width;
+      pointer.texcoordY = 1 - posY / canvas!.height;
       pointer.deltaX = correctDeltaX(pointer.texcoordX - pointer.prevTexcoordX);
       pointer.deltaY = correctDeltaY(pointer.texcoordY - pointer.prevTexcoordY);
       pointer.moved = Math.abs(pointer.deltaX) > 0 || Math.abs(pointer.deltaY) > 0;
@@ -1129,13 +1134,13 @@ export default function SplashCursor({
     }
 
     function correctDeltaX(delta: number) {
-      const aspectRatio = canvas.width / canvas.height;
+      const aspectRatio = canvas!.width / canvas!.height;
       if (aspectRatio < 1) delta *= aspectRatio;
       return delta;
     }
 
     function correctDeltaY(delta: number) {
-      const aspectRatio = canvas.width / canvas.height;
+      const aspectRatio = canvas!.width / canvas!.height;
       if (aspectRatio > 1) delta /= aspectRatio;
       return delta;
     }
@@ -1151,7 +1156,7 @@ export default function SplashCursor({
 
     function generateColor(): ColorRGB {
       if (!config.RAINBOW_MODE) {
-        return hexToRGB(config.COLOR);
+        return hexToRGB(config.COLOR!);
       }
       const c = HSVtoRGB(Math.random(), 1.0, 1.0);
       c.r *= 0.15;
@@ -1247,12 +1252,9 @@ export default function SplashCursor({
       }
     };
 
-    const touchendHandler = (e: TouchEvent) => {
-      const touches = e.changedTouches;
+    const touchendHandler = () => {
       const pointer = pointers[0];
-      for (let i = 0; i < touches.length; i++) {
-        updatePointerUpData(pointer);
-      }
+      updatePointerUpData(pointer);
     };
 
     window.addEventListener('mousedown', mousedownHandler);
@@ -1286,6 +1288,7 @@ export default function SplashCursor({
     document.body.addEventListener('touchstart', handleFirstTouchStart);
 
     return () => {
+      cancelAnimationFrame(rafId);
       window.removeEventListener('mousedown', mousedownHandler);
       window.removeEventListener('mousemove', mousemoveHandler);
       window.removeEventListener('touchstart', touchstartHandler);
@@ -1293,7 +1296,7 @@ export default function SplashCursor({
       window.removeEventListener('touchend', touchendHandler);
       document.body.removeEventListener('mousemove', handleFirstMouseMove);
       document.body.removeEventListener('touchstart', handleFirstTouchStart);
-    }
+    };
   }, [
     SIM_RESOLUTION,
     DYE_RESOLUTION,

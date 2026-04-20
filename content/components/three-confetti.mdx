@@ -1,0 +1,51 @@
+---
+title: Three.js Confetti
+description: A high-performance 3D confetti system powered by Three.js and React Three Fiber. Features multi-shape particles with custom gradient shaders.
+category: Animations
+tags: ["WebGL", "Three.js", "3D", "Animated", "Physics"]
+date: 2026-04-20
+---
+
+## Overview
+
+**Three.js Confetti** is a premium, GPU-accelerated 3D celebration component. Unlike 2D canvas confetti, this component uses full WebGL geometries (Noodles, Balls, and Stars) with physics-based inertia, air friction, and subtle pulsing animations to create a high-end feel.
+
+## Features
+
+- **3D Geometries**: Uses `TorusKnot`, `Sphere`, and `ExtrudedStar` for high visual variety.
+- **Custom Shaders**: Includes a custom `GradientMaterial` shader for smooth color transitions on each particle.
+- **Physics Simulation**: Particles have velocity, spin, and friction that naturally decelerate the explosion.
+- **Responsive**: Automatically adjusts camera perspective and fov for mobile and desktop viewports.
+- **Re-triggerable**: Designed to be easily reset and triggered through parent key changes.
+
+## Installation
+
+```bash
+npm install three @react-three/fiber @react-three/drei
+```
+
+## Usage
+
+```tsx
+import { ThreeConfetti } from "@/registry/animations/three-confetti"
+
+export default function WinScreen() {
+  return (
+    <div className="relative w-full h-screen">
+      <ThreeConfetti />
+    </div>
+  )
+}
+```
+
+## Props
+
+The component currently starts immediately and fires once. You can control its re-triggering by changing its `key` prop.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `key` | `any` | `undefined` | Change the key to re-trigger the initial explosion. |
+
+## How it works
+
+The component initializes a WebGL `Canvas` from `@react-three/fiber`. Each particle is a separate `mesh` that calculates its own position and rotation in a `useFrame` loop. To keep performance high even with many particles, it uses simplified geometries and a single pooled gradient shader.

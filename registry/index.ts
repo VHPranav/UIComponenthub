@@ -10,6 +10,7 @@ import { ScrollRevealDemo } from "./animations/scroll-reveal-demo"
 import { ScrollVelocityDemo } from "./animations/scroll-velocity-demo"
 import { AnimatedContentDemo } from "./animations/animated-content-demo"
 import { GlareCardDemo } from "./animations/glare-card-demo"
+import { ThreeConfettiDemo } from "./animations/three-confetti-demo"
 import { MagicRingsCyberpunk } from "./backgrounds/magic-rings-cyberpunk"
 import { MagicRingsSerenity } from "./backgrounds/magic-rings-serenity"
 import { MagicRingsParallax } from "./backgrounds/magic-rings-parallax"
@@ -60,5 +61,6 @@ export const registry: Record<string, React.ComponentType<any>> = {
   "magic-rings-parallax": MagicRingsParallax,
   "gradual-blur": GradualBlurDemo,
   "splash-cursor": SplashCursorDemo,
+  "three-confetti": ThreeConfettiDemo,
   // "colourful-bento-grid": ColourfulBentoGrid,
 }

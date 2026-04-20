@@ -13,7 +13,11 @@ export const SplashCursorDemo = () => {
         Because it is fixed top-0 left-0 w-screen h-screen, the fluid will escape 
         this bounding box and cover the entire webpage as requested.
       */}
-      <SplashCursor />
+      <SplashCursor 
+        RAINBOW_MODE={false}
+        COLOR="#fdce3c"
+        SPLAT_RADIUS={0.2}
+      />
 
       <div className="z-10 flex flex-col items-center justify-center p-8">
         <div className="w-16 h-16 rounded-full bg-white/5 border border-white/10 flex items-center justify-center mb-6 shadow-2xl animate-bounce">
