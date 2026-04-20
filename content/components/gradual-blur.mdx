@@ -1,0 +1,67 @@
+---
+title: Gradual Blur
+description: A mathematical step-based blur gradient generator that natively fades frosted glass without heavy dependencies.
+date: 2024-04-19
+category: Special Effects
+tags: ["Blur", "Frosted", "Gradient", "Overlay", "Math"]
+---
+
+# Gradual Blur
+
+<ComponentPreview id="gradual-blur" />
+
+The `GradualBlur` component creates mathematically perfect fade-offs for frosted glass effects using native browser APIs structure. Re-engineered without heavy third-party geometry limits like `mathjs`, it layers highly tuned fractional `divs` rendering backdrop-filters to create ultra-smooth mask contours over images or complex noisy backdrops.
+
+## Installation
+
+No external dependencies are required. This replaces manually injected CSS loops with standard Tailwind utility integration.
+
+```bash
+# None! Ready to copy.
+```
+
+## Usage
+
+```tsx
+import { GradualBlur } from "@/registry/special-effects/gradual-blur"
+
+export default function Example() {
+  return (
+    <div className="relative w-full h-[500px]">
+      <div 
+        className="absolute inset-0 bg-cover bg-center" 
+        style={{ backgroundImage: "url('/your-epic-photo.jpg')" }} 
+      />
+      <GradualBlur 
+        preset="intense" 
+        position="bottom" 
+        height="12rem"
+      >
+        <div className="absolute bottom-4 left-4">
+           <h1 className="text-white text-4xl font-bold">Smooth Text Focus</h1>
+        </div>
+      </GradualBlur>
+    </div>
+  )
+}
+```
+
+## Props
+
+The `GradualBlur` component is highly configurable with over twenty unique properties affecting curve trajectory, div slices, and exponential decay rates. It features a robust predefined `preset` dictionary to instantly summon common overlays.
+
+### Presets
+
+Supplying a `preset` string immediately overrides structural sizes mathematically geared to generic use cases.
+
+| Preset | Description |
+| :--- | :--- |
+| `top` | 6rem standard fade from top. |
+| `bottom` | 6rem standard fade from bottom. |
+| `subtle` | 4rem short fade with 0.8 opacity. |
+| `intense` | 10rem heavy fade using 8 step-function overlays and exponential math scaling. |
+| `smooth` | 8rem bezier curve math utilizing 10 fractional steps for high frame rates. |
+| `page-header` | Targets `page` (fixed positioning) instead of `parent` for absolute floating navigation blurs. |
+
+## Why it works better?
+Typically, gradient masks in CSS cannot affect `backdrop-filter`. The traditional approach overlays a gradient from `transparent` to your background-color, but this looks horrible on imagery. `GradualBlur` layers `N` invisible divs, giving each ascending index an exponentially or linearly scaling exact `blur()` amount, then gradient-masks those blocks so they blend seamlessly.

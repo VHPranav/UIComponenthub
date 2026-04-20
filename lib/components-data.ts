@@ -353,4 +353,46 @@ export const Demo = () => {
   )
 }`,
   },
+  {
+    id: "gradual-blur",
+    name: "Gradual Blur Overlay",
+    description: "A mathematical step-based blur gradient generator that natively fades frosted glass without heavy dependencies.",
+    category: "Special Effects",
+    tags: ["Blur", "Frosted", "Gradient", "Overlay", "Math"],
+    installation: "npm install lucide-react",
+    code: `import { GradualBlur } from "@/registry/special-effects/gradual-blur"
+
+export const GradualBlurDemo = () => {
+  return (
+    <div className="w-full relative min-h-[400px] rounded-xl overflow-hidden shadow-2xl flex flex-col justify-end bg-[url('https://images.unsplash.com/photo-1614850523459-c2f4c699c52e?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center">
+      <GradualBlur 
+        preset="intense" 
+        position="bottom" 
+        height="12rem"
+        curve="ease-out"
+        className="z-10 text-white p-8"
+      >
+        <h2 className="text-3xl font-black">FROSTED GLASS</h2>
+      </GradualBlur>
+    </div>
+  )
+}`,
+  },
+  {
+    id: "splash-cursor",
+    name: "Splash Cursor",
+    description: "A highly interactive, full-screen WebGL fluid simulation that reacts dynamically to cursor swiping and clicking.",
+    category: "Special Effects",
+    tags: ["WebGL", "Fluid", "Cursor", "Physics", "VFX"],
+    installation: "npm install raw-loader",
+    code: `import SplashCursor from "@/registry/special-effects/splash-cursor"
+
+export const SplashCursorDemo = () => {
+  return (
+    <SplashCursor />
+  )
+}
+
+export default SplashCursorDemo`,
+  }
 ]

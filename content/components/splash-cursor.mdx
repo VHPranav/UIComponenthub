@@ -1,0 +1,61 @@
+---
+title: Splash Cursor
+description: A stunning, fully interactive WebGL fluid simulation that tracks and splats off your mouse cursor across the entire page.
+category: Special Effects
+tags: ["Cursor", "WebGL", "Fluid", "Simulation", "Follower"]
+date: 2026-04-19
+---
+
+# Splash Cursor
+
+<ComponentPreview id="splash-cursor" />
+
+The `SplashCursor` component wraps a state-of-the-art 60fps WebGL fluid dynamics engine inside a React component. It's configured out of the box to act as a brilliant, invisible full-screen layer beneath or immediately above your UI. As users drag their cursor, iridescent fluid forces curl and advect across the screen.
+
+> [!TIP]
+> This component acts globally! When mounted, its mathematical physics simulation runs using `requestAnimationFrame`, binding invisible listeners to the `window` to track interactions. It is engineered with robust Next.js cleanup functions to ensure it completely removes itself from memory without leaks once unmounted.
+
+## Usage
+
+Simply drop the component anywhere in your page structure. Due to its internal `fixed top-0 left-0 w-screen h-screen` tailwind rules, it will automatically overlay the viewport.
+
+```tsx
+import { SplashCursor } from "@/components/magic/splash-cursor"
+
+export default function Home() {
+  return (
+    <main>
+      <h1>My Portfolio</h1>
+      {/* 
+        This acts as a transparent physics canvas 
+        over the whole screen. Set pointer-events-none 
+        so the user can click buttons through the fluid! 
+      */}
+      <SplashCursor 
+        SPLAT_RADIUS={0.25} 
+        SPLAT_FORCE={6000} 
+        COLOR_UPDATE_SPEED={10} 
+      />
+    </main>
+  )
+}
+```
+
+## Props
+
+The fluid kernel exposes dozens of deep mathematical variables for tweaking the viscosity, gravity, and color density of the simulated liquid.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `SIM_RESOLUTION` | number | 128 | Internal simulation grid logic. Higher is sharper but extremely costly. |
+| `DYE_RESOLUTION` | number | 1440 | The texture scale for rendering the fluid dye. |
+| `DENSITY_DISSIPATION` | number | 3.5 | Rate at which the dye fades to nothing. Higher = faster fade. |
+| `VELOCITY_DISSIPATION` | number | 2 | Rate at which the fluid loses movement momentum. |
+| `PRESSURE` | number | 0.1 | Computational force spreading the splats. |
+| `PRESSURE_ITERATIONS` | number | 20 | Solver steps for stability. 20 is industry standard. |
+| `CURL` | number | 3 | Intensity of the rotating swirls in the liquid. |
+| `SPLAT_RADIUS` | number | 0.2 | Width of the brush stroke produced by the cursor. |
+| `SPLAT_FORCE` | number | 6000 | Speed vector intensity given off by moving the mouse. |
+| `SHADING` | boolean | true | Enable pseudo-3D bump shading on the liquid texture. |
+| `RAINBOW_MODE` | boolean | true | Continuously cycle the color of the liquid while dragging. |
+| `COLOR` | string | '#ff0000' | Static hex color if RAINBOW_MODE is false. |

@@ -26,6 +26,8 @@ import { LiquidLoader } from "./loaders/liquid-loader"
 import { InteractivePixelGrid } from "./backgrounds/interactive-pixel-grid"
 import { MagneticIntegrationsOrb } from "./backgrounds/magnetic-integrations-orb"
 import { RegistryEcosystemMap } from "./special-effects/registry-ecosystem-map"
+import { GradualBlurDemo } from "./special-effects/gradual-blur-demo"
+import { SplashCursorDemo } from "./special-effects/splash-cursor-demo"
 // import { ColourfulBentoGrid } from "./cards/colourful-bento-grid"
 
 export const registry: Record<string, React.ComponentType<any>> = {
@@ -56,5 +58,7 @@ export const registry: Record<string, React.ComponentType<any>> = {
   "magic-rings-cyberpunk": MagicRingsCyberpunk,
   "magic-rings-serenity": MagicRingsSerenity,
   "magic-rings-parallax": MagicRingsParallax,
+  "gradual-blur": GradualBlurDemo,
+  "splash-cursor": SplashCursorDemo,
   // "colourful-bento-grid": ColourfulBentoGrid,
 }
