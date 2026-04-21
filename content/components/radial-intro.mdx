@@ -1,0 +1,72 @@
+---
+title: Radial Intro
+description: A dynamic orbital entrance animation that places profile items in a circular layout with continuous motion.
+category: Special Effects
+tags: ["Animated", "Framer Motion", "Orbital", "Intro"]
+date: 2026-04-21
+isNew: true
+---
+
+# Radial Intro
+
+A premium community intro effect featuring profile images that "lift-in" from the center and distribute themselves along an orbital path. The images continuously spin while staying perfectly upright via counter-rotation logic.
+
+## Features
+
+- **Sequential Entrance**: Images reveal from the center and expand to their positions using a timed sequence.
+- **Upright Spin**: Integrated logic ensures that while the orbit rotates, the images themselves rotate in reverse to stay upright.
+- **Dynamic Orbital Scaling**: Automatically calculates angles and placement for any number of items.
+- **High Performance**: Uses Framer Motion's `animate` function and `LayoutGroup` for smooth shared element transitions.
+
+## Installation
+
+```bash
+npm install framer-motion
+```
+
+## Setup
+
+Place the component in `registry/special-effects/radial-intro.tsx`:
+
+```tsx
+// See registry source for RadialIntro implementation
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `orbitItems` | `OrbitItem[]` | `required` | Array of objects with `id`, `name`, and `src`. |
+| `stageSize` | `number` | `320` | The diameter of the orbital stage. |
+| `imageSize` | `number` | `60` | The width and height of each profile image. |
+
+## Usage
+
+```tsx
+import { RadialIntro } from "@/registry/special-effects/radial-intro"
+
+const ITEMS = [
+  { id: 1, name: 'Adam', src: '...' },
+  { id: 2, name: 'Sarah', src: '...' },
+  { id: 3, name: 'John', src: '...' },
+]
+
+export default function Demo() {
+  return (
+    <div className="flex items-center justify-center min-h-[500px]">
+      <RadialIntro 
+        orbitItems={ITEMS} 
+        stageSize={400} 
+        imageSize={80} 
+      />
+    </div>
+  )
+}
+```
+
+## Physics & Animation
+
+The component uses a three-stage animation lifecycle:
+1. **Lift-in**: Images move from the center `top: 50%` to their outer radii.
+2. **Placement**: Items rotate into their calculated positions (staggered by angle).
+3. **Continuous Spin**: An infinite linear rotation is applied to the container, while a counter-rotation is applied to each image to maintain legibility.

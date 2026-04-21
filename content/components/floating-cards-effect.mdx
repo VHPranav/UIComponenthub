@@ -1,0 +1,66 @@
+---
+title: Floating Cards Effect
+description: A high-performance 3D floating cards animation component using Three.js and GSAP. 
+category: Animations
+tags: ["Background", "WebGL", "Three.js", "Interactive", "3D", "GSAP"]
+date: 2026-04-21
+isNew: true
+---
+
+# Floating Cards Effect
+
+A premium interactive component featuring a stream of 3D floating cards that react to mouse movement. Built with Three.js (via React Three Fiber) for performance and GSAP for animated background elements.
+
+## Installation
+
+```bash
+npm install three @react-three/fiber gsap
+```
+
+## Setup
+
+Place the component in `registry/animations/floating-cards-effect.tsx`:
+
+```tsx
+// Copy the full component code from the sample below
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `count` | `number` | `80` | Number of floating cards to render |
+| `spacing` | `number` | `0.45` | Distance between cards in the stream |
+| `cardWidth` | `number` | `2.0` | Width of each card |
+| `cardHeight` | `number` | `2.0` | Height of each card |
+| `radius` | `number` | `0.15` | Corner radius of the cards |
+| `colors` | `number[]` | `[...]` | Array of hex color values |
+| `bgColor` | `number` | `0xffffff` | Scene background color |
+| `showBackgroundLines` | `boolean` | `true` | Whether to show the topographic lines |
+| `lineColor` | `string` | `"#C4A484"` | SVG stroke color for lines |
+| `className` | `string` | `""` | Optional container class |
+
+## Features
+
+- **Instanced Rendering**: Uses `instancedMesh` to render hundreds of 3D objects with a single draw call.
+- **Interactive Waves**: The vertical wave amplitude and horizontal speed respond dynamically to mouse X/Y positions.
+- **Topographic Background**: Includes an animated SVG background that provides depth and texture.
+- **Particle System**: Subliminal particle clusters moving at slow speeds to enhance scene atmosphere.
+
+## Usage
+
+```tsx
+import FloatingCardsEffect from "@/registry/animations/floating-cards-effect"
+
+export default function Demo() {
+  return (
+    <div className="w-full h-[600px] border rounded-xl overflow-hidden">
+      <FloatingCardsEffect
+        count={60}
+        colors={[0x00DBDE, 0xFC00FF, 0xFFA07A]}
+        bgColor={0xf8fafc}
+      />
+    </div>
+  )
+}
+```

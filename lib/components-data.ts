@@ -135,19 +135,6 @@ export const ShimmerButton = () => {
   return <div className="w-full h-full bg-grid-zinc-200" />
 }`,
   },
-  /*
-  {
-    id: "bt-1",
-    name: "Colourful Bento Grid",
-    description: "A high-impact, responsive Bento-style grid with industry-specific cards and smooth animations.",
-    category: "Cards",
-    tags: ["Bento Grid", "Animated", "Premium"],
-    installation: "npm install framer-motion clsx tailwind-merge",
-    code: `export const ColourfulBentoGrid = () => {
-  return <div className="grid grid-cols-3 gap-4">Bento Grid</div>
-}`,
-  },
-  */
   {
     id: "bg-2",
     name: "Magnetic Integrations Orb",
@@ -303,6 +290,24 @@ export const GlareCardDemo = () => {
 }`,
   },
   {
+    id: "floating-cards-effect",
+    name: "Floating Cards Effect",
+    description: "A premium 3D interaction featuring instanced cards that flow in a wave pattern. Responds dynamically to mouse velocity and position.",
+    category: "Animations",
+    tags: ["3D", "WebGL", "Three.js", "GSAP", "Interactive"],
+    installation: "npm install three @react-three/fiber gsap",
+    code: `import FloatingCardsEffect from "@/registry/animations/floating-cards-effect"
+
+export const Demo = () => {
+  return (
+    <div className="w-full h-full min-h-[500px]">
+      <FloatingCardsEffect count={80} spacing={0.45} />
+    </div>
+  )
+}`,
+    isNew: true,
+  },
+  {
     id: "magic-rings-cyberpunk",
     name: "Magic Rings Cyberpunk",
     description: "A high-performance interactive WebGL background featuring multiple 3D rings in a bright cyberpunk aesthetic that react to mouse movements, complete with click bursts.",
@@ -397,7 +402,6 @@ export const SplashCursorDemo = () => {
 }
 export default SplashCursorDemo`,
   },
-  },
   {
     id: "fluid-gooey-effect",
     name: "Fluid Gooey Image Reveal",
@@ -419,5 +423,30 @@ export const FluidGooeyDemo = () => {
     </div>
   )
 }`,
-  }
+    isNew: true,
+  },
+  {
+    id: "radial-intro",
+    name: "Radial Intro Orbit",
+    description: "A dynamic orbital entrance animation that places profile items in a circular layout. Features sequential lift-in mechanics and a continuous upright spin.",
+    category: "Special Effects",
+    tags: ["Animated", "Framer Motion", "Orbital", "Intro"],
+    installation: "npm install framer-motion",
+    code: `import { RadialIntro } from "@/registry/special-effects/radial-intro"
+
+const ITEMS = [
+  { id: 1, name: 'Item 1', src: 'https://via.placeholder.com/150' },
+  { id: 2, name: 'Item 2', src: 'https://via.placeholder.com/150' },
+  { id: 3, name: 'Item 3', src: 'https://via.placeholder.com/150' },
+]
+
+export const Demo = () => {
+  return (
+    <div className="w-full h-[500px] flex items-center justify-center">
+      <RadialIntro orbitItems={ITEMS} stageSize={320} imageSize={64} />
+    </div>
+  )
+}`,
+    isNew: true,
+  },
 ]

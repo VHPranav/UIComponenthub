@@ -67,7 +67,12 @@ export function CommandMenu({ components }: CommandMenuProps) {
                 }}
               >
                 <FileText className="mr-2 h-4 w-4" />
-                <span>{component.title}</span>
+                <span className="flex-1">{component.title}</span>
+                {component.isNew && (
+                  <span className="ml-2 flex h-4 items-center rounded-full bg-indigo-500 px-1.5 text-[9px] font-black uppercase text-white shadow-[0_0_8px_rgba(99,102,241,0.5)]">
+                    New
+                  </span>
+                )}
               </CommandItem>
             ))}
           </CommandGroup>

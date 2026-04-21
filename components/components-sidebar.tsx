@@ -52,7 +52,12 @@ export function ComponentsSidebar({ items }: SidebarNavProps) {
                       : "text-muted-foreground"
                   )}
                 >
-                  {component.title}
+                  <span className="truncate">{component.title}</span>
+                  {component.isNew && (
+                    <span className="ml-auto flex h-4 items-center rounded-full bg-indigo-500 px-1.5 text-[9px] font-black uppercase text-white shadow-[0_0_8px_rgba(99,102,241,0.5)]">
+                      New
+                    </span>
+                  )}
                 </Link>
               )
             })}

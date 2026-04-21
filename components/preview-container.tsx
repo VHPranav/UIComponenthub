@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { RotateCcw } from "lucide-react"
 import { cn } from "@/lib/utils"
 
@@ -10,12 +10,25 @@ interface PreviewContainerProps {
   className?: string
 }
 
+/**
+ * PreviewContainer is the global wrapper for all component previews.
+ * It handles:
+ * 1. Hydration safety (ensures complex components only render on the client).
+ * 2. Manual refresh/re-trigger logic.
+ * 3. Base layout and decorative elements.
+ */
 export function PreviewContainer({ 
   children, 
   showDots = true, 
   className 
 }: PreviewContainerProps) {
+  const [mounted, setMounted] = useState(false)
   const [refreshKey, setRefreshKey] = useState(0)
+
+  // Standard Hydration Safety Fix
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   return (
     <div className={cn(
@@ -42,7 +55,21 @@ export function PreviewContainer({
       </button>
 
       <div className="z-10 w-full flex justify-center" key={refreshKey}>
-        {children}
+        {/* Only render children once mounted on the client to avoid Three.js/GSAP hydration issues */}
+        {mounted ? children : (
+          <div className="animate-pulse flex space-x-4 opacity-20">
+            <div className="flex-1 space-y-6 py-1">
+              <div className="h-2 bg-slate-700 rounded"></div>
+              <div className="space-y-3">
+                <div className="grid grid-cols-3 gap-4">
+                  <div className="h-2 bg-slate-700 rounded col-span-2"></div>
+                  <div className="h-2 bg-slate-700 rounded col-span-1"></div>
+                </div>
+                <div className="h-2 bg-slate-700 rounded"></div>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   )

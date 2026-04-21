@@ -20,4 +20,5 @@ export interface ComponentMetadata {
   category: Category
   tags: string[]
   date: string
+  isNew?: boolean
 }

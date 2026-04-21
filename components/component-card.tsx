@@ -63,17 +63,36 @@ export function ComponentCard({ component, index = 0 }: ComponentCardProps) {
               </div>
             </div>
 
-            {/* Category pill */}
-            <div className="absolute top-3 left-3">
-              <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full border ${categoryColor}`}>
+            {/* Category pill - Relocated to top-right to share space with arrow */}
+            <div className="absolute top-3 right-3 z-10">
+              <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full border ${categoryColor} group-hover:opacity-0 transition-opacity duration-200`}>
                 {component.category}
               </span>
             </div>
 
-            {/* Arrow on hover */}
-            <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-all duration-200 translate-x-1 group-hover:translate-x-0">
+            {/* Arrow on hover - Stays top-right */}
+            <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-all duration-200 translate-x-1 group-hover:translate-x-0 z-20">
               <ArrowRight className="h-4 w-4 text-zinc-400" />
             </div>
+
+            {/* Dynamic New Badge - Relocated to top-left */}
+            {component.isNew && (
+              <motion.div
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                className="absolute top-3 left-3 z-30"
+              >
+                <div className="relative group/badge">
+                  <div className="absolute -inset-0.5 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-full blur opacity-50 animate-pulse" />
+                  <div className="relative px-2.5 py-0.5 bg-zinc-950 rounded-full leading-none flex items-center">
+                    <span className="text-[9px] font-black tracking-tighter text-white uppercase">
+                      New
+                    </span>
+                    <span className="ml-1 w-1 h-1 rounded-full bg-indigo-400 animate-ping" />
+                  </div>
+                </div>
+              </motion.div>
+            )}
           </div>
 
           {/* Content */}

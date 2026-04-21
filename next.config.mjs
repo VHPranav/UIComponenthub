@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   compress: true,
-  transpilePackages: ["@mui/material", "@emotion/react", "@emotion/styled"],
+  transpilePackages: ["@mui/material", "@emotion/react", "@emotion/styled", "three"],
   async headers() {
     return [
       {
