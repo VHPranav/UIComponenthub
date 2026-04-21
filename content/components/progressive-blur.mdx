@@ -1,0 +1,77 @@
+---
+title: Progressive Blur
+description: A smooth, graduated backdrop-blur effect created with layered masks for elegant UI overlays.
+category: Special Effects
+tags: ["Blur", "Overlay", "Graduated", "Interactive", "Glassmorphism"]
+date: 2026-04-21
+isNew: true
+---
+
+# Progressive Blur
+
+The **Progressive Blur** component (also known as Gradient Blur) creates a smooth, graduated transition from sharp to blurred content. This is a common design pattern used for elegant header overlays, footer transitions, or content fading.
+
+## Features
+
+- **Layered Blurring**: Uses multiple stacked `backdrop-filter` layers with staggered masks to achieve a smooth gradient effect that CSS filters cannot do alone.
+- **Configurable Positions**: Supports `top`, `bottom`, and `both` (double-sided) blurring.
+- **Customizable Intensity**: Fine-tune the blur progression by providing a custom array of `blurLevels`.
+- **Lightweight**: Pure CSS backdrop-filters and SVG/Linear-gradient masking.
+
+## Installation
+
+No external dependencies required beyond Tailwind CSS.
+
+## Setup
+
+Place the component in `registry/magicui/progressive-blur.tsx`:
+
+```tsx
+// See registry source for ProgressiveBlur implementation
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `height` | `string` | `"30%"` | The height of the blur gradient (ignored if position is "both"). |
+| `position` | `"top" \| "bottom" \| "both"` | `"bottom"` | Where the blur should be concentrated. |
+| `blurLevels` | `number[]` | `[0.5, 1, 2, ..., 64]` | Sequential blur values for the layers. |
+| `className` | `string` | `""` | Optional container class for positioning. |
+
+## Usage
+
+### Bottom Fade (Default)
+
+Used typically for elegant tab bars or footer overlays.
+
+```tsx
+import { ProgressiveBlur } from "@/registry/magicui/progressive-blur"
+
+export default function FooterOverlay() {
+  return (
+    <div className="relative">
+      <div className="h-[400px] overflow-auto">
+         {/* Long content here */}
+      </div>
+      <ProgressiveBlur position="bottom" height="100px" />
+    </div>
+  )
+}
+```
+
+### Both Sides
+
+Perfect for full-screen modals or focused content overlays.
+
+```tsx
+<ProgressiveBlur position="both" />
+```
+
+## Technical Implementation
+
+Standard CSS `backdrop-filter: blur()` applies an even blur across the entire element. To create a **graduated** blur, this component:
+1. Creates multiple absolute-positioned `div` layers.
+2. Applies increasing blur values to each layer.
+3. Uses `mask-image: linear-gradient()` to show only a small "slice" of each blur level.
+4. Overlaps these slices perfectly to create the illusion of a continuous, increasing blur.

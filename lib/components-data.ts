@@ -485,4 +485,30 @@ export const Demo = () => {
 }`,
     isNew: true,
   },
+  {
+    id: "progressive-blur",
+    title: "Progressive Blur",
+    description: "A smooth, graduated backdrop-blur effect created with layered masks for elegant UI overlays.",
+    category: "Special Effects",
+    tags: ["Blur", "Overlay", "Graduated", "Interactive", "Glassmorphism"],
+    date: "2026-04-21",
+    code: `import { ProgressiveBlur } from "@/registry/magicui/progressive-blur"
+
+export const Demo = () => {
+  return (
+    <div className="relative w-full h-[300px] overflow-hidden rounded-xl">
+      <img 
+        src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop" 
+        className="absolute inset-0 w-full h-full object-cover"
+        alt="gradient"
+      />
+      <ProgressiveBlur position="bottom" height="50%" />
+      <div className="absolute bottom-6 inset-x-0 text-center font-bold text-white drop-shadow-md">
+        Graduated Blur Effect
+      </div>
+    </div>
+  )
+}`,
+    isNew: true,
+  },
 ]

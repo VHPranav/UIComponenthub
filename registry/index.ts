@@ -33,6 +33,7 @@ import { SplashCursorDemo } from "./special-effects/splash-cursor-demo"
 import { FluidGooeyEffectDemo } from "./special-effects/fluid-gooey-effect-demo"
 import { RadialIntroDemo } from "./special-effects/radial-intro-demo"
 import { DockDemo } from "./magicui/dock-demo"
+import { ProgressiveBlurDemo } from "./special-effects/progressive-blur-demo"
 // import { ColourfulBentoGrid } from "./cards/colourful-bento-grid"
 
 export const registry: Record<string, React.ComponentType<any>> = {
@@ -70,5 +71,6 @@ export const registry: Record<string, React.ComponentType<any>> = {
   "fluid-gooey-effect": FluidGooeyEffectDemo,
   "radial-intro": RadialIntroDemo,
   "dock": DockDemo,
+  "progressive-blur": ProgressiveBlurDemo,
   // "colourful-bento-grid": ColourfulBentoGrid,
 }
