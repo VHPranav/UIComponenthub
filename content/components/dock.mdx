@@ -1,0 +1,78 @@
+---
+title: Dock
+description: A macOS-style dock component with smooth magnification effects and tooltips.
+category: Special Effects
+tags: ["Magic UI", "Dock", "Framer Motion", "Navigation", "Interactive"]
+date: 2026-04-21
+isNew: true
+---
+
+# Dock
+
+A premium navigation component that replicates the macOS dock experience, featuring smooth icon magnification on hover and integrated tooltips.
+
+## Features
+
+- **Interactive Magnification**: Icons expand smoothly when the cursor approaches, using Framer Motion physics.
+- **Directional Support**: Can be positioned at the top, middle, or bottom of its container.
+- **Tooltip Integration**: Built-in support for Radix UI tooltips to provide icon labels.
+- **Fully Customizable**: Control icon size, magnification strength, and proximity distance via props.
+
+## Installation
+
+```bash
+npm install framer-motion lucide-react class-variance-authority
+```
+
+## Setup
+
+Place the component in `registry/magicui/dock.tsx`:
+
+```tsx
+// See registry source for Dock implementation
+```
+
+## Props
+
+### Dock Props
+
+| Prop | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `iconSize` | `number` | `40` | The base size of the icons. |
+| `iconMagnification` | `number` | `60` | The maximum size an icon reaches when hovered. |
+| `iconDistance` | `number` | `140` | The distance at which the magnification effect begins. |
+| `direction` | `"top" \| "middle" \| "bottom"` | `"middle"` | The alignment of the icons within the dock. |
+| `disableMagnification` | `boolean` | `false` | Disables the expansion effect. |
+
+### DockIcon Props
+
+| Prop | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `className` | `string` | `""` | Optional CSS class for the icon wrapper. |
+| `children` | `React.ReactNode` | `required` | The icon or image to display. |
+
+## Usage
+
+```tsx
+import { Dock, DockIcon } from "@/registry/magicui/dock"
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
+import { HomeIcon, MailIcon } from "lucide-react"
+
+export default function Demo() {
+  return (
+    <TooltipProvider>
+      <Dock direction="middle">
+        <DockIcon>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <HomeIcon className="size-4" />
+            </TooltipTrigger>
+            <TooltipContent><p>Home</p></TooltipContent>
+          </Tooltip>
+        </DockIcon>
+        {/* ... */}
+      </Dock>
+    </TooltipProvider>
+  )
+}
+```

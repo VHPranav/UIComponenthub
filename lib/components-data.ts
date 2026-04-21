@@ -449,4 +449,40 @@ export const Demo = () => {
 }`,
     isNew: true,
   },
+  {
+    id: "dock",
+    title: "Dock",
+    description: "A macOS-style dock component with smooth magnification effects and tooltips.",
+    category: "Special Effects",
+    tags: ["Magic UI", "Dock", "Framer Motion", "Navigation", "Interactive"],
+    date: "2026-04-21",
+    code: `import { Dock, DockIcon } from "@/registry/magicui/dock"
+import { 
+  Tooltip, 
+  TooltipContent, 
+  TooltipProvider, 
+  TooltipTrigger 
+} from "@/components/ui/tooltip"
+
+export const Demo = () => {
+  return (
+    <div className="flex items-center justify-center min-h-[200px]">
+      <TooltipProvider>
+        <Dock direction="middle">
+          <DockIcon>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <div className="h-4 w-4 bg-primary rounded-full" />
+              </TooltipTrigger>
+              <TooltipContent><p>Home</p></TooltipContent>
+            </Tooltip>
+          </DockIcon>
+          {/* Add more icons... */}
+        </Dock>
+      </TooltipProvider>
+    </div>
+  )
+}`,
+    isNew: true,
+  },
 ]
