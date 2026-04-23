@@ -9,29 +9,60 @@ import {
   useMemo,
   useRef,
   useState,
+  type ComponentType,
+  type RefAttributes,
 } from "react"
-import { motion, AnimatePresence, useInView } from "framer-motion"
+import {
+  motion,
+  AnimatePresence,
+  useInView,
+  type HTMLMotionProps,
+  type MotionProps,
+} from "framer-motion"
 import { Terminal as TerminalIcon, Copy, RotateCcw, Check } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
+// --- Types ---
+
+const motionElements = {
+  article: motion.article,
+  div: motion.div,
+  h1: motion.h1,
+  h2: motion.h2,
+  h3: motion.h3,
+  h4: motion.h4,
+  h5: motion.h5,
+  h6: motion.h6,
+  li: motion.li,
+  p: motion.p,
+  section: motion.section,
+  span: motion.span,
+} as const
+
+type MotionElementType = keyof typeof motionElements
+
+type TerminalTypingMotionComponent = ComponentType<
+  Omit<HTMLMotionProps<any>, "ref"> & RefAttributes<HTMLElement>
+>
+
 // --- Contexts ---
 
-interface TerminalContextValue {
+interface SequenceContextValue {
   activeIndex: number
   completeItem: (index: number) => void
   sequenceStarted: boolean
 }
 
-const TerminalContext = createContext<TerminalContextValue | null>(null)
-const useTerminal = () => useContext(TerminalContext)
+const SequenceContext = createContext<SequenceContextValue | null>(null)
+const useSequence = () => useContext(SequenceContext)
 
 const ItemIndexContext = createContext<number | null>(null)
 const useItemIndex = () => useContext(ItemIndexContext)
 
 // --- Components ---
 
-interface AnimatedSpanProps {
+interface AnimatedSpanProps extends MotionProps {
   children: React.ReactNode
   delay?: number
   className?: string
@@ -46,82 +77,93 @@ export const AnimatedSpan = ({
   delay = 0,
   className,
   startOnView = false,
+  ...props
 }: AnimatedSpanProps) => {
   const elementRef = useRef<HTMLDivElement>(null)
   const isInView = useInView(elementRef, { amount: 0.3, once: true })
 
-  const terminal = useTerminal()
+  const sequence = useSequence()
   const itemIndex = useItemIndex()
   const [hasStarted, setHasStarted] = useState(false)
 
   useEffect(() => {
-    if (!terminal || itemIndex === null) return
-    if (!terminal.sequenceStarted) return
+    if (!sequence || itemIndex === null) return
+    if (!sequence.sequenceStarted) return
     if (hasStarted) return
-    if (terminal.activeIndex === itemIndex) {
+    if (sequence.activeIndex === itemIndex) {
       setHasStarted(true)
     }
-  }, [terminal, hasStarted, itemIndex])
+  }, [sequence, hasStarted, itemIndex])
 
-  const shouldAnimate = terminal ? hasStarted : startOnView ? isInView : true
+  const shouldAnimate = sequence ? hasStarted : startOnView ? isInView : true
 
   return (
     <motion.div
       ref={elementRef}
       initial={{ opacity: 0, y: 5 }}
       animate={shouldAnimate ? { opacity: 1, y: 0 } : { opacity: 0, y: 5 }}
-      transition={{ duration: 0.3, delay: terminal ? 0 : delay / 1000 }}
+      transition={{ duration: 0.3, delay: sequence ? 0 : delay / 1000 }}
       className={cn("text-sm font-mono", className)}
       onAnimationComplete={() => {
-        if (terminal && itemIndex !== null && shouldAnimate) {
-          terminal.completeItem(itemIndex)
+        if (sequence && itemIndex !== null && shouldAnimate) {
+          sequence.completeItem(itemIndex)
         }
       }}
+      {...props}
     >
       {children}
     </motion.div>
   )
 }
 
-interface TypingTextProps {
+interface TypingAnimationProps extends Omit<MotionProps, "children"> {
   children: string
   className?: string
   duration?: number
   delay?: number
+  as?: MotionElementType
   startOnView?: boolean
   showCursor?: boolean
 }
 
 /**
- * TypingText simulates a terminal typing experience with a blinking cursor.
+ * TypingAnimation simulates a terminal typing experience with a blinking cursor.
  */
-export const TypingText = ({
+export const TypingAnimation = ({
   children,
   className,
   duration = 40,
   delay = 0,
+  as: Component = "span",
   startOnView = true,
   showCursor = true,
-}: TypingTextProps) => {
+  ...props
+}: TypingAnimationProps) => {
+  if (typeof children !== "string") {
+    throw new Error("TypingAnimation: children must be a string.")
+  }
+
+  const MotionComponent = motionElements[Component] as TerminalTypingMotionComponent
+
   const [displayedText, setDisplayedText] = useState("")
   const [started, setStarted] = useState(false)
   const [isDone, setIsDone] = useState(false)
-  const elementRef = useRef<HTMLSpanElement>(null)
+  const elementRef = useRef<HTMLElement>(null)
   const isInView = useInView(elementRef, { amount: 0.3, once: true })
 
-  const terminal = useTerminal()
+  const sequence = useSequence()
   const itemIndex = useItemIndex()
 
   useEffect(() => {
-    if (terminal && itemIndex !== null) {
-      if (terminal.sequenceStarted && !started && terminal.activeIndex === itemIndex) {
+    if (sequence && itemIndex !== null) {
+      if (sequence.sequenceStarted && !started && sequence.activeIndex === itemIndex) {
         setStarted(true)
       }
     } else if (!startOnView || isInView) {
       const timer = setTimeout(() => setStarted(true), delay)
       return () => clearTimeout(timer)
     }
-  }, [terminal, itemIndex, started, startOnView, isInView, delay])
+  }, [sequence, itemIndex, started, startOnView, isInView, delay])
 
   useEffect(() => {
     if (!started || isDone) return
@@ -134,17 +176,21 @@ export const TypingText = ({
       } else {
         clearInterval(interval)
         setIsDone(true)
-        if (terminal && itemIndex !== null) {
-          terminal.completeItem(itemIndex)
+        if (sequence && itemIndex !== null) {
+          sequence.completeItem(itemIndex)
         }
       }
     }, duration)
 
     return () => clearInterval(interval)
-  }, [children, duration, started, isDone, terminal, itemIndex])
+  }, [children, duration, started, isDone, sequence, itemIndex])
 
   return (
-    <span ref={elementRef} className={cn("inline-block font-mono text-sm", className)}>
+    <MotionComponent
+      ref={elementRef}
+      className={cn("inline-block font-mono text-sm", className)}
+      {...props}
+    >
       {displayedText}
       {showCursor && started && !isDone && (
         <motion.span
@@ -153,9 +199,12 @@ export const TypingText = ({
           className="inline-block w-2 h-4 ml-1 bg-current align-middle"
         />
       )}
-    </span>
+    </MotionComponent>
   )
 }
+
+// Re-export TypingText for backward compatibility if needed, though they asked to make it the same
+export const TypingText = TypingAnimation
 
 interface TerminalLineProps {
   children: React.ReactNode
@@ -246,7 +295,7 @@ export const AnimatedTerminal = ({
   }
 
   return (
-    <TerminalContext.Provider value={contextValue}>
+    <SequenceContext.Provider value={contextValue}>
       <div
         ref={containerRef}
         className={cn(
@@ -335,7 +384,7 @@ export const AnimatedTerminal = ({
           }
         `}</style>
       </div>
-    </TerminalContext.Provider>
+    </SequenceContext.Provider>
   )
 }
 
