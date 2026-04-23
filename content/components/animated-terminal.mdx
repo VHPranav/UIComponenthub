@@ -1,0 +1,85 @@
+---
+title: Animated Terminal
+description: A retro-future terminal component with sequential typing animations, CRT effects, and glassmorphism.
+category: Animations
+tags: ["Terminal", "Animation", "Typing", "Retro", "Glassmorphism"]
+date: 2026-04-23
+isNew: true
+---
+
+## Overview
+
+The **Animated Terminal** is a high-fidelity component designed to simulate a modern command-line interface. It features a sequential animation system where each line can wait for the previous one to finish, creating a realistic "automated script" or "interactive demo" feel. It includes premium visual touches like CRT scanlines, ambient background glows, and a glassmorphism header.
+
+## Features
+
+- **Sequential Animations**: Sync complex typing and fading sequences using a context-based execution system.
+- **CRT Effect**: Optional scanline and radial gradient overlay for a retro aesthetic.
+- **Interactive Controls**: Built-in "Replay" and "Copy to Clipboard" functionality.
+- **Glassmorphism Design**: Sleek backdrop-blur effects and curated color palettes.
+- **Auto-scrolling**: Automatically scrolls to the bottom as new lines emerge in the sequence.
+
+## Installation
+
+```bash
+npm install framer-motion lucide-react
+```
+
+## Usage
+
+```tsx
+import { 
+  AnimatedTerminal, 
+  TerminalLine, 
+  TypingText, 
+  AnimatedSpan 
+} from "@/registry/animations/animated-terminal"
+
+export default function TerminalDemo() {
+  return (
+    <AnimatedTerminal title="bash" className="max-w-xl">
+      <TerminalLine prompt="$">
+        <TypingText duration={30}>npx create-next-app@latest</TypingText>
+      </TerminalLine>
+      
+      <AnimatedSpan delay={200} className="text-blue-400">
+        🔍 Initializing project setup...
+      </AnimatedSpan>
+      
+      <AnimatedSpan delay={500} className="text-green-400">
+        ✔ Success! Project created.
+      </AnimatedSpan>
+    </AnimatedTerminal>
+  )
+}
+```
+
+## Props
+
+### AnimatedTerminal
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `title` | `string` | `"bash"` | The text displayed in the terminal header. |
+| `sequence` | `boolean` | `true` | Whether children should animate in sequence or all at once. |
+| `startOnView` | `boolean` | `true` | Start the animation automatically when the component enters the viewport. |
+| `showCrtEffect` | `boolean` | `true` | Toggle the CRT scanline and distortion overlay. |
+
+### TypingText
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `duration` | `number` | `40` | The speed of typing (ms per character). |
+| `delay` | `number` | `0` | Delay before starting the typing effect (ms). |
+| `showCursor` | `boolean` | `true` | Whether to show the blinking block cursor while typing. |
+
+### AnimatedSpan
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `delay` | `number` | `0` | Delay before fading in (ms). |
+| `startOnView` | `boolean` | `false` | If true, ignore terminal sequence and start on scroll. |
+
+## How it works
+
+The component uses a custom `TerminalContext` and `ItemIndexContext` to manage a queue of animated children. Each child reports its completion back to the parent, which then increments the `activeIndex`, triggering the next child in the sequence. This ensures that even with varying typing speeds or delays, the lines always appear in order.

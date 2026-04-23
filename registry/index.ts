@@ -12,6 +12,7 @@ import { AnimatedContentDemo } from "./animations/animated-content-demo"
 import { GlareCardDemo } from "./animations/glare-card-demo"
 import { ThreeConfettiDemo } from "./animations/three-confetti-demo"
 import { FloatingCardsEffectDemo } from "./animations/floating-cards-effect-demo"
+import { AnimatedTerminalDemo } from "./animations/animated-terminal-demo"
 import { MagicRingsCyberpunk } from "./backgrounds/magic-rings-cyberpunk"
 import { MagicRingsSerenity } from "./backgrounds/magic-rings-serenity"
 import { MagicRingsParallax } from "./backgrounds/magic-rings-parallax"
@@ -72,5 +73,6 @@ export const registry: Record<string, React.ComponentType<any>> = {
   "radial-intro": RadialIntroDemo,
   "dock": DockDemo,
   "progressive-blur": ProgressiveBlurDemo,
+  "animated-terminal": AnimatedTerminalDemo,
   // "colourful-bento-grid": ColourfulBentoGrid,
 }
