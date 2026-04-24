@@ -1,0 +1,53 @@
+---
+title: Autumn Breeze
+description: A serene environmental background with procedurally generated falling leaves and scroll-reactive wind physics.
+category: Backgrounds
+tags: ["Three.js", "Background", "Physics", "Environmental", "Scroll"]
+date: 2026-04-24
+isNew: true
+---
+
+## Overview
+
+The **Autumn Breeze** background is a dynamic seasonal visualization that brings life to your layout. It simulates falling leaves (modeled as curved planes with procedurally generated textures) that tumble through the air. The system is reactive to the user's scroll behavior, where scrolling down generates a "gust of wind" that pushes the leaves across the screen and increases their turbulence.
+
+## Features
+
+- **Procedural Textures**: Hand-coded maple leaf silhouette and vein patterns generated on a `CanvasTexture`.
+- **Wind Physics**: Real-time scroll delta calculation that translates into physical force applied to the leaves.
+- **Efficient Instancing**: Handles 40+ curved geometry leaves in a single draw call.
+- **Dynamic Sway**: Randomized frequency and amplitude for realistic air-resistance simulation.
+- **Frosty Palette**: A curated soft-blue "Frost" palette for a unique winter/autumn crossover feel.
+
+## Installation
+
+```bash
+npm install three
+```
+
+## Usage
+
+```tsx
+import { AutumnBreeze } from "@/registry/backgrounds/autumn-breeze"
+
+export default function SeasonalPage() {
+  return (
+    <div className="relative w-full min-h-screen">
+      {/* Background responds to window scrolling */}
+      <AutumnBreeze />
+      
+      <div className="relative z-10 py-24 text-center">
+        <h1 className="text-5xl font-black">Serene Movements</h1>
+        <p className="mt-4 text-zinc-500 italic">Scroll down to feel the breeze</p>
+      </div>
+    </div>
+  )
+}
+```
+
+## How it works
+
+1. **Geometry**: Each leaf is a `PlaneGeometry` with a custom parabolic vertex displacement to give it a natural curve.
+2. **Proceduralism**: The leaf shape is drawn using cubic bezier curves on an internal canvas, which is then uploaded as a Three.js map.
+3. **Scroll Listener**: A window scroll event tracks the velocity of the scroll. This velocity is converted into a `windForce` scalar that decays over time.
+4. **Instancing**: The `InstancedMesh` system manages the position, rotation, and color of every leaf, allowing for high-performance animation loop.
