@@ -38,6 +38,7 @@ import { ProgressiveBlurDemo } from "./special-effects/progressive-blur-demo"
 import { BalloonBackgroundDemo } from "./backgrounds/balloon-background-demo"
 import { UnityNodesDemo } from "./backgrounds/unity-nodes-demo"
 import { AutumnBreezeDemo } from "./backgrounds/autumn-breeze-demo"
+import { KineticBalanceDemo } from "./backgrounds/kinetic-balance-demo"
 // import { ColourfulBentoGrid } from "./cards/colourful-bento-grid"
 
 export const registry: Record<string, React.ComponentType<any>> = {
@@ -80,5 +81,6 @@ export const registry: Record<string, React.ComponentType<any>> = {
   "balloon-background": BalloonBackgroundDemo,
   "unity-nodes": UnityNodesDemo,
   "autumn-breeze": AutumnBreezeDemo,
+  "kinetic-balance": KineticBalanceDemo,
   // "colourful-bento-grid": ColourfulBentoGrid,
 }

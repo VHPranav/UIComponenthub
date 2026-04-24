@@ -1,0 +1,52 @@
+---
+title: Kinetic Balance
+description: A sophisticated physical background featuring glass planks with spring-based equilibrium and procedural waves.
+category: Backgrounds
+tags: ["Three.js", "Background", "Physics", "Glass", "Animation"]
+date: 2026-04-24
+isNew: true
+---
+
+## Overview
+
+The **Kinetic Balance** background is a study in physical simulation and material rendering. It features a diagonal staircase of heavy glass planks that respond to a continuous procedural wave. The component uses custom **Spring Physics** to ensure that when one plank moves, the entire system adjusts to maintain an "equilibrium" state, creating a satisfyngly heavy and interconnected feel.
+
+## Features
+
+- **MeshPhysicalMaterial**: High-fidelity glass rendering with transmission, thickness, and clearcoat properties.
+- **Spring Dynamics**: Custom spring-damper physics for smooth, elastic movements.
+- **Mass-Linkage Logic**: The system calculates a global "compensator" value to keep the center of mass stable during the wave animation.
+- **Procedural Ripples**: A sine-wave based trigger that travels through the indices of the planks, simulating a continuous step-through.
+- **Performance Optimized**: Uses instance-safe material disposal and efficient geometry management.
+
+## Installation
+
+```bash
+npm install three
+```
+
+## Usage
+
+```tsx
+import { KineticBalance } from "@/registry/backgrounds/kinetic-balance"
+
+export default function LuxuryPage() {
+  return (
+    <div className="relative w-full min-h-screen bg-slate-950">
+      {/* Background provides a sophisticated, abstract atmosphere */}
+      <KineticBalance />
+      
+      <div className="relative z-10 py-24 px-8">
+        <h1 className="text-6xl font-thin text-white">Equilibrium</h1>
+      </div>
+    </div>
+  )
+}
+```
+
+## How it works
+
+1. **Materials**: Each plank uses `THREE.MeshPhysicalMaterial` with `transmission: 0.9` and `thickness: 0.5`. This allows light to pass through the objects, creating realistic glass refraction.
+2. **The Wave**: A procedural wave is calculated every frame using `Math.sin(time - index * offset)`. When the wave value exceeds a threshold, the specific plank's `targetY` is lowered.
+3. **Equilibrium Calculation**: To make the planks feel "linked," the component sums the deviation of all planks from their base positions. It then applies a negative "compensator" force to all planks, ensuring the average position remains constant.
+4. **Spring Physics**: The movement isn't linear; it uses a proportional force (`target - current`) multiplied by a spring constant and softened by a damping factor.
