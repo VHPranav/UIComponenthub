@@ -6,15 +6,6 @@ import { ScrollReveal } from "./scroll-reveal"
 export function ScrollRevealDemo() {
   return (
     <div className="w-full max-w-4xl mx-auto px-4 py-24 space-y-[40vh]">
-      <div className="text-center space-y-4">
-        <h3 className="text-sm font-medium text-muted-foreground uppercase tracking-widest">
-          Scroll Down
-        </h3>
-        <p className="text-zinc-400">
-          The animations below will reveal as you scroll into their viewport.
-        </p>
-      </div>
-
       <ScrollReveal
         baseOpacity={0}
         baseRotation={5}
@@ -52,3 +43,5 @@ export function ScrollRevealDemo() {
     </div>
   )
 }
+
+export default ScrollRevealDemo

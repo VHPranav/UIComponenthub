@@ -1,0 +1,54 @@
+---
+title: Unity Nodes
+description: A high-performance networking graph with instanced meshes, dynamic line segments, and interactive particle logic.
+category: Backgrounds
+tags: ["Three.js", "Background", "Nodes", "Interactive", "Performance"]
+date: 2026-04-24
+isNew: true
+---
+
+## Overview
+
+The **Unity Nodes** background is a sophisticated interactive visualization built using pure Three.js. It simulates a neural or social network where nodes (spheres) move through 3D space, forming and breaking connections based on their proximity. It uses **Instanced Rendering** to maintain high frame rates even with hundreds of nodes and thousands of potential connections.
+
+## Features
+
+- **Instanced Mesh Rendering**: Efficiently renders 150+ nodes in a single draw call.
+- **Dynamic Line Segments**: Real-time distance-based connection logic with additive blending.
+- **Mouse Ripple Physics**: Nodes respond to the user's cursor with a procedural "ripple" force.
+- **Ambient Animation**: Subtle scaling and jitter effects added to each node for organic feel.
+- **Performance Optimized**: Uses `requestAnimationFrame` and low-level BufferGeometries for minimum CPU overhead.
+
+## Installation
+
+```bash
+npm install three
+```
+
+## Usage
+
+```tsx
+import { UnityNodes } from "@/registry/backgrounds/unity-nodes"
+
+export default function NetworkPage() {
+  return (
+    <div className="relative w-full h-screen bg-black">
+      {/* Background automatically fills the screen */}
+      <UnityNodes />
+      
+      <div className="relative z-10 py-24 text-center">
+        <h1 className="text-5xl font-black text-white">Global Connectivity</h1>
+      </div>
+    </div>
+  )
+}
+```
+
+## How it works
+
+The component initializes a full Three.js scene inside a React `useEffect` hook. 
+
+1. **Instancing**: Instead of 150 independent meshes, it uses `THREE.InstancedMesh` which allows the GPU to render all nodes at once using a shared geometry and material.
+2. **Matrix Updates**: Every frame, it calculates the new position for each node and updates a 4x4 matrix for each instance.
+3. **Proximity Search**: It performs a nested loop to find pairs of nodes within a specific radius, populating a `Float32Array` with their coordinates to update the connection lines in bulk.
+4. **Interactive Force**: A target vector follows the mouse, and any node within a certain distance of that vector is pushed away based on a falloff function.

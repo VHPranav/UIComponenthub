@@ -54,23 +54,8 @@ const ITEMS = [
 export const RadialIntroDemo = () => {
   return (
     <div className="relative flex flex-col items-center justify-center p-12 bg-white dark:bg-zinc-950 rounded-2xl border border-zinc-200 dark:border-zinc-800 shadow-sm overflow-hidden min-h-[500px] w-full">
-      <div className="absolute top-8 left-8 z-20">
-        <h3 className="text-zinc-900 dark:text-zinc-100 text-2xl font-bold tracking-tight">
-          Community Orbit
-        </h3>
-        <p className="text-zinc-500 text-xs font-medium uppercase tracking-[0.2em] mt-1">
-          Radial Intro Sequence
-        </p>
-      </div>
-
       <div className="relative z-10 scale-75 md:scale-100">
         <RadialIntro orbitItems={ITEMS} stageSize={320} imageSize={64} />
-      </div>
-
-      <div className="absolute bottom-8 right-8 z-20 max-w-[200px] text-right pointer-events-none">
-        <p className="text-zinc-400 text-[10px] font-mono leading-tight uppercase">
-          Continuous Counter-Spin Loop
-        </p>
       </div>
       
       {/* Decorative center element */}
