@@ -1,0 +1,48 @@
+---
+title: Team Section
+description: An interactive about us section with overlapping member cards, varied rotations, and motion-enhanced tooltips.
+category: Sections
+tags: ["Framer Motion", "Layout", "Team", "Interactive", "Animations"]
+date: 2026-04-24
+isNew: true
+---
+
+## Overview
+
+The **Team Section** is a high-engagement layout component designed to showcase people with personality. Instead of a standard grid, it uses overlapping cards with randomized rotations and vibrant background colors to create a "stacked photo" aesthetic. It features smooth transitions between member sets and interactive "Hi" tooltips that respond to mouse movement.
+
+## Features
+
+- **Overlapping Card Layout**: Uses negative margins and calculated Z-indices for a depth-rich, "casual" look.
+- **Set-Based Navigation**: High-performance transition between sets of team members using `AnimatePresence`.
+- **Interactive Tooltips**: Animated labels that show member names and roles on hover.
+- **Dynamic Rotations**: Each card has a slight rotation offset to mimic physical photos spread on a table.
+- **Full Responsiveness**: Automatically hides less critical team members on smaller screens to maintain the layout's integrity.
+
+## Installation
+
+```bash
+npm install framer-motion lucide-react
+```
+
+## Usage
+
+```tsx
+import { TeamSection } from "@/registry/sections/team-section"
+
+export default function AboutPage() {
+  return (
+    <main>
+      {/* Team section can be dropped into any page layout */}
+      <TeamSection />
+    </main>
+  )
+}
+```
+
+## How it works
+
+1. **Stacking**: Cards are positioned in a flex container with negative horizontal margins (`-ml-12`). The Z-index is calculated based on the index (`total - index`) so they stack correctly from left to right.
+2. **Set Transitions**: The component chunks a large array of members into smaller sets (default is 6). A timer or dot-navigation triggers a state change that swaps these sets with a horizontal slide animation.
+3. **Hover Physics**: When a card is hovered, it scales up (`scale-110`), resets its rotation to `0deg`, and its Z-index is boosted to `100` to bring it to the absolute front of the stack.
+4. **Motion**: Headings and subtext use staggered `motion.div` entrances to guide the user's eye from the top down to the interactive team cards.

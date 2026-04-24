@@ -39,6 +39,7 @@ import { BalloonBackgroundDemo } from "./backgrounds/balloon-background-demo"
 import { UnityNodesDemo } from "./backgrounds/unity-nodes-demo"
 import { AutumnBreezeDemo } from "./backgrounds/autumn-breeze-demo"
 import { KineticBalanceDemo } from "./backgrounds/kinetic-balance-demo"
+import { TeamSectionDemo } from "./sections/team-section-demo"
 // import { ColourfulBentoGrid } from "./cards/colourful-bento-grid"
 
 export const registry: Record<string, React.ComponentType<any>> = {
@@ -82,5 +83,6 @@ export const registry: Record<string, React.ComponentType<any>> = {
   "unity-nodes": UnityNodesDemo,
   "autumn-breeze": AutumnBreezeDemo,
   "kinetic-balance": KineticBalanceDemo,
+  "team-section": TeamSectionDemo,
   // "colourful-bento-grid": ColourfulBentoGrid,
 }
