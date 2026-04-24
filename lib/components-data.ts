@@ -19,6 +19,7 @@ export const CATEGORIES = [
   "Animations",
   "Special Effects",
   "Backgrounds",
+  "Navigation",
 ] as const
 
 export const ALL_TAGS = [
@@ -508,6 +509,20 @@ export const Demo = () => {
       </div>
     </div>
   )
+}`,
+    isNew: true,
+  },
+  {
+    id: "mega-menu-navbar",
+    name: "Mega Menu Navbar",
+    description: "A premium, scroll-reactive navbar featuring glassmorphic effects and portal-based mega menu dropdowns.",
+    category: "Navigation",
+    tags: ["Navigation", "Interactive", "Glassmorphism", "Mega Menu"],
+    installation: "npm install framer-motion lucide-react clsx tailwind-merge",
+    code: `import Navbar from "@/registry/nav/navbar"
+
+export default function Layout() {
+  return <Navbar />
 }`,
     isNew: true,
   },

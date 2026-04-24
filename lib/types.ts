@@ -9,6 +9,7 @@ export const CATEGORIES = [
   "Animations",
   "Special Effects",
   "Backgrounds",
+  "Navigation",
 ] as const
 
 export type Category = (typeof CATEGORIES)[number]

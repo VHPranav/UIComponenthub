@@ -1,0 +1,70 @@
+---
+id: mega-menu-navbar
+title: Mega Menu Navbar
+description: A premium, scroll-reactive navbar featuring glassmorphic effects and portal-based mega menu dropdowns.
+category: Navigation
+tags: ["Navigation", "Interactive", "Glassmorphism", "Mega Menu"]
+date: "2026-04-24"
+isNew: true
+---
+
+# Mega Menu Navbar
+
+A high-end navigation component designed for complex websites. It features a dynamic glassmorphic container that shrinks and expands based on scroll position, providing a cinematic experience.
+
+## Features
+
+- **Dynamic Glassmorphism**: Transitions smoothly between transparent and blurred states on scroll.
+- **Mega Menu Dropdowns**: Large, multi-column layouts for Services, Products, AI, and Company links.
+- **React Portal**: Dropdowns are rendered using portals to ensure they always stay on top of the Z-index stack.
+- **Mobile Optimized**: Fully responsive mobile menu with categorization and smooth transitions.
+- **Scroll Reactive**: Automatically hides on scroll down and reveals on scroll up.
+
+## Installation
+
+```bash
+npm install framer-motion lucide-react clsx tailwind-merge
+```
+
+## Usage
+
+```tsx
+import Navbar from "@/registry/nav/navbar"
+
+export default function Layout() {
+  return (
+    <div>
+      <Navbar />
+      <main>{/* Your content */}</main>
+    </div>
+  )
+}
+```
+
+## Props
+
+The component is currently configured as a standalone navbar with ClockHash-inspired content but can be easily mapped to your own data structure.
+
+### Navigation Item Structure
+
+```tsx
+interface NavItem {
+  name: string
+  href: string
+  hasDropdown?: boolean
+  dropdownItems?: Array<{
+    name: string
+    href: string
+    description: string
+    image?: string
+  }>
+  categories?: Array<{
+    label: string
+    items: Array<{
+      name: string
+      href: string
+      description: string
+    }>
+  }>
+}
+```
