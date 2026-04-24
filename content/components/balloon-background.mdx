@@ -1,0 +1,47 @@
+---
+title: Balloon Background
+description: A whimsical, floating three-dimensional balloon background with procedural patterns and mouse interaction.
+category: Backgrounds
+tags: ["Three.js", "Background", "3D", "Interactive", "Canvas"]
+date: 2026-04-24
+isNew: true
+---
+
+## Overview
+
+The **Balloon Background** is a 3D scene built with `@react-three/fiber` and `@react-three/drei`. It features balloons with custom textures (stripes, dots, checkered) that float upwards and respond to mouse movement.
+
+## Features
+
+- **Procedural Textures**: Textures generated on the fly via HTML5 Canvas.
+- **Mouse Reactivity**: Balloons tilt based on your cursor position.
+- **Infinite Loop**: Balloons reset to the bottom once they float off-screen.
+- **Zero-Config**: A drop-in component that fills the background.
+
+## Installation
+
+```bash
+npm install three @react-three/fiber @react-three/drei
+```
+
+## Usage
+
+```tsx
+import { BalloonBackground } from "@/registry/backgrounds/balloon-background"
+
+export default function CarnivalPage() {
+  return (
+    <div className="relative w-full h-screen">
+      <BalloonBackground />
+      
+      <div className="relative z-10 py-24 text-center">
+        <h1 className="text-6xl font-black">Up and Away</h1>
+      </div>
+    </div>
+  )
+}
+```
+
+## How it works
+
+The component generates a `THREE.CanvasTexture` for each balloon type. Each balloon is a group containing a `Sphere` (the balloon) and a `Box` (the basket), connected by `Line` components. The movement is handled inside a `useFrame` hook, which increments the Y position and applies a lerped rotation based on mouse coordinates.

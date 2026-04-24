@@ -35,6 +35,7 @@ import { FluidGooeyEffectDemo } from "./special-effects/fluid-gooey-effect-demo"
 import { RadialIntroDemo } from "./special-effects/radial-intro-demo"
 import { DockDemo } from "./magicui/dock-demo"
 import { ProgressiveBlurDemo } from "./special-effects/progressive-blur-demo"
+import { BalloonBackgroundDemo } from "./backgrounds/balloon-background-demo"
 // import { ColourfulBentoGrid } from "./cards/colourful-bento-grid"
 
 export const registry: Record<string, React.ComponentType<any>> = {
@@ -74,5 +75,6 @@ export const registry: Record<string, React.ComponentType<any>> = {
   "dock": DockDemo,
   "progressive-blur": ProgressiveBlurDemo,
   "animated-terminal": AnimatedTerminalDemo,
+  "balloon-background": BalloonBackgroundDemo,
   // "colourful-bento-grid": ColourfulBentoGrid,
 }
