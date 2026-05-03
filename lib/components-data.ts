@@ -526,4 +526,28 @@ export default function Layout() {
 }`,
     isNew: true,
   },
+  {
+    id: "code-tabs",
+    name: "Code Tabs",
+    description: "A functional tabbed code block with integrated syntax highlighting and a built-in copy button, ideal for displaying multiple installation commands.",
+    category: "Special Effects",
+    tags: ["Tabs", "Code Block", "Syntax Highlighting", "Shiki"],
+    installation: "npm install shiki next-themes lucide-react clsx tailwind-merge",
+    code: `import { CodeTabs } from "@/components/code-tabs"
+
+export const Demo = () => {
+  return (
+    <CodeTabs
+      codes={{
+        npm: "npm install @animate-ui/tabs",
+        yarn: "yarn add @animate-ui/tabs",
+        pnpm: "pnpm add @animate-ui/tabs",
+        bun: "bun add @animate-ui/tabs",
+      }}
+      lang="bash"
+    />
+  )
+}`,
+    isNew: true,
+  },
 ]
