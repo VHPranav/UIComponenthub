@@ -95,7 +95,7 @@ function CodeTabs({
               <TabsTrigger
                 key={code}
                 value={code}
-                className="relative flex items-center justify-center h-full text-sm font-medium text-muted-foreground dark:text-zinc-400 data-[state=active]:text-foreground dark:data-[state=active]:text-white transition-colors bg-transparent data-[state=active]:bg-transparent data-[state=active]:shadow-none border-b-2 border-transparent data-[state=active]:border-foreground dark:data-[state=active]:border-white rounded-none px-1"
+                className="relative flex items-center justify-center h-full text-sm font-sans font-medium text-muted-foreground dark:text-zinc-400 data-[state=active]:text-foreground dark:data-[state=active]:text-white transition-colors bg-transparent data-[state=active]:bg-transparent data-[state=active]:shadow-none border-b-2 border-transparent data-[state=active]:border-foreground dark:data-[state=active]:border-white rounded-none px-1"
               >
                 {code}
               </TabsTrigger>

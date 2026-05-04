@@ -51,7 +51,7 @@ const mdxComponents = {
     <p className="mt-6 leading-7 [&:not(:first-child)]:mt-6 text-muted-foreground" {...props} />
   ),
   code: (props: React.ComponentPropsWithoutRef<"code">) => (
-    <code className="relative rounded bg-muted px-[0.3rem] py-[0.1rem] font-mono text-sm font-semibold" {...props} />
+    <code className="relative rounded bg-muted px-[0.3rem] py-[0.1rem] font-sans text-sm font-semibold" {...props} />
   ),
   pre: ({ children }: React.ComponentPropsWithoutRef<"pre">) => {
     const el = children as React.ReactElement<{ children: string; className?: string }>
@@ -139,7 +139,7 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
            <p className="text-muted-foreground mb-6">Installation instructions for CLI coming soon. For now, copy the source directly.</p>
            <div className="max-w-md mx-auto relative group">
               <div className="bg-zinc-900/50 rounded-lg p-3 pl-4 text-left border overflow-hidden flex items-center justify-between">
-                 <code className="text-zinc-300 font-mono text-sm truncate">npx shadcn@latest add {params.id}</code>
+                 <code className="text-zinc-300 font-sans text-sm truncate">npx shadcn@latest add {params.id}</code>
                  <Terminal className="h-4 w-4 text-zinc-500" />
               </div>
            </div>

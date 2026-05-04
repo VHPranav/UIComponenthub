@@ -26,10 +26,10 @@ export async function CodeBlock({ code, language = "tsx", filename }: CodeBlockP
             <div className="h-3 w-3 rounded-full bg-emerald-500/70" />
           </div>
           {filename && (
-            <span className="text-xs text-zinc-500 font-mono ml-1">{filename}</span>
+            <span className="text-xs text-zinc-500 font-sans ml-1 tracking-tight">{filename}</span>
           )}
           {!filename && (
-            <span className="text-xs text-zinc-600 font-mono ml-1">{language}</span>
+            <span className="text-xs text-zinc-600 font-sans ml-1 tracking-tight">{language}</span>
           )}
         </div>
         <CopyButton
@@ -43,7 +43,7 @@ export async function CodeBlock({ code, language = "tsx", filename }: CodeBlockP
       {/* Code */}
       <ScrollArea className="max-h-[560px] w-full">
         <div
-          className="p-5 text-[13px] font-sans leading-6 [&>pre]:!bg-transparent [&>pre]:!p-0 overflow-x-auto"
+          className="p-5 text-[13px] font-sans leading-6 [&>pre]:!bg-transparent [&>pre]:!p-0 [&_code]:font-sans [&_pre]:font-sans overflow-x-auto"
           dangerouslySetInnerHTML={{ __html: html }}
         />
       </ScrollArea>
