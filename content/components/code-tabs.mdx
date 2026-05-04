@@ -1,0 +1,54 @@
+---
+title: Code Tabs
+description: A functional tabbed code block with integrated syntax highlighting and a built-in copy button, ideal for displaying multiple installation commands.
+category: Special Effects
+tags: ["Tabs", "Code Block", "Syntax Highlighting", "Shiki"]
+date: 2026-05-04
+isNew: true
+---
+
+# Code Tabs
+
+A functional tabbed code block with integrated syntax highlighting (via Shiki) and a built-in copy button, ideal for displaying multiple installation commands.
+
+## Features
+
+- **Integrated Syntax Highlighting**: Uses Shiki to securely highlight code in multiple languages.
+- **Copy to Clipboard**: Seamless copy button that triggers toast notifications on success.
+- **Dynamic Tabs**: Pass a record of labels and code strings, and the component automatically generates functional tabs.
+- **Next Themes Support**: Matches the syntax highlighting theme to the active Next.js light/dark mode seamlessly.
+
+## Installation
+
+```bash
+npm install shiki next-themes lucide-react clsx tailwind-merge
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `codes` | `Record<string, string>` | `required` | A mapping of tab names (e.g. 'npm', 'yarn') to code snippets. |
+| `lang` | `string` | `"bash"` | The language identifier passed to Shiki for syntax highlighting. |
+| `themes` | `{ light: string; dark: string }` | `{ light: 'github-light', dark: 'github-dark' }` | The Shiki themes to use for light and dark modes. |
+| `copyButton` | `boolean` | `true` | Whether to display the copy button or not. |
+
+## Usage
+
+```tsx
+import { CodeTabs } from "@/components/code-tabs"
+
+export const Demo = () => {
+  return (
+    <CodeTabs
+      codes={{
+        npm: "npm install @animate-ui/tabs",
+        yarn: "yarn add @animate-ui/tabs",
+        pnpm: "pnpm add @animate-ui/tabs",
+        bun: "bun add @animate-ui/tabs",
+      }}
+      lang="bash"
+    />
+  )
+}
+```

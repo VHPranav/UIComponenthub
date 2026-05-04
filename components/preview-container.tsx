@@ -32,7 +32,7 @@ export function PreviewContainer({
 
   return (
     <div className={cn(
-      "relative overflow-hidden rounded-xl border bg-muted/20 min-h-[400px] flex items-center justify-center p-8 transition-colors hover:border-primary/20 group",
+      "relative overflow-hidden font-sans rounded-xl border bg-muted/20 min-h-[400px] flex items-center justify-center p-8 transition-colors hover:border-primary/20 group",
       className
     )}>
       {showDots && (

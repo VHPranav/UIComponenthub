@@ -79,8 +79,8 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body
         className={cn(
-          "min-h-screen bg-background antialiased",
-          dmSans.className
+          "min-h-screen bg-background font-sans antialiased",
+          dmSans.variable
         )}
       >
         <ThemeProvider

@@ -9,20 +9,15 @@ import {
   TabsContent,
   TabsList,
   TabsTrigger,
-  TabsContents,
-  TabsHighlight,
-  TabsHighlightItem,
-  type TabsProps,
-} from '@/components/animate-ui/primitives/animate/tabs';
-import { CopyButton } from '@/components/animate-ui/components/buttons/copy';
+} from '@/components/ui/tabs';
+import { CopyButton } from '@/components/copy-button';
 
 type CodeTabsProps = {
   codes: Record<string, string>;
   lang?: string;
   themes?: { light: string; dark: string };
   copyButton?: boolean;
-  onCopiedChange?: (copied: boolean, content?: string) => void;
-} & Omit<TabsProps, 'children'>;
+} & Omit<React.ComponentProps<typeof Tabs>, 'children'>;
 
 function CodeTabs({
   codes,
@@ -36,7 +31,6 @@ function CodeTabs({
   value,
   onValueChange,
   copyButton = true,
-  onCopiedChange,
   ...props
 }: CodeTabsProps) {
   const { resolvedTheme } = useTheme();
@@ -81,7 +75,7 @@ function CodeTabs({
     <Tabs
       data-slot="install-tabs"
       className={cn(
-        'w-full gap-0 bg-muted/50 rounded-xl border overflow-hidden',
+        'w-full rounded-xl border bg-zinc-50 dark:bg-[#0d0d0d] dark:border-white/10 overflow-hidden',
         className,
       )}
       {...props}
@@ -91,58 +85,48 @@ function CodeTabs({
         onValueChange?.(val);
       }}
     >
-      <TabsHighlight className="absolute z-0 inset-0 rounded-none shadow-none bg-transparent after:content-[''] after:absolute after:inset-x-0 after:h-0.5 after:bottom-0 dark:after:bg-white after:bg-black after:rounded-t-full">
-        <TabsList
-          data-slot="install-tabs-list"
-          className="w-full relative flex items-center justify-between rounded-none h-10 bg-muted border-b border-border/75 dark:border-border/50 text-current py-0 px-4"
-        >
-          <div className="flex gap-x-3 h-full">
-            {highlightedCodes &&
-              Object.keys(highlightedCodes).map((code) => (
-                <TabsHighlightItem
-                  key={code}
-                  value={code}
-                  className="flex items-center justify-center"
-                >
-                  <TabsTrigger
-                    key={code}
-                    value={code}
-                    className="text-muted-foreground h-full text-sm font-medium data-[state=active]:text-current px-0"
-                  >
-                    {code}
-                  </TabsTrigger>
-                </TabsHighlightItem>
-              ))}
-          </div>
+      <TabsList
+        data-slot="install-tabs-list"
+        className="flex w-full justify-between items-center h-12 rounded-none bg-transparent p-0 px-4 border-b border-border dark:border-white/10"
+      >
+        <div className="flex gap-x-4 h-full">
+          {highlightedCodes &&
+            Object.keys(highlightedCodes).map((code) => (
+              <TabsTrigger
+                key={code}
+                value={code}
+                className="relative flex items-center justify-center h-full text-sm font-medium text-muted-foreground dark:text-zinc-400 data-[state=active]:text-foreground dark:data-[state=active]:text-white transition-colors bg-transparent data-[state=active]:bg-transparent data-[state=active]:shadow-none border-b-2 border-transparent data-[state=active]:border-foreground dark:data-[state=active]:border-white rounded-none px-1"
+              >
+                {code}
+              </TabsTrigger>
+            ))}
+        </div>
 
-          {copyButton && highlightedCodes && (
-            <CopyButton
-              content={codes[selectedCode]}
-              size="xs"
-              variant="ghost"
-              className="-me-2.5 bg-transparent hover:bg-black/5 dark:hover:bg-white/10"
-              onCopiedChange={onCopiedChange}
-            />
-          )}
-        </TabsList>
-      </TabsHighlight>
+        {copyButton && highlightedCodes && (
+          <CopyButton
+            value={codes[selectedCode]}
+            variant="ghost"
+            className="text-muted-foreground dark:text-zinc-400 hover:text-foreground dark:hover:text-white dark:hover:bg-white/10 h-8 w-8"
+          />
+        )}
+      </TabsList>
 
-      <TabsContents data-slot="install-tabs-contents">
+      <div data-slot="install-tabs-contents">
         {highlightedCodes &&
           Object.entries(highlightedCodes).map(([code, val]) => (
             <TabsContent
               data-slot="install-tabs-content"
               key={code}
-              className="w-full"
+              className="w-full mt-0"
               value={code}
             >
               <div
-                className="w-full text-sm overflow-auto flex items-center p-4 [&>pre,_&_code]:!bg-transparent [&_code_.line]:!px-0 [&>pre,_&_code]:[background:transparent_!important] [&>pre,_&_code]:border-none [&_code]:!text-[13px]"
+                className="w-full text-sm overflow-auto p-4 font-sans [&>pre]:!bg-transparent [&>pre]:m-0 [&_code]:!text-[13px] [&_code]:font-sans [&_code_.line]:!px-0"
                 dangerouslySetInnerHTML={{ __html: val }}
               />
             </TabsContent>
           ))}
-      </TabsContents>
+      </div>
     </Tabs>
   );
 }

@@ -43,7 +43,7 @@ export async function CodeBlock({ code, language = "tsx", filename }: CodeBlockP
       {/* Code */}
       <ScrollArea className="max-h-[560px] w-full">
         <div
-          className="p-5 text-[13px] font-mono leading-6 [&>pre]:!bg-transparent [&>pre]:!p-0 overflow-x-auto"
+          className="p-5 text-[13px] font-sans leading-6 [&>pre]:!bg-transparent [&>pre]:!p-0 overflow-x-auto"
           dangerouslySetInnerHTML={{ __html: html }}
         />
       </ScrollArea>
