@@ -1,0 +1,55 @@
+---
+title: Animated Switch
+description: A premium, highly customizable switch component featuring spring physics, elastic thumb stretching, icon support, and a subtle glow effect.
+category: Special Effects
+tags: ["Input", "Switch", "Interactive", "Framer Motion"]
+date: 2026-05-06
+isNew: true
+---
+
+# Animated Switch
+
+A premium switch component built with Framer Motion, offering smooth spring-based animations, elastic thumb stretching on press, and integrated icon support for both the background and the thumb.
+
+## Features
+
+- **Spring Physics**: Highly tuned spring animations for a tactile, responsive feel.
+- **Elastic Stretch**: The thumb stretches when pressed, providing a physical, elastic feedback.
+- **Icon Support**: Integrated support for `startIcon`, `endIcon`, and `thumbIcon`.
+- **Glow Effect**: Optional glow shadow that activates when the switch is checked.
+- **Keyboard Accessible**: Full support for `Space` and `Enter` keys.
+
+## Installation
+
+```bash
+npm install framer-motion lucide-react clsx tailwind-merge
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `checked` | `boolean` | `false` | The controlled checked state of the switch. |
+| `onCheckedChange` | `(checked: boolean) => void` | `undefined` | Callback fired when the state changes. |
+| `pressedWidth` | `number` | `24` | The width the thumb reaches when pressed (elastic effect). |
+| `glow` | `boolean` | `true` | Whether to show a glow shadow when checked. |
+| `startIcon` | `ReactElement` | `undefined` | Icon shown on the left/off side. |
+| `endIcon` | `ReactElement` | `undefined` | Icon shown on the right/on side. |
+| `thumbIcon` | `ReactElement` | `undefined` | Icon shown inside the moving thumb. |
+
+## Usage
+
+```tsx
+import { Switch } from "@/components/ui/switch"
+import { Sun, Moon } from "lucide-react"
+
+export default function SwitchDemo() {
+  return (
+    <Switch 
+      startIcon={<Sun className="size-3" />} 
+      endIcon={<Moon className="size-3" />} 
+      glow
+    />
+  )
+}
+```

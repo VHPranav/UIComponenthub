@@ -550,4 +550,25 @@ export const Demo = () => {
 }`,
     isNew: true,
   },
+  {
+    id: "switch",
+    name: "Animated Switch",
+    description: "A highly customizable switch with spring physics, elastic thumb stretching, icon support, and a subtle glow effect.",
+    category: "Special Effects",
+    tags: ["Input", "Switch", "Interactive", "Framer Motion"],
+    installation: "npm install framer-motion lucide-react clsx tailwind-merge",
+    code: `import { Switch } from "@/components/ui/switch"
+import { Sun, Moon } from "lucide-react"
+
+export default function Demo() {
+  return (
+    <Switch 
+      startIcon={<Sun />} 
+      endIcon={<Moon />} 
+      glow
+    />
+  )
+}`,
+    isNew: true,
+  },
 ]
