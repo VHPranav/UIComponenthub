@@ -306,7 +306,7 @@ export const Demo = () => {
     </div>
   )
 }`,
-    isNew: true,
+    isNew: false,
   },
   {
     id: "magic-rings-cyberpunk",
@@ -424,7 +424,7 @@ export const FluidGooeyDemo = () => {
     </div>
   )
 }`,
-    isNew: true,
+    isNew: false,
   },
   {
     id: "radial-intro",
@@ -448,7 +448,7 @@ export const Demo = () => {
     </div>
   )
 }`,
-    isNew: true,
+    isNew: false,
   },
   {
     id: "dock",
@@ -484,7 +484,7 @@ export const Demo = () => {
     </div>
   )
 }`,
-    isNew: true,
+    isNew: false,
   },
   {
     id: "progressive-blur",
@@ -510,7 +510,7 @@ export const Demo = () => {
     </div>
   )
 }`,
-    isNew: true,
+    isNew: false,
   },
   {
     id: "mega-menu-navbar",
@@ -524,14 +524,14 @@ export const Demo = () => {
 export default function Layout() {
   return <Navbar />
 }`,
-    isNew: true,
+    isNew: false,
   },
   {
     id: "code-tabs",
     name: "Code Tabs",
     description: "A functional tabbed code block with integrated syntax highlighting and a built-in copy button, ideal for displaying multiple installation commands.",
     category: "Special Effects",
-    tags: ["Tabs", "Code Block", "Syntax Highlighting", "Shiki"],
+    tags: ["Tabs", "Code Block", "Syntax Highlighting"],
     installation: "npm install shiki next-themes lucide-react clsx tailwind-merge",
     code: `import { CodeTabs } from "@/components/code-tabs"
 
@@ -555,7 +555,7 @@ export const Demo = () => {
     name: "Animated Switch",
     description: "A highly customizable switch with spring physics, elastic thumb stretching, icon support, and a subtle glow effect.",
     category: "Special Effects",
-    tags: ["Input", "Switch", "Interactive", "Framer Motion"],
+    tags: ["Input", "Switch", "Framer Motion"],
     installation: "npm install framer-motion lucide-react clsx tailwind-merge",
     code: `import { Switch } from "@/components/ui/switch"
 import { Sun, Moon } from "lucide-react"
@@ -567,6 +567,33 @@ export default function Demo() {
       endIcon={<Moon />} 
       glow
     />
+  )
+}`,
+    isNew: true,
+  },
+  {
+    id: "toggle-group",
+    name: "Animated Toggle Group",
+    description: "A flexible toggle group featuring a premium sliding highlight effect powered by Framer Motion layout animations.",
+    category: "Special Effects",
+    tags: ["Input", "Toggle", "Framer Motion"],
+    installation: "npm install @radix-ui/react-toggle-group framer-motion lucide-react clsx tailwind-merge",
+    code: `import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
+import { Bold, Italic, Underline } from "lucide-react"
+
+export default function Demo() {
+  return (
+    <ToggleGroup type="multiple">
+      <ToggleGroupItem value="bold">
+        <Bold className="h-4 w-4" />
+      </ToggleGroupItem>
+      <ToggleGroupItem value="italic">
+        <Italic className="h-4 w-4" />
+      </ToggleGroupItem>
+      <ToggleGroupItem value="underline">
+        <Underline className="h-4 w-4" />
+      </ToggleGroupItem>
+    </ToggleGroup>
   )
 }`,
     isNew: true,
