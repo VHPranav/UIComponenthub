@@ -16,7 +16,7 @@ import { User, Settings, Shield, LogOut } from 'lucide-react';
 
 export default function ModalDemo() {
   return (
-    <div className="flex items-center justify-center p-20 bg-zinc-950/50 rounded-2xl border border-zinc-800 border-dashed">
+    <div className="absolute inset-0 flex items-center justify-center bg-zinc-950/20">
       <AnimatedDialog>
         <AnimatedDialogTrigger asChild>
           <Button

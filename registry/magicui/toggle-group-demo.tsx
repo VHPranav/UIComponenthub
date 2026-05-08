@@ -6,7 +6,7 @@ import { Bold, Italic, Underline, AlignLeft, AlignCenter, AlignRight } from 'luc
 
 export default function ToggleGroupDemo() {
   return (
-    <div className="flex flex-col gap-8 items-center p-8">
+    <div className="absolute inset-0 flex flex-col gap-8 items-center justify-center">
       <div className="flex flex-col gap-3 items-center">
         <span className="text-sm font-medium text-muted-foreground italic">Single Selection (Sliding Highlight)</span>
         <ToggleGroup type="single" defaultValue="center">

@@ -1,0 +1,58 @@
+---
+title: Gravity Stars
+description: An immersive, colorful background featuring interactive stars that respond to mouse gravity with smooth spring physics.
+category: Backgrounds
+tags: ["Background", "Canvas", "Interactive"]
+date: 2026-05-08
+isNew: true
+---
+
+# Gravity Stars
+
+A premium, high-performance canvas background featuring interactive particles that respond to mouse movement. Built with custom physics and smooth spring animations.
+
+## Features
+
+- **Interactive Gravity**: Stars are attracted to or repelled by the mouse with customizable strength.
+- **Colorful Palette**: Support for multiple colors with smooth blending and glowing effects.
+- **Constellation Mode**: Optional connection lines between nearby stars for a more complex look.
+- **Spring Physics**: Organic movement using spring-based acceleration and damping.
+- **High Performance**: Optimized canvas rendering with DPR (Device Pixel Ratio) awareness.
+
+## Installation
+
+```bash
+npm install clsx tailwind-merge
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `starsCount` | `number` | `100` | Number of stars to render. |
+| `starsSize` | `number` | `2` | Base size of the stars. |
+| `colors` | `string[]` | `['#00d2ff', '#3a7bd5', ...]` | Array of colors for the stars. |
+| `connectionLines` | `boolean` | `true` | Whether to draw lines between nearby stars. |
+| `mouseInfluence` | `number` | `150` | The radius of mouse influence. |
+| `mouseGravity` | `"attract" \| "repel"` | `"attract"` | Direction of mouse gravity. |
+| `glowIntensity` | `number` | `20` | Intensity of the star's glow. |
+
+## Usage
+
+```tsx
+import { GravityStarsBackground } from "@/components/backgrounds/gravity-stars"
+
+export default function GravityStarsDemo() {
+  return (
+    <div className="relative h-[500px] w-full bg-black overflow-hidden rounded-xl">
+      <GravityStarsBackground 
+        starsCount={120}
+        colors={['#00d2ff', '#3a7bd5', '#7f00ff', '#ff00c1']}
+      />
+      <div className="absolute inset-0 flex items-center justify-center">
+        <h1 className="text-white text-4xl font-bold">Immersive Cosmos</h1>
+      </div>
+    </div>
+  )
+}
+```

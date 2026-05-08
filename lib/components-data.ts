@@ -596,7 +596,7 @@ export default function Demo() {
     </ToggleGroup>
   )
 }`,
-    isNew: true,
+    isNew: false,
   },
   {
     id: "checkbox",
@@ -651,6 +651,27 @@ export default function Demo() {
         </AnimatedDialogHeader>
       </AnimatedDialogPopup>
     </AnimatedDialog>
+  )
+}`,
+    isNew: true,
+  },
+  {
+    id: "gravity-stars",
+    name: "Gravity Stars",
+    description: "An immersive, colorful background featuring interactive stars that respond to mouse gravity with smooth spring physics.",
+    category: "Backgrounds",
+    tags: ["Background", "Canvas", "Interactive"],
+    installation: "npm install clsx tailwind-merge",
+    code: `import { GravityStarsBackground } from "@/components/backgrounds/gravity-stars"
+
+export default function Demo() {
+  return (
+    <div className="relative h-[500px] w-full bg-black">
+      <GravityStarsBackground />
+      <h1 className="absolute inset-0 flex items-center justify-center text-white text-4xl font-bold">
+        Gravity Stars
+      </h1>
+    </div>
   )
 }`,
     isNew: true,

@@ -5,7 +5,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 
 export default function CheckboxDemo() {
   return (
-    <div className="flex flex-col gap-6 items-center p-8">
+    <div className="absolute inset-0 flex flex-col gap-6 items-center justify-center">
       <div className="flex items-center space-x-2">
         <Checkbox id="terms" />
         <label
