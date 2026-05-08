@@ -5,7 +5,7 @@ import FluidGooeyEffect from './fluid-gooey-effect';
 
 export const FluidGooeyEffectDemo = () => {
   return (
-    <div className="relative w-full h-[600px] rounded-xl overflow-hidden shadow-2xl border border-zinc-200 dark:border-zinc-800">
+    <div className="absolute inset-0 w-full h-full overflow-hidden">
       <FluidGooeyEffect
         mainImage="/gooey-bg.png"
         revealImage="/gooey-reveal.png"
