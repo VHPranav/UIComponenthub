@@ -548,7 +548,7 @@ export const Demo = () => {
     />
   )
 }`,
-    isNew: true,
+    isNew: false,
   },
   {
     id: "switch",
@@ -594,6 +594,27 @@ export default function Demo() {
         <Underline className="h-4 w-4" />
       </ToggleGroupItem>
     </ToggleGroup>
+  )
+}`,
+    isNew: true,
+  },
+  {
+    id: "checkbox",
+    name: "Animated Checkbox",
+    description: "A premium checkbox component featuring smooth spring-based checkmark animations and multiple size/style variants.",
+    category: "Special Effects",
+    tags: ["Input", "Checkbox", "Framer Motion"],
+    installation: "npm install @radix-ui/react-checkbox framer-motion lucide-react clsx tailwind-merge",
+    code: `import { Checkbox } from "@/components/ui/checkbox"
+
+export default function Demo() {
+  return (
+    <div className="flex items-center space-x-2">
+      <Checkbox id="terms" />
+      <label htmlFor="terms" className="text-sm font-medium">
+        Accept terms and conditions
+      </label>
+    </div>
   )
 }`,
     isNew: true,

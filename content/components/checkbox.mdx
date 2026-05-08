@@ -1,0 +1,56 @@
+---
+title: Animated Checkbox
+description: A premium checkbox component featuring smooth spring-based checkmark animations and support for multiple size and style variants.
+category: Special Effects
+tags: ["Input", "Checkbox", "Framer Motion"]
+date: 2026-05-08
+isNew: true
+---
+
+# Animated Checkbox
+
+A highly responsive and accessible checkbox component built on Radix UI primitives, featuring smooth spring-based animations for the checkmark and indeterminate states.
+
+## Features
+
+- **Spring Animations**: The checkmark pops in with a satisfying spring animation using Framer Motion.
+- **Indeterminate State**: Built-in support for indeterminate states with a distinct animated icon.
+- **Multiple Variants**: Choose between `default` (bordered) and `accent` (solid background) styles.
+- **Custom Sizes**: Support for `sm`, `default`, and `lg` sizes to fit any layout.
+- **Radix UI Powered**: Full accessibility and keyboard support out-of-the-box.
+
+## Installation
+
+```bash
+npm install @radix-ui/react-checkbox framer-motion lucide-react clsx tailwind-merge
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `checked` | `boolean \| "indeterminate"` | `false` | The controlled checked state of the checkbox. |
+| `onCheckedChange` | `(checked: boolean \| "indeterminate") => void` | `undefined` | Callback fired when the state changes. |
+| `variant` | `"default" \| "accent"` | `"default"` | The visual style of the checkbox. |
+| `size` | `"sm" \| "default" \| "lg"` | `"default"` | The size of the checkbox. |
+| `disabled` | `boolean` | `false` | Whether the checkbox is disabled. |
+
+## Usage
+
+```tsx
+import { Checkbox } from "@/components/ui/checkbox"
+
+export default function CheckboxDemo() {
+  return (
+    <div className="flex items-center space-x-2">
+      <Checkbox id="terms" />
+      <label
+        htmlFor="terms"
+        className="text-sm font-medium leading-none"
+      >
+        Accept terms and conditions
+      </label>
+    </div>
+  )
+}
+```
