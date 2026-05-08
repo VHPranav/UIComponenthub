@@ -45,6 +45,7 @@ import { CodeTabsDemo } from "./magicui/code-tabs-demo"
 import SwitchDemo from "./magicui/switch-demo"
 import ToggleGroupDemo from "./magicui/toggle-group-demo"
 import CheckboxDemo from "./magicui/checkbox-demo"
+import ModalDemo from "./magicui/modal-demo"
 // import { ColourfulBentoGrid } from "./cards/colourful-bento-grid"
 
 export const registry: Record<string, React.ComponentType<any>> = {
@@ -94,5 +95,6 @@ export const registry: Record<string, React.ComponentType<any>> = {
   "switch": SwitchDemo,
   "toggle-group": ToggleGroupDemo,
   "checkbox": CheckboxDemo,
+  "animated-dialog": ModalDemo,
   // "colourful-bento-grid": ColourfulBentoGrid,
 }

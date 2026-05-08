@@ -1,0 +1,74 @@
+---
+title: Animated Dialog
+description: A premium dialog component featuring smooth spring-based scaling animations and a glassmorphic backdrop.
+category: Special Effects
+tags: ["Overlay", "Dialog", "Framer Motion"]
+date: 2026-05-08
+isNew: true
+---
+
+# Animated Dialog
+
+A highly customizable and accessible dialog component built on Radix UI primitives, featuring premium spring-based entry/exit animations and a glassmorphic backdrop blur effect.
+
+## Features
+
+- **Spring Animations**: The dialog pops in with a smooth spring-based scale and fade animation using Framer Motion.
+- **Glassmorphic Backdrop**: A beautiful blurred backdrop that adds depth and focus to the content.
+- **Responsive Design**: Automatically adjusts its width and layout for mobile and desktop screens.
+- **Full Accessibility**: Built on Radix UI's `Dialog` primitive for perfect keyboard navigation and screen reader support.
+- **Customizable Footer/Header**: Includes dedicated sub-components for consistent layout and spacing.
+
+## Installation
+
+```bash
+npm install @radix-ui/react-dialog framer-motion lucide-react clsx tailwind-merge
+```
+
+## Props
+
+### AnimatedDialogPopup Props
+
+| Prop | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `showCloseButton` | `boolean` | `true` | Whether to show the default "X" close button in the top right. |
+
+## Usage
+
+```tsx
+import {
+  AnimatedDialog,
+  AnimatedDialogTrigger,
+  AnimatedDialogPopup,
+  AnimatedDialogHeader,
+  AnimatedDialogFooter,
+  AnimatedDialogTitle,
+  AnimatedDialogDescription,
+  AnimatedDialogClose,
+} from "@/components/ui/animated-dialog"
+import { Button } from "@/components/ui/button"
+
+export default function DialogDemo() {
+  return (
+    <AnimatedDialog>
+      <AnimatedDialogTrigger asChild>
+        <Button variant="outline">Open Profile</Button>
+      </AnimatedDialogTrigger>
+      <AnimatedDialogPopup>
+        <AnimatedDialogHeader>
+          <AnimatedDialogTitle>Edit profile</AnimatedDialogTitle>
+          <AnimatedDialogDescription>
+            Update your information here.
+          </AnimatedDialogDescription>
+        </AnimatedDialogHeader>
+        {/* Content goes here */}
+        <AnimatedDialogFooter>
+          <AnimatedDialogClose asChild>
+            <Button type="submit">Save changes</Button>
+          </AnimatedDialogClose>
+        </AnimatedDialogFooter>
+      </AnimatedDialogPopup>
+    </AnimatedDialog>
+  )
+}
+```

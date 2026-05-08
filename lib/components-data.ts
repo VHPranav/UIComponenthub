@@ -569,7 +569,7 @@ export default function Demo() {
     />
   )
 }`,
-    isNew: true,
+    isNew: false,
   },
   {
     id: "toggle-group",
@@ -615,6 +615,42 @@ export default function Demo() {
         Accept terms and conditions
       </label>
     </div>
+  )
+}`,
+    isNew: true,
+  },
+  {
+    id: "animated-dialog",
+    name: "Animated Modal",
+    description: "A premium modal component with smooth spring-based scaling animations and a glassmorphic backdrop.",
+    category: "Special Effects",
+    tags: ["Overlay", "Modal", "Framer Motion"],
+    installation: "npm install @radix-ui/react-dialog framer-motion lucide-react clsx tailwind-merge",
+    code: `import {
+  AnimatedDialog,
+  AnimatedDialogTrigger,
+  AnimatedDialogPopup,
+  AnimatedDialogHeader,
+  AnimatedDialogTitle,
+  AnimatedDialogDescription,
+} from "@/components/ui/animated-dialog"
+import { Button } from "@/components/ui/button"
+
+export default function Demo() {
+  return (
+    <AnimatedDialog>
+      <AnimatedDialogTrigger asChild>
+        <Button variant="outline">Open Dialog</Button>
+      </AnimatedDialogTrigger>
+      <AnimatedDialogPopup>
+        <AnimatedDialogHeader>
+          <AnimatedDialogTitle>Animated Dialog</AnimatedDialogTitle>
+          <AnimatedDialogDescription>
+            This dialog features a smooth spring animation and backdrop blur.
+          </AnimatedDialogDescription>
+        </AnimatedDialogHeader>
+      </AnimatedDialogPopup>
+    </AnimatedDialog>
   )
 }`,
     isNew: true,
