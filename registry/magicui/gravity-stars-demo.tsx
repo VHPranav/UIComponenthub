@@ -6,7 +6,7 @@ import { GravityStarsBackground } from '@/components/backgrounds/gravity-stars';
 export default function GravityStarsDemo() {
   return (
     <div className="absolute inset-0 w-full h-full overflow-hidden">
-      <GravityStarsBackground 
+      <GravityStarsBackground
         starsCount={120}
         starsSize={2.5}
         starsOpacity={0.8}
@@ -29,4 +29,5 @@ export default function GravityStarsDemo() {
       </div>
     </div>
   );
+
 }
