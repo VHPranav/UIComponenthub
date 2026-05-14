@@ -1,0 +1,89 @@
+---
+title: Blur Fade
+description: A blur fade effect that can be applied to any element.
+category: Animations
+tags: ["Animation", "Framer Motion", "Blur"]
+date: 2026-05-14
+isNew: true
+---
+
+# Blur Fade
+
+A beautiful blur fade animation that reveals elements as they enter the viewport. Perfect for image galleries, list items, or any content that needs a premium feel.
+
+## Features
+
+- **Viewport Reveal**: Automatically animates when the element enters the viewport.
+- **Customizable Directions**: Reveal from top, bottom, left, or right.
+- **Adjustable Blur**: Fine-tune the blur intensity.
+- **Delay & Duration**: Control the timing of the animation.
+- **Stagger Support**: Easily create staggered reveal effects by increasing delay for each item.
+
+## Installation
+
+```bash
+npm install framer-motion
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `children` | `React.ReactNode` | `undefined` | The content to be animated. |
+| `className` | `string` | `undefined` | Additional CSS classes for the container. |
+| `duration` | `number` | `0.4` | Duration of the animation in seconds. |
+| `delay` | `number` | `0` | Delay before the animation starts. |
+| `offset` | `number` | `6` | The distance the element moves during the reveal. |
+| `direction` | `"up" \| "down" \| "left" \| "right"` | `"down"` | The direction from which the element appears. |
+| `inView` | `boolean` | `false` | If true, the animation only triggers when in view. |
+| `inViewMargin` | `string` | `"-50px"` | Margin around the viewport for triggering the animation. |
+| `blur` | `string` | `"6px"` | The initial blur amount. |
+
+## Usage
+
+### Simple Reveal
+
+```tsx
+import { BlurFade } from "@/registry/magicui/blur-fade"
+
+export default function BlurFadeDemo() {
+  return (
+    <BlurFade delay={0.25} inView>
+      <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
+        Hello World
+      </h2>
+      <p className="max-w-[600px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+        This is a blur fade effect.
+      </p>
+    </BlurFade>
+  )
+}
+```
+
+### Image Gallery (Staggered)
+
+```tsx
+import { BlurFade } from "@/registry/magicui/blur-fade"
+
+const images = [
+  "https://images.unsplash.com/photo-1517336714731-489689fd1ca8",
+  "https://images.unsplash.com/photo-1522202176988-66273c2fd55f",
+  // ...
+]
+
+export default function BlurFadeGallery() {
+  return (
+    <div className="columns-2 gap-4 sm:columns-3">
+      {images.map((imageUrl, idx) => (
+        <BlurFade key={imageUrl} delay={0.25 + idx * 0.05} inView>
+          <img
+            className="mb-4 size-full rounded-lg object-contain"
+            src={imageUrl}
+            alt={`Gallery item ${idx}`}
+          />
+        </BlurFade>
+      ))}
+    </div>
+  )
+}
+```

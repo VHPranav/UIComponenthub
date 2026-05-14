@@ -48,6 +48,7 @@ import CheckboxDemo from "./magicui/checkbox-demo"
 import DialogDemo from "./magicui/dialog-demo"
 import ModalDemo from "./magicui/modal-demo"
 import GravityStarsDemo from "./magicui/gravity-stars-demo"
+import BlurFadeDemo from "./magicui/blur-fade-demo"
 // import { ColourfulBentoGrid } from "./cards/colourful-bento-grid"
 
 export const registry: Record<string, React.ComponentType<any>> = {
@@ -99,5 +100,6 @@ export const registry: Record<string, React.ComponentType<any>> = {
   "checkbox": CheckboxDemo,
   "animated-dialog": ModalDemo,
   "gravity-stars": GravityStarsDemo,
+  "blur-fade": BlurFadeDemo,
   // "colourful-bento-grid": ColourfulBentoGrid,
 }
