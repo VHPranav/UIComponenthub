@@ -1,0 +1,75 @@
+---
+title: Text Reveal
+description: A scroll-driven text reveal animation that highlights words as you scroll.
+category: Animations
+tags: ["Animation", "Framer Motion", "Scroll", "Reveal"]
+date: 2026-05-15
+isNew: true
+---
+
+# Text Reveal
+
+A sophisticated scroll-driven text animation that reveals content word by word as the user scrolls down the page. This creates a highly engaging reading experience, often used in premium landing pages.
+
+## Features
+
+- **Scroll-Driven**: Animation progress is directly tied to the scroll position of the section.
+- **Word-by-Word**: Each word is animated individually for a granular reveal effect.
+- **Sticky Implementation**: Uses sticky positioning to keep the text in view while the user scrolls through the animation range.
+- **Customizable**: Works with any string content and can be easily styled.
+
+## Installation
+
+```bash
+npm install framer-motion
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `children` | `string` | `undefined` | The text content to be revealed (must be a string). |
+| `className` | `string` | `undefined` | Additional CSS classes for the container. |
+| `containerRef` | `React.RefObject<HTMLElement>` | `undefined` | Optional ref to a scrollable container for internal scrolling. |
+
+## Usage
+
+### Window Scroll (Default)
+
+```tsx
+import { TextReveal } from "@/registry/magicui/text-reveal"
+
+export default function TextRevealDemo() {
+  return (
+    <TextReveal>
+      Magic UI will make your landing page look 10x better.
+    </TextReveal>
+  )
+}
+```
+
+### Internal Scroll (Preview Mode)
+
+```tsx
+import { useRef } from "react"
+import { TextReveal } from "@/registry/magicui/text-reveal"
+
+export default function TextRevealInternalDemo() {
+  const containerRef = useRef<HTMLDivElement>(null)
+
+  return (
+    <div 
+      ref={containerRef}
+      className="h-[400px] w-full overflow-y-auto rounded-xl border bg-white dark:bg-black"
+    >
+      <TextReveal containerRef={containerRef}>
+        Magic UI will make your landing page look 10x better.
+      </TextReveal>
+    </div>
+  )
+}
+```
+
+## How it works
+
+The `TextReveal` component calculates the scroll progress of its container (which is set to `200vh` to provide enough scroll space). It then maps this progress to the opacity of each word. As you scroll, the words transition from a subtle 30% opacity to 100% opacity, creating the "reveal" effect.

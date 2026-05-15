@@ -49,6 +49,7 @@ import DialogDemo from "./magicui/dialog-demo"
 import ModalDemo from "./magicui/modal-demo"
 import GravityStarsDemo from "./magicui/gravity-stars-demo"
 import BlurFadeDemo from "./magicui/blur-fade-demo"
+import TextRevealDemo from "./magicui/text-reveal-demo"
 // import { ColourfulBentoGrid } from "./cards/colourful-bento-grid"
 
 export const registry: Record<string, React.ComponentType<any>> = {
@@ -101,5 +102,6 @@ export const registry: Record<string, React.ComponentType<any>> = {
   "animated-dialog": ModalDemo,
   "gravity-stars": GravityStarsDemo,
   "blur-fade": BlurFadeDemo,
+  "text-reveal": TextRevealDemo,
   // "colourful-bento-grid": ColourfulBentoGrid,
 }

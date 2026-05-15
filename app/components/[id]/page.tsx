@@ -102,8 +102,11 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
           </TabsList>
 
           <TabsContent value="preview" className="mt-8">
-            {params.id === "count-up" ? (
-              <div className="z-10 w-full flex justify-center">
+            {params.id === "count-up" || params.id === "text-reveal" ? (
+              <div className={cn(
+                "z-10 w-full flex justify-center",
+                params.id === "text-reveal" && "block w-full overflow-hidden"
+              )}>
                 {PreviewComponent ? (
                   <PreviewComponent />
                 ) : (

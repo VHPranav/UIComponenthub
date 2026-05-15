@@ -6,10 +6,11 @@ import { PreviewContainer } from "./preview-container"
 interface ComponentPreviewProps {
   id: string
   className?: string
+  previewClassName?: string
   props?: Record<string, unknown>
 }
 
-export function ComponentPreview({ id, className, props = {} }: ComponentPreviewProps) {
+export function ComponentPreview({ id, className, previewClassName, props = {} }: ComponentPreviewProps) {
   const Component = registry[id]
 
   if (!Component) {
@@ -22,7 +23,7 @@ export function ComponentPreview({ id, className, props = {} }: ComponentPreview
 
   return (
     <div className={cn("group relative my-8", className)}>
-      <PreviewContainer>
+      <PreviewContainer className={previewClassName}>
         <Component {...props} />
       </PreviewContainer>
     </div>
