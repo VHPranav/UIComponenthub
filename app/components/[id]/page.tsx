@@ -11,6 +11,7 @@ import { TableOfContents } from "@/components/toc"
 import { Breadcrumbs } from "@/components/breadcrumbs"
 import { ComponentPreview } from "@/components/component-preview"
 import { PreviewContainer } from "@/components/preview-container"
+import { cn } from "@/lib/utils"
 
 interface ComponentPageProps {
   params: { id: string }
