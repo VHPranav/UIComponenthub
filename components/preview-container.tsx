@@ -8,6 +8,8 @@ interface PreviewContainerProps {
   children: React.ReactNode
   showDots?: boolean
   className?: string
+  fullWidth?: boolean
+  noPadding?: boolean
 }
 
 /**
@@ -20,7 +22,9 @@ interface PreviewContainerProps {
 export function PreviewContainer({ 
   children, 
   showDots = true, 
-  className 
+  className,
+  fullWidth = false,
+  noPadding = false,
 }: PreviewContainerProps) {
   const [mounted, setMounted] = useState(false)
   const [refreshKey, setRefreshKey] = useState(0)
@@ -32,7 +36,9 @@ export function PreviewContainer({
 
   return (
     <div className={cn(
-      "relative overflow-hidden font-sans rounded-xl border bg-muted/20 min-h-[400px] flex items-center justify-center p-8 transition-colors hover:border-primary/20 group",
+      "relative overflow-hidden font-sans rounded-xl border bg-muted/20 min-h-[400px] flex transition-colors hover:border-primary/20 group",
+      !fullWidth && "items-center justify-center",
+      !noPadding && "p-8",
       className
     )}>
       {showDots && (

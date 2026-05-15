@@ -103,30 +103,18 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
           </TabsList>
 
           <TabsContent value="preview" className="mt-8">
-            {params.id === "count-up" || params.id === "text-reveal" ? (
-              <div className={cn(
-                "z-10 w-full flex justify-center",
-                params.id === "text-reveal" && "block w-full min-h-[400px] rounded-xl border bg-muted/20 overflow-hidden"
-              )}>
-                {PreviewComponent ? (
-                  <PreviewComponent />
-                ) : (
-                  <div className="text-muted-foreground text-sm italic text-center">
-                    Component implementation not found in registry.
-                  </div>
-                )}
-              </div>
-            ) : (
-              <PreviewContainer>
-                {PreviewComponent ? (
-                  <PreviewComponent />
-                ) : (
-                  <div className="text-muted-foreground text-sm italic text-center">
-                    Component implementation not found in registry.
-                  </div>
-                )}
-              </PreviewContainer>
-            )}
+            <PreviewContainer 
+              fullWidth={params.id === "text-reveal" || params.id === "count-up"}
+              noPadding={params.id === "text-reveal"}
+            >
+              {PreviewComponent ? (
+                <PreviewComponent />
+              ) : (
+                <div className="text-muted-foreground text-sm italic text-center">
+                  Component implementation not found in registry.
+                </div>
+              )}
+            </PreviewContainer>
           </TabsContent>
 
           <TabsContent value="code" className="mt-8">
