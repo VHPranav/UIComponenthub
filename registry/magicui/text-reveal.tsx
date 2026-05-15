@@ -18,13 +18,11 @@ export interface TextRevealProps extends ComponentPropsWithoutRef<"div"> {
 export const TextReveal: FC<TextRevealProps> = ({ children, className, containerRef }) => {
   const targetRef = useRef<HTMLDivElement | null>(null)
   
-  // If we have a container, we use it for useScroll. 
-  // We use ["start start", "end end"] because the target is the content of the container.
-  const { scrollYProgress } = useScroll(
-    containerRef 
-      ? { container: containerRef } 
-      : { target: targetRef, offset: ["start 0.9", "start 0.25"] }
-  )
+  const { scrollYProgress } = useScroll({
+    target: targetRef,
+    container: containerRef,
+    offset: ["start end", "end start"]
+  })
 
   const words = children.split(" ")
 
@@ -32,15 +30,13 @@ export const TextReveal: FC<TextRevealProps> = ({ children, className, container
     <div 
       ref={targetRef} 
       className={cn(
-        "relative z-0 w-full", 
-        containerRef ? "h-[200%]" : "h-[200vh]",
+        "relative z-0 h-[200vh] w-full", 
         className
       )}
     >
       <div
         className={cn(
-          "sticky top-0 mx-auto flex max-w-4xl items-center justify-center bg-transparent px-4",
-          containerRef ? "h-1/2" : "h-screen"
+          "sticky top-0 mx-auto flex h-[50%] max-w-4xl items-center justify-center bg-transparent px-4 py-20",
         )}
       >
         <p
