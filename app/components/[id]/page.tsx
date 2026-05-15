@@ -106,7 +106,7 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
             {params.id === "count-up" || params.id === "text-reveal" ? (
               <div className={cn(
                 "z-10 w-full flex justify-center",
-                params.id === "text-reveal" && "block w-full overflow-hidden"
+                params.id === "text-reveal" && "block w-full min-h-[400px] rounded-xl border bg-muted/20 overflow-hidden"
               )}>
                 {PreviewComponent ? (
                   <PreviewComponent />
