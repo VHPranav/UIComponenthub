@@ -9,7 +9,7 @@ export default function TextRevealDemo() {
   return (
     <div 
       ref={containerRef}
-      className="h-[400px] w-full overflow-y-auto rounded-xl border bg-white dark:bg-black scrollbar-hide"
+      className="h-[400px] w-full overflow-y-auto scrollbar-hide"
     >
       <TextReveal containerRef={containerRef}>
         Magic UI will make your landing page look 10x better.
