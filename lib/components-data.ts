@@ -455,9 +455,9 @@ export const Demo = () => {
     title: "Dock",
     description: "A macOS-style dock component with smooth magnification effects and tooltips.",
     category: "Special Effects",
-    tags: ["Magic UI", "Dock", "Framer Motion", "Navigation", "Interactive"],
+    tags: ["Dock", "Framer Motion", "Navigation", "Interactive"],
     date: "2026-04-21",
-    code: `import { Dock, DockIcon } from "@/registry/magicui/dock"
+    code: `import { Dock, DockIcon } from "@/registry/ui/dock"
 import { 
   Tooltip, 
   TooltipContent, 
@@ -493,7 +493,7 @@ export const Demo = () => {
     category: "Special Effects",
     tags: ["Blur", "Overlay", "Graduated", "Interactive", "Glassmorphism"],
     date: "2026-04-21",
-    code: `import { ProgressiveBlur } from "@/registry/magicui/progressive-blur"
+    code: `import { ProgressiveBlur } from "@/registry/ui/progressive-blur"
 
 export const Demo = () => {
   return (
